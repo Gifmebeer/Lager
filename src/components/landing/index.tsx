@@ -43,7 +43,9 @@ const LandingPage = () => {
             {!address && <h1>Connect your wallet</h1>}
             {address && isLoading && <h1>Loading...</h1>}
             {address && !isLoading && !nfts?.length && (
-              <h3>You have no membership :(</h3>
+              <div>
+                <h3>You have no membership :(</h3>
+              </div>
             )}
             <div>
               {nfts?.map((nft) => (
