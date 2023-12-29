@@ -3,8 +3,22 @@ import DropERC1155_ABI from '@/abis/DropERC1155.json';
 import { NFT_MEMBERSHIP_ADDRESS } from '@/constants/addresses';
 import { privateKeyToWalletClient } from '@/utils/web3';
 
-export async function GET(request: Request) {
+export async function POST(request: Request) {
   try {
+    const req = await request.json();
+    const { address } = req;
+
+    if (!address) {
+      return new Response(
+        JSON.stringify({
+          error: 'Address missing',
+        }),
+        {
+          status: 400,
+        }
+      );
+    }
+
     const TOKEN_ID = 0;
     const minterPvtKey = process.env.MINTER_PV_KEY as Address;
 
@@ -24,7 +38,7 @@ export async function GET(request: Request) {
     // console.log({ balance });
 
     // Define the parameters for the claim function
-    const _receiver = '0x24792793bb40e66cb1c6e8897Ecb520FF1dc4181';
+    const _receiver = address;
 
     // Checks balance
     const balance = (await walletClient.readContract({
@@ -34,7 +48,7 @@ export async function GET(request: Request) {
       args: [_receiver, TOKEN_ID],
     })) as bigint;
 
-    if (BigInt(balance) > 0) {
+    if (BigInt(balance) > BigInt(0)) {
       return new Response(
         JSON.stringify({
           error: 'You already own this NFT',

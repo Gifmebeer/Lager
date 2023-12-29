@@ -10,13 +10,51 @@ import {
 import { Flex } from '@mantine/core';
 import { NFT_MEMBERSHIP_ADDRESS } from '@/constants/addresses';
 import { NFTCard } from '@/components/NFTCard';
+import useSWRMutation from 'swr/mutation';
+import { Address } from 'viem';
+
+async function sendRequest(
+  url: string,
+  { arg }: { arg: { address: Address } }
+) {
+  return fetch(url, {
+    method: 'POST',
+    body: JSON.stringify(arg),
+  }).then((res) => res.json());
+}
 
 const LandingPage = () => {
   const TOKEN_ID = 0;
   const { data: contract } = useContract(NFT_MEMBERSHIP_ADDRESS);
   const address = useAddress();
-  const { data: nfts, isLoading } = useOwnedNFTs(contract, address);
-  const { data: nftBalance } = useNFTBalance(contract, address, TOKEN_ID);
+  const {
+    data: nfts,
+    isLoading,
+    refetch: refetchOwnedNFTS,
+  } = useOwnedNFTs(contract, address);
+  const { data: nftBalance, refetch: refetchNFTBalance } = useNFTBalance(
+    contract,
+    address,
+    TOKEN_ID
+  );
+
+  const { trigger, isMutating } = useSWRMutation('/api/mint', sendRequest);
+
+  const refetch = () => {
+    refetchOwnedNFTS();
+    refetchNFTBalance();
+  };
+
+  const claim = async () => {
+    try {
+      console.log('triggerin');
+      const result = await trigger({ address: address as Address });
+      console.log({ result });
+      refetch();
+    } catch (e) {
+      // error handling
+    }
+  };
 
   return (
     <div>
@@ -39,13 +77,17 @@ const LandingPage = () => {
             <h2>
               TOTAL ITEMS: <span>{nftBalance?.toNumber()}</span>
             </h2>
-
             {!address && <h1>Connect your wallet</h1>}
             {address && isLoading && <h1>Loading...</h1>}
             {address && !isLoading && !nfts?.length && (
-              <div>
-                <h3>You have no membership :(</h3>
-              </div>
+              <Flex justify='center' align='center' direction='column'>
+                <h3>You have no membership </h3>
+                {isMutating ? (
+                  <h3>Interacting with contract...</h3>
+                ) : (
+                  <button onClick={claim}>claim</button>
+                )}
+              </Flex>
             )}
             <div>
               {nfts?.map((nft) => (
