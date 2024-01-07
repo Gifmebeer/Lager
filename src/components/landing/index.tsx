@@ -1,13 +1,14 @@
 'use client';
 
 import {
-  ConnectWallet,
   useContract,
   useAddress,
   useOwnedNFTs,
   useNFTBalance,
 } from '@thirdweb-dev/react';
 import { Flex } from '@mantine/core';
+import Hero from './hero';
+import Collections from './collections';
 import { NFT_MEMBERSHIP_ADDRESS } from '@/constants/addresses';
 import { NFTCard } from '@/components/NFTCard';
 import useSWRMutation from 'swr/mutation';
@@ -57,6 +58,12 @@ const LandingPage = () => {
   };
 
   return (
+    <Flex justify={'center'} align={'center'} direction='column'>
+      <Hero />
+      <Collections />
+    </Flex>
+  );
+  return (
     <div>
       <Flex
         m={100}
@@ -66,7 +73,6 @@ const LandingPage = () => {
         align='center'
         direction='column'
       >
-        <ConnectWallet switchToActiveChain={true} modalSize={'compact'} />
         {!address ? null : isLoading ? (
           <div>
             <h3>Loading...</h3>

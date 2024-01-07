@@ -1,13 +1,26 @@
 import '@mantine/core/styles.css';
 import './globals.css';
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';
-import { Container } from '@mantine/core';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import localFont from 'next/font/local';
 import ThirdwebProvider from '@/helpers/ThirdwebProvider';
+import AppShell from '@/components/Appshell';
 import { theme } from '@/../theme';
 
-const inter = Inter({ subsets: ['latin'] });
+const metamorBit_Latin = localFont({
+  src: './fonts/MetamorBit_Latin-Regular.otf',
+  variable: '--font-metamorbit-latin',
+});
+
+const gtAmericaStandard_Regular = localFont({
+  src: './fonts/GT-America-Standard-Regular.otf',
+  variable: '--font-gt-america-standard-regular',
+});
+
+const gtAmericaStandard_Medium = localFont({
+  src: './fonts/GT-America-Standard-Medium.otf',
+  variable: '--font-gt-america-standard-medium',
+});
 
 export const metadata: Metadata = {
   title: 'GifMeBeer',
@@ -20,7 +33,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en'>
+    <html
+      lang='en'
+      className={`${metamorBit_Latin.variable} ${gtAmericaStandard_Regular.variable} ${gtAmericaStandard_Medium.variable}`}
+    >
       <head>
         <ColorSchemeScript />
         <meta
@@ -28,10 +44,10 @@ export default function RootLayout({
           content='minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no'
         />
       </head>
-      <body className={inter.className}>
+      <body>
         <MantineProvider theme={theme}>
           <ThirdwebProvider>
-            <Container>{children}</Container>
+            <AppShell>{children}</AppShell>
           </ThirdwebProvider>
         </MantineProvider>
       </body>
