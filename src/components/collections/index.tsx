@@ -17,6 +17,7 @@ const CustomNFTCard = ({ nft, ownedNFT, claimed }: any) => {
       <Flex
         w='100%'
         h='100%'
+        miw={'400px'}
         mih='400px'
         m={0}
         p={0}
