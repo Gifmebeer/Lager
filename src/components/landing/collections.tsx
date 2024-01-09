@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Image, Text, Title, Container, Flex, em } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
+import Link from 'next/link';
 
 const cards = [
   {
@@ -52,33 +53,35 @@ const Collections = () => {
 
           <Flex direction={{ base: 'column', lg: 'row' }} gap={'md'} mt={40}>
             {cards.map((card, index) => (
-              <Card key={index} w={400} h={'fit-content'} bg={'transparent'}>
-                <Flex direction='column' align={'center'} gap='md'>
-                  <Image src={card.image} alt='img' height={200} />
-                  <Flex
-                    mt={14}
-                    w={'200px'}
-                    align={'center'}
-                    justify={'center'}
-                    dir='row'
-                    gap={12}
-                  >
-                    <img
-                      src={card.icon}
-                      alt='icon'
-                      width={'16px'}
-                      height={'16px'}
-                    />
-                    <Text
-                      style={{
-                        fontFamily: 'var(--font-metamorbit-latin)',
-                      }}
+              <Link key={index} href={`/collections`}>
+                <Card w={400} h={'fit-content'} bg={'transparent'}>
+                  <Flex direction='column' align={'center'} gap='md'>
+                    <Image src={card.image} alt='img' height={200} />
+                    <Flex
+                      mt={14}
+                      w={'200px'}
+                      align={'center'}
+                      justify={'center'}
+                      dir='row'
+                      gap={12}
                     >
-                      {card.title}
-                    </Text>
+                      <img
+                        src={card.icon}
+                        alt='icon'
+                        width={'16px'}
+                        height={'16px'}
+                      />
+                      <Text
+                        style={{
+                          fontFamily: 'var(--font-metamorbit-latin)',
+                        }}
+                      >
+                        {card.title}
+                      </Text>
+                    </Flex>
                   </Flex>
-                </Flex>
-              </Card>
+                </Card>
+              </Link>
             ))}
           </Flex>
         </Flex>

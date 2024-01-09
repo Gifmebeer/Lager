@@ -27,7 +27,7 @@ const CustomNFTCard = ({ nft, ownedNFT, claimed }: any) => {
         {ownedNFT ? (
           <NFTCard metadata={ownedNFT.metadata} key={ownedNFT.metadata.id} />
         ) : (
-          claimed && <Image src={nft.image} alt='img' />
+          <p>empty</p>
         )}
         {!claimed && <Overlay color='#fff' backgroundOpacity={0.5} />}
       </Flex>
@@ -46,7 +46,7 @@ const CustomNFTCard = ({ nft, ownedNFT, claimed }: any) => {
 };
 
 const CollectionsPage = () => {
-  const MEMBERSHIP_TOKEN_ID = 0;
+  const MEMBERSHIP_TOKEN_ID = 1;
   const { data: contract } = useContract(NFT_MEMBERSHIP_ADDRESS);
   const address = useAddress();
   const {
@@ -60,6 +60,10 @@ const CollectionsPage = () => {
     MEMBERSHIP_TOKEN_ID
   );
   const membershipBalance = nftBalance?.toNumber() || 0;
+  const ownedNFT =
+    membershipBalance > 0 &&
+    nfts?.find((i) => Number(i.metadata.id) === MEMBERSHIP_TOKEN_ID);
+
   return (
     <Container fluid mih={'40vh'} py={30} bg={'rgba(99,60, 230, 1)'}>
       <Flex py={12} px={24} m={0} gap={100} justify={'flex-start'}>
@@ -70,14 +74,11 @@ const CollectionsPage = () => {
           content='GIFME.BEER MEMBERSHIP'
         />
         <CustomNFTCard
-          ownedNFT={
-            membershipBalance > 0 &&
-            nfts?.find((i) => Number(i.metadata.id) === MEMBERSHIP_TOKEN_ID)
-          }
+          ownedNFT={ownedNFT}
           nft={{
             image: '/images/collections/membership_card.png',
           }}
-          claimed={membershipBalance > 0}
+          claimed={!!ownedNFT}
         />
       </Flex>
     </Container>

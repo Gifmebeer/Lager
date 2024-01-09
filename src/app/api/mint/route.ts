@@ -19,7 +19,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const TOKEN_ID = 0;
+    const TOKEN_ID = 1;
     const minterPvtKey = process.env.MINTER_PV_KEY as Address;
 
     if (!minterPvtKey) {
