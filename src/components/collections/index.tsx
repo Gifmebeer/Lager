@@ -140,7 +140,7 @@ const CollectionsPage = () => {
             c='white'
             content={
               !address
-                ? 'Connecting'
+                ? 'No wallet connected'
                 : isLoading
                 ? 'Loading'
                 : isMutating
