@@ -25,7 +25,7 @@ async function sendRequest(
 }
 
 const LandingPage = () => {
-  const TOKEN_ID = 0;
+  const TOKEN_ID = 1;
   const { data: contract } = useContract(NFT_MEMBERSHIP_ADDRESS);
   const address = useAddress();
   const {
