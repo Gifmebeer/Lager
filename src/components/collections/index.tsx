@@ -6,6 +6,7 @@ import {
   Card,
   Container,
   Flex,
+  Grid,
   Group,
   Image,
   Overlay,
@@ -18,50 +19,18 @@ import {
   useNFTBalance,
   useOwnedNFTs,
 } from '@thirdweb-dev/react';
-import { NFT_MEMBERSHIP_ADDRESS } from '@/constants/addresses';
+import {
+  NFT_COLLECTION_ADDRESS,
+  NFT_MEMBERSHIP_ADDRESS,
+} from '@/constants/addresses';
 import { NFTCard } from '../NFTCard';
 import useSWRMutation from 'swr/mutation';
 import { Address } from 'viem';
 import { useState } from 'react';
+import { CURRENT_COLLECTIONS } from '@/constants/collections';
+import { ICardItem, ICollection } from '@/types';
 
-interface CardItem {
-  name: string;
-  category: 'Breweries' | 'Festivals' | 'Beers';
-  imageUrl: string;
-}
-
-const breweries: CardItem[] = [
-  { name: 'Espiga', category: 'Breweries', imageUrl: '/path/to/espiga/image' },
-];
-
-const festivals: CardItem[] = [
-  { name: 'Soma', category: 'Festivals', imageUrl: '/path/to/espiga/image' },
-];
-
-const beers: CardItem[] = [
-  { name: 'Beer', category: 'Beers', imageUrl: '/path/to/espiga/image' },
-];
-
-const collections: any = {
-  breweries: {
-    name: 'Breweries',
-    items: breweries,
-    bg: 'rgba(99, 192, 172, 1)',
-    icon: '/images/icons/smile_icon.png',
-  },
-  festivals: {
-    name: 'Festivals',
-    items: festivals,
-    bg: 'rgba(220, 146, 231, 1)',
-    icon: '/images/icons/smile_icon2.png',
-  },
-  beers: {
-    name: 'Beers',
-    items: beers,
-    bg: 'rgba(245, 209, 110, 1)',
-    icon: '/images/icons/star_icon.png',
-  },
-};
+const collections: ICollection[] = CURRENT_COLLECTIONS;
 
 async function sendRequest(
   url: string,
@@ -112,41 +81,56 @@ const CustomNFTCard = ({ nft, ownedNFT, claimed, claim }: any) => {
   );
 };
 
-const BreweryCard: React.FC<{ item: CardItem }> = ({ item }) => {
+const CollectionCard: React.FC<{ item: ICardItem; owned: boolean }> = ({
+  item,
+  owned,
+}) => {
   const theme = useMantineTheme();
 
   return (
-    <Card shadow='sm' p='lg' style={{ width: 240, height: 240 }}>
+    <Card p='lg' bg='transparent' w='100%' opacity={owned ? 1 : 0.5}>
       <Card.Section>
-        {/* <Image src={item.imageUrl} height={160} alt={item.name} /> */}
+        <Image w={350} src={item.imageUrl} alt={item.name} fit='contain' />
       </Card.Section>
-      <Group style={{ marginBottom: 5, marginTop: theme.spacing.sm }}>
-        <Text content={item.name} />
-        <Badge color='pink' variant='light'>
-          {item.category}
-        </Badge>
-      </Group>
+      <Card.Section>
+        <Group my={12} justify='center'>
+          <Text style={{ fontWeight: 'bold' }} content={item.name} />
+          {/* <Badge color='pink' variant='light'>
+            {item.category}
+          </Badge> */}
+        </Group>
+      </Card.Section>
     </Card>
   );
 };
 
 const CollectionsPage = () => {
   const MEMBERSHIP_TOKEN_ID = 1;
-  const { data: contract } = useContract(NFT_MEMBERSHIP_ADDRESS);
+  const { data: membershipContract } = useContract(NFT_MEMBERSHIP_ADDRESS);
+  const { data: collectionContract } = useContract(NFT_COLLECTION_ADDRESS);
   const address = useAddress();
-  const [currentCollection, setCurrentCollection] = useState('breweries');
+  const [currentCollection, setCurrentCollection] = useState<ICollection>(
+    CURRENT_COLLECTIONS[0]
+  );
   const [claimDone, setClaimDone] = useState('');
   const {
     data: nfts,
     isLoading,
     refetch: refetchOwnedNFTS,
-  } = useOwnedNFTs(contract, address);
+  } = useOwnedNFTs(membershipContract, address);
+
+  const {
+    data: collectionNfts,
+    isLoading: collectionIsLoading,
+    refetch: refetchOwnedCollectionNFTS,
+  } = useOwnedNFTs(collectionContract, address);
+  console.log({ collectionNfts });
   const { data: nftBalance, refetch: refetchNFTBalance } = useNFTBalance(
-    contract,
+    membershipContract,
     address,
     MEMBERSHIP_TOKEN_ID
   );
-  const ownedNFT = nfts?.find(
+  const ownedMembership = nfts?.find(
     (i) => Number(i.metadata.id) === MEMBERSHIP_TOKEN_ID
   );
 
@@ -169,6 +153,14 @@ const CollectionsPage = () => {
       alert(e);
     }
   };
+  // const cards = Array(5)
+  //   .fill(currentCollection.cards)
+  //   .flatMap((x) => x);
+  const ownedFromCollection = collectionNfts?.map((nft: any) => nft.id) || [];
+  const cards = currentCollection.cards;
+  const filteredCards = cards.filter(
+    (card: ICardItem) => !ownedFromCollection.includes(card.id)
+  );
 
   return (
     <>
@@ -177,7 +169,6 @@ const CollectionsPage = () => {
           py={12}
           px={24}
           m={0}
-          gap={100}
           justify={'flex-start'}
           align={'center'}
           direction={{ base: 'column', md: 'row' }}
@@ -220,11 +211,11 @@ const CollectionsPage = () => {
           ) : (
             <CustomNFTCard
               claim={claim}
-              ownedNFT={ownedNFT}
+              ownedNFT={ownedMembership}
               nft={{
                 image: '/images/collections/membership_card.png',
               }}
-              claimed={!!ownedNFT}
+              claimed={!!ownedMembership}
             />
           )}
         </Flex>
@@ -232,27 +223,64 @@ const CollectionsPage = () => {
 
       <Flex direction='row'>
         {Object.keys(collections).map((key: any, index) => {
-          const collection = collections[key];
+          const collection: ICollection = collections[key];
           return (
             <Flex
-              onClick={() => setCurrentCollection(key)}
+              onClick={() => setCurrentCollection(CURRENT_COLLECTIONS[index])}
               key={index}
-              direction='column'
+              direction='row'
+              align={'center'}
               justify={'center'}
               pos='relative'
-              bg={collection.bg}
+              gap='16px'
+              bg={collection.color}
               p={20}
+              pl={index === 0 ? 64 : 0}
+              pr={42}
               style={{ cursor: 'pointer' }}
             >
-              <Text content={`${collection.name} Collection`} />
+              <Image
+                src={`/images/icons/smiley_${(index % 3) + 1}.svg`}
+                alt={'smiley'}
+                w={24}
+                h={24}
+                fit='contain'
+              />
+              <Text maw='200' content={`${collection.name} Collection`} />
             </Flex>
           );
         })}
       </Flex>
-      <Flex mih='100vh' bg={collections[currentCollection].bg}>
-        {collections[currentCollection].items.map((item: any) => (
-          <BreweryCard key={item.name} item={item} />
-        ))}
+      <Flex
+        p={64}
+        justify={'center'}
+        style={{
+          width: '100%',
+          minHeight: '100vh',
+          backgroundColor: currentCollection.color,
+        }}
+      >
+        {collectionIsLoading ? (
+          <Text content='Loading' />
+        ) : (
+          <Grid grow gutter='xl' maw='1200px'>
+            {ownedFromCollection.map((nft: any, index: number) => (
+              <Grid.Col key={index} span={{ sm: 12, md: 6, xl: 4 }}>
+                <CustomNFTCard
+                  claim={null}
+                  ownedNFT={nft}
+                  nft={nft.metadata}
+                  claimed={true}
+                />
+              </Grid.Col>
+            ))}
+            {filteredCards.map((item: ICardItem) => (
+              <Grid.Col key={item.name} span={{ sm: 12, md: 6, xl: 4 }}>
+                <CollectionCard item={item} owned={false} />
+              </Grid.Col>
+            ))}
+          </Grid>
+        )}
       </Flex>
     </>
   );

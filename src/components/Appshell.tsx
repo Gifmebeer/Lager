@@ -27,7 +27,12 @@ function Header({ children, isLanding, noPadding }: IHeader) {
         >
           {!isLanding && (
             <Link href='/' legacyBehavior>
-              <Image w={'120px'} src='/images/gmb_logo.svg' alt='Logo' />
+              <Image
+                w={'120px'}
+                src='/images/gmb_logo.svg'
+                alt='Logo'
+                style={{ cursor: 'pointer' }}
+              />
             </Link>
           )}
           <ConnectWallet

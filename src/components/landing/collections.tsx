@@ -9,21 +9,21 @@ const cards = [
     type: 'membership',
     address: '0x0000...0000',
     image: '/images/collections/membership_card.png',
-    icon: '/images/icons/star_icon.png',
+    icon: '/images/icons/smiley_3.svg',
   },
   {
     title: 'Breweries Collection',
     type: 'brewery',
     address: '0x0000...0000',
     image: '/images/collections/brewery_card.png',
-    icon: '/images/icons/smile_icon.png',
+    icon: '/images/icons/smiley_3.svg',
   },
   {
     title: 'Festivals Collection',
     type: 'festival',
     address: '0x0000...0000',
     image: '/images/collections/festival_card.png',
-    icon: '/images/icons/smile_icon2.png',
+    icon: '/images/icons/smiley_3.svg',
   },
 ];
 
