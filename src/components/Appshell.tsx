@@ -16,7 +16,7 @@ function Header({ children, isLanding, noPadding }: IHeader) {
   const [opened, { toggle }] = useDisclosure();
 
   return (
-    <AppShell header={{ height: '200px', offset: false }}>
+    <AppShell header={{ height: '0', offset: false }}>
       <AppShell.Header
         withBorder={false}
         bg={isLanding || noPadding ? 'transparent' : 'rgba(226,226,226,1)'}

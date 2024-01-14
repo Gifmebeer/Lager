@@ -4,7 +4,6 @@ import { ColorSchemeScript, MantineProvider } from '@mantine/core';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import ThirdwebProvider from '@/helpers/ThirdwebProvider';
-import AppShell from '@/components/Appshell';
 import { theme } from '@/../theme';
 
 const metamorBit_Latin = localFont({
