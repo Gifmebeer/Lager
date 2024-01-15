@@ -26,13 +26,14 @@ const CollectionCard: React.FC<{
   item?: ICardItem;
   metadata?: any;
   showTitle?: boolean;
+  address?: string;
   owned: boolean;
-}> = ({ item, owned, metadata, showTitle }) => {
+}> = ({ item, owned, metadata, showTitle, address }) => {
   return (
     <Card p='lg' bg='transparent' w='100%' opacity={owned ? 1 : 0.5}>
       <Card.Section>
         {metadata ? (
-          <NFTCard metadata={metadata} key={metadata.id} />
+          <NFTCard metadata={metadata} key={metadata.id} address={address} />
         ) : (
           item && (
             <Image w={350} src={item.imageUrl} alt={item.name} fit='contain' />
@@ -109,6 +110,7 @@ const CollectionsPage = () => {
           {ownedMembership ? (
             <Flex w='400px' ml='md'>
               <CollectionCard
+                address={NFT_MEMBERSHIP_ADDRESS}
                 metadata={ownedMembership.metadata}
                 owned={true}
               />
@@ -172,6 +174,7 @@ const CollectionsPage = () => {
             {collectionNfts?.map((nft: any, index: number) => (
               <Grid.Col key={index} span={{ sm: 12, md: 6, xl: 4 }}>
                 <CollectionCard
+                  address={currentCollection.address}
                   metadata={nft.metadata}
                   owned={true}
                   showTitle
@@ -180,7 +183,12 @@ const CollectionsPage = () => {
             ))}
             {filteredCards.map((item: ICardItem) => (
               <Grid.Col key={item.name} span={{ sm: 12, md: 6, xl: 4 }}>
-                <CollectionCard item={item} owned={false} showTitle />
+                <CollectionCard
+                  address={currentCollection.address}
+                  item={item}
+                  owned={false}
+                  showTitle
+                />
               </Grid.Col>
             ))}
           </Grid>
