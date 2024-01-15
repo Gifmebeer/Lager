@@ -10,11 +10,11 @@ interface IHeader {
   children: ReactNode;
   isLanding?: boolean;
   noPadding?: boolean;
+  noLogin?: boolean;
 }
 
-function Header({ children, isLanding, noPadding }: IHeader) {
+function Header({ children, isLanding, noPadding, noLogin }: IHeader) {
   const [opened, { toggle }] = useDisclosure();
-
   return (
     <AppShell header={{ height: '0', offset: false }}>
       <AppShell.Header
@@ -35,12 +35,14 @@ function Header({ children, isLanding, noPadding }: IHeader) {
               />
             </Link>
           )}
-          <ConnectWallet
-            btnTitle='LOGIN'
-            className={'connectButton'}
-            switchToActiveChain={true}
-            modalSize={'compact'}
-          />
+          {!noLogin && (
+            <ConnectWallet
+              btnTitle='LOGIN'
+              className={'connectButton'}
+              switchToActiveChain={true}
+              modalSize={'compact'}
+            />
+          )}
         </Flex>
       </AppShell.Header>
       <AppShell.Main pt={isLanding || noPadding ? 0 : '200px'}>

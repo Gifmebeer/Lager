@@ -1,13 +1,12 @@
-import { Address, formatUnits } from 'viem';
+import { Address } from 'viem';
 import DropERC1155_ABI from '@/abis/DropERC1155.json';
-import { NFT_MEMBERSHIP_ADDRESS } from '@/constants/addresses';
 import { privateKeyToWalletClient } from '@/utils/web3';
 
 export async function POST(request: Request) {
   try {
     const req = await request.json();
-    const { address } = req;
-
+    const { address, nftAddress, tokenId } = req;
+    const NFT_ADDRESS = nftAddress;
     if (!address) {
       return new Response(
         JSON.stringify({
@@ -19,7 +18,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const TOKEN_ID = 1;
+    const TOKEN_ID = tokenId;
     const minterPvtKey = process.env.MINTER_PV_KEY as Address;
 
     if (!minterPvtKey) {
@@ -29,20 +28,12 @@ export async function POST(request: Request) {
     // Set up the account and clients with Viem
     const { walletClient } = privateKeyToWalletClient(minterPvtKey, 80001);
 
-    // NOT WORKING FOR SOME NETWORK ISSUE
-    // const sdk = ThirdwebSDK.fromPrivateKey(`${minterPvtKey}`, 'mumbai', {
-    //   secretKey: process.env.THIRD_WEB_SECRET_KEY,
-    // });
-    // const contract = await sdk.getContract(NFT_MEMBERSHIP_ADDRESS);
-    // const balance = await contract.erc1155.balance(0);
-    // console.log({ balance });
-
     // Define the parameters for the claim function
     const _receiver = address;
 
     // Checks balance
     const balance = (await walletClient.readContract({
-      address: NFT_MEMBERSHIP_ADDRESS,
+      address: NFT_ADDRESS,
       abi: DropERC1155_ABI.abi,
       functionName: 'balanceOf',
       args: [_receiver, TOKEN_ID],
@@ -78,7 +69,7 @@ export async function POST(request: Request) {
     ];
     // Simulate the contract interaction
     const simulation = await walletClient.simulateContract({
-      address: NFT_MEMBERSHIP_ADDRESS,
+      address: NFT_ADDRESS,
       abi: DropERC1155_ABI.abi,
       functionName: 'claim',
       args: _args,
@@ -87,12 +78,11 @@ export async function POST(request: Request) {
     // If simulation is successful, write to the contract
     if (simulation) {
       const transactionRequest = await walletClient.writeContract({
-        address: NFT_MEMBERSHIP_ADDRESS,
+        address: NFT_ADDRESS,
         abi: DropERC1155_ABI.abi,
         functionName: 'claim',
         args: _args,
       });
-      console.log({ transactionRequest });
       return new Response(
         JSON.stringify({ data: 'Claim successful', transactionRequest }),
         {
@@ -105,7 +95,6 @@ export async function POST(request: Request) {
       });
     }
   } catch (error) {
-    console.error(error);
     return new Response(JSON.stringify({ error }), {
       status: 500,
     });
