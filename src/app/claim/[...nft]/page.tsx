@@ -8,7 +8,7 @@ import { CURRENT_COLLECTIONS, membership } from '@/constants/collections';
 import {
   ConnectWallet,
   useAddress,
-  useConnectedWallet,
+  useConnectionStatus,
   useContract,
   useOwnedNFTs,
   useNFT,
@@ -39,7 +39,8 @@ const Claim = ({ params: { nft } }: { params: { nft: any } }) => {
   const { walletClient } = createPublicWalletClient(
     CURRENT_COLLECTIONS[0].chainId
   );
-  const isConnected = useConnectedWallet();
+  const connectionStatus = useConnectionStatus();
+  const isConnected = connectionStatus === 'connected';
   const [isMinting, setIsMinting] = useState(false);
   const [error, setError] = useState<any>(false);
   const [receipt, setReceipt] = useState<any>(null);
@@ -137,9 +138,11 @@ const Claim = ({ params: { nft } }: { params: { nft: any } }) => {
   };
 
   const isError = contractError || !isValidNFT || mutationError || error;
-  const isLoading = isMutating || isMinting || !ready;
+  const connecting =
+    connectionStatus === 'connecting' || connectionStatus === 'unknown';
+  const isLoading = connecting || isMutating || isMinting || !ready;
 
-  if (isLoading) {
+  if (isLoading || !ready) {
     return (
       <Flex
         style={{ minHeight: '100vh' }}
@@ -180,14 +183,18 @@ const Claim = ({ params: { nft } }: { params: { nft: any } }) => {
       </Flex>
     );
   }
-
-  if (!isConnected && !ready) {
+  if (ready && !isConnected) {
     return (
       <Center
-        style={{ minHeight: '100vh', flexDirection: 'column', gap: '20px' }}
+        style={{
+          textAlign: 'center',
+          minHeight: '100vh',
+          flexDirection: 'column',
+          gap: '20px',
+        }}
         bg='black'
       >
-        <Text c='white' size='xl'>
+        <Text c='white' size='xl' maw={{ base: '300px', md: '100%' }}>
           Please connect your wallet to claim
         </Text>
         <ConnectWallet />
