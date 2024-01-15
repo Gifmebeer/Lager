@@ -25,8 +25,9 @@ export const NFTCard: FC<NFTCardProps> = ({ metadata, address }) => {
         align='center'
         direction='column'
         key={metadata.id}
+        w={{ base: '300px', md: '400px' }}
       >
-        <ThirdwebNftMedia metadata={metadata} width='400px' height='100%' />
+        <ThirdwebNftMedia metadata={metadata} width='100%' height='100%' />
       </Flex>
     </Link>
   );
