@@ -136,6 +136,7 @@ const Claim = ({ params: { nft } }: { params: { nft: any } }) => {
       )
     );
   };
+  
 
   const isError = contractError || !isValidNFT || mutationError || error;
   const connecting =
