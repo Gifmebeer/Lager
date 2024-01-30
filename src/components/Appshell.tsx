@@ -1,10 +1,10 @@
 'use client';
 
-import { AppShell, Container, Flex, Image } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { ConnectWallet } from '@thirdweb-dev/react';
+import { AppShell, Flex, Image } from '@mantine/core';
+import { ConnectWallet, darkTheme } from '@thirdweb-dev/react';
 import Link from 'next/link';
 import { ReactNode } from 'react';
+import Footer from './Footer';
 
 interface IHeader {
   children: ReactNode;
@@ -14,7 +14,6 @@ interface IHeader {
 }
 
 function Header({ children, isLanding, noPadding, noLogin }: IHeader) {
-  const [opened, { toggle }] = useDisclosure();
   return (
     <AppShell header={{ height: '0', offset: false }}>
       <AppShell.Header
@@ -41,12 +40,22 @@ function Header({ children, isLanding, noPadding, noLogin }: IHeader) {
               className={'connectButton'}
               switchToActiveChain={true}
               modalSize={'compact'}
+              theme={darkTheme({
+                colors: {
+                  modalBg: 'rgba(36, 195, 171, 1)',
+                  primaryText: 'black',
+                  primaryButtonText: 'black',
+                  secondaryButtonText: 'black',
+                  secondaryText: 'black',
+                },
+              })}
             />
           )}
         </Flex>
       </AppShell.Header>
       <AppShell.Main pt={isLanding || noPadding ? 0 : '200px'}>
         {children}
+        <Footer />
       </AppShell.Main>
     </AppShell>
   );

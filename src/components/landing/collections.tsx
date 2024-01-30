@@ -1,7 +1,18 @@
 import React from 'react';
-import { Card, Image, Text, Title, Container, Flex, em } from '@mantine/core';
+import {
+  Button,
+  Card,
+  Image,
+  Text,
+  Title,
+  Container,
+  Flex,
+  em,
+} from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import Link from 'next/link';
+import { ConnectWallet, useConnectionStatus } from '@thirdweb-dev/react';
+import { useRouter } from 'next/navigation';
 
 const cards = [
   {
@@ -28,6 +39,9 @@ const cards = [
 ];
 
 const Collections = () => {
+  const router = useRouter();
+  const connectionStatus = useConnectionStatus();
+  const isConnected = connectionStatus === 'connected';
   const isMobile = useMediaQuery(`(max-width: ${em(850)})`);
   return (
     <Flex
@@ -38,7 +52,7 @@ const Collections = () => {
       justify='center'
       direction={'column'}
     >
-      <Container fluid>
+      <Container fluid mb={'lg'}>
         <Flex w={'100%'} align={'center'} justify='center' direction={'column'}>
           <Title
             style={{
@@ -86,6 +100,22 @@ const Collections = () => {
           </Flex>
         </Flex>
       </Container>
+      {!isConnected ? (
+        <ConnectWallet
+          btnTitle='LOG IN TO SEE ALL COLLECTIONS'
+          className={'connectButton2'}
+          switchToActiveChain={true}
+          modalSize={'compact'}
+        />
+      ) : (
+        <Button
+          onClick={() => router.push('/collections')}
+          className='connectButton2'
+          variant='light'
+        >
+          SEE ALL COLLECTIONS
+        </Button>
+      )}
     </Flex>
   );
 };

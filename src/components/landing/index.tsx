@@ -9,6 +9,7 @@ import {
 import { Flex } from '@mantine/core';
 import Hero from './hero';
 import Collections from './collections';
+import Carousel from './carousel';
 import { NFT_MEMBERSHIP_ADDRESS } from '@/constants/addresses';
 import { NFTCard } from '@/components/NFTCard';
 import useSWRMutation from 'swr/mutation';
@@ -61,6 +62,7 @@ const LandingPage = () => {
     <Flex justify={'center'} align={'center'} direction='column'>
       <Hero />
       <Collections />
+      <Carousel />
     </Flex>
   );
   return (
