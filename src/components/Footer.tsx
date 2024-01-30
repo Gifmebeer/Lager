@@ -11,10 +11,10 @@ const data = [
   {
     title: 'Community',
     links: [
-      { label: 'HOLA@GIFME.BEER', link: '#' },
-      { label: 'FAQ', link: '#' },
-      { label: 'GIFME.BEER TEAM', link: '#' },
-      { label: 'TERMS & CONDITIONS', link: '#' },
+      { label: 'HOLA@GIFME.BEER', link: '/' },
+      { label: 'FAQ', link: '/' },
+      { label: 'GIFME.BEER TEAM', link: '/' },
+      { label: 'TERMS & CONDITIONS', link: '/tos' },
     ],
   },
 ];
