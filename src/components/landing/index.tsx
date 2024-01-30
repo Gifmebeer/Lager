@@ -11,7 +11,6 @@ import Hero from './hero';
 import Collections from './collections';
 import Carousel from './carousel';
 import { NFT_MEMBERSHIP_ADDRESS } from '@/constants/addresses';
-import { NFTCard } from '@/components/NFTCard';
 import useSWRMutation from 'swr/mutation';
 import { Address } from 'viem';
 
@@ -64,48 +63,6 @@ const LandingPage = () => {
       <Collections />
       <Carousel />
     </Flex>
-  );
-  return (
-    <div>
-      <Flex
-        m={100}
-        mih={100}
-        gap='md'
-        justify='center'
-        align='center'
-        direction='column'
-      >
-        {!address ? null : isLoading ? (
-          <div>
-            <h3>Loading...</h3>
-          </div>
-        ) : (
-          <Flex justify='center' align='center' direction='column'>
-            {<h1>GifMeBeer Membership</h1>}
-            <h2>
-              TOTAL ITEMS: <span>{nftBalance?.toNumber()}</span>
-            </h2>
-            {!address && <h1>Connect your wallet</h1>}
-            {address && isLoading && <h1>Loading...</h1>}
-            {address && !isLoading && !nfts?.length && (
-              <Flex justify='center' align='center' direction='column'>
-                <h3>You have no membership </h3>
-                {isMutating ? (
-                  <h3>Interacting with contract...</h3>
-                ) : (
-                  <button onClick={claim}>claim</button>
-                )}
-              </Flex>
-            )}
-            <div>
-              {nfts?.map((nft) => (
-                <NFTCard metadata={nft.metadata} key={nft.metadata.id} />
-              ))}
-            </div>
-          </Flex>
-        )}
-      </Flex>
-    </div>
   );
 };
 
