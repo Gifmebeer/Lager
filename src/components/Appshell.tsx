@@ -42,11 +42,14 @@ function Header({ children, isLanding, noPadding, noLogin }: IHeader) {
               modalSize={'compact'}
               theme={darkTheme({
                 colors: {
-                  modalBg: 'rgba(36, 195, 171, 1)',
-                  primaryText: 'black',
+                  modalBg: 'black',
+                  primaryText: 'white',
+                  accentText: 'rgba(36, 195, 171, 1)',
                   primaryButtonText: 'black',
-                  secondaryButtonText: 'black',
-                  secondaryText: 'black',
+                  secondaryButtonText: 'rgba(36, 195, 171, 1)',
+                  secondaryText: 'darkgray',
+                  accentButtonText: 'black',
+                  accentButtonBg: 'rgba(36, 195, 171, 1)',
                 },
               })}
             />

@@ -1,15 +1,7 @@
 import './carousel.css';
 import { Carousel } from '@mantine/carousel';
 import { useMediaQuery } from '@mantine/hooks';
-import {
-  Button,
-  Paper,
-  Title,
-  useMantineTheme,
-  Text,
-  Flex,
-  Image,
-} from '@mantine/core';
+import { Button, useMantineTheme, Flex, Image } from '@mantine/core';
 import { useRouter } from 'next/navigation';
 
 const data = [
@@ -32,28 +24,7 @@ interface CardProps {
 }
 
 function Card({ image, title, category }: CardProps) {
-  return <Image src={image} alt={title} w={500} ml={150} />;
-  return (
-    <Paper
-      shadow='md'
-      p='xl'
-      radius='md'
-      style={{ backgroundImage: `url(${image})` }}
-      className={'carousel_card'}
-    >
-      <div>
-        <Text className={'carousel_category'} size='xs'>
-          {category}
-        </Text>
-        <Title order={3} className={'carousel_title'}>
-          {title}
-        </Title>
-      </div>
-      <Button variant='white' color='dark'>
-        Read article
-      </Button>
-    </Paper>
-  );
+  return <Image src={image} alt={title} w={{ base: 250, md: 500 }} ml={150} />;
 }
 
 export default function CarouselSection() {
@@ -77,9 +48,9 @@ export default function CarouselSection() {
     >
       <Carousel
         w={'100%'}
-        slideSize={{ base: '100%', sm: '50%' }}
+        slideSize={{ base: '100%', sm: 0 }}
         slideGap={{ base: 'xl', sm: 2 }}
-        align='start'
+        align={'start'}
         mb={'xl'}
       >
         {slides}
@@ -88,6 +59,7 @@ export default function CarouselSection() {
         onClick={() => router.push('/promos')}
         className='connectButton2'
         variant='light'
+        mt={'lg'}
       >
         SEE ALL PROMOS
       </Button>

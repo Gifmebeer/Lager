@@ -57,7 +57,7 @@ const Collections = () => {
           <Title
             style={{
               textTransform: 'uppercase',
-              fontSize: isMobile ? '4rem' : '6rem',
+              fontSize: isMobile ? '2rem' : '6rem',
               fontFamily: 'var(--font-metamorbit-latin)',
             }}
             order={1}
@@ -68,7 +68,11 @@ const Collections = () => {
           <Flex direction={{ base: 'column', lg: 'row' }} gap={'md'} mt={40}>
             {cards.map((card, index) => (
               <Link key={index} href={`/collections`}>
-                <Card w={400} h={'fit-content'} bg={'transparent'}>
+                <Card
+                  w={{ base: 300, md: 400 }}
+                  h={'fit-content'}
+                  bg={'transparent'}
+                >
                   <Flex direction='column' align={'center'} gap='md'>
                     <Image src={card.image} alt='img' height={200} />
                     <Flex
