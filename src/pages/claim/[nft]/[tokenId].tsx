@@ -1,5 +1,3 @@
-'use client';
-
 import { Flex, Loader } from '@mantine/core';
 
 import React, { useEffect, useState } from 'react';
@@ -16,12 +14,15 @@ import {
 import useSWRMutation from 'swr/mutation';
 import { Address } from 'viem';
 import { NFTCard } from '@/components/NFTCard';
+import AppShell from '@/components/Appshell';
 import {
   createPublicWalletClient,
   getExplorerLink,
   shortenAddress,
 } from '@/utils/web3';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import currentNetwork from '@/constants/currentNetwork';
 
 async function sendRequest(
   url: string,
@@ -33,12 +34,13 @@ async function sendRequest(
   }).then((res) => res.json());
 }
 
-const Claim = ({ params: { nft } }: { params: { nft: any } }) => {
+const Claim = (params: any) => {
+  const router = useRouter();
+  const nft = router.query.nft as Address;
+  const tokenId = router.query.tokenId as string;
   const [claimDone, setClaimDone] = useState('');
   const address = useAddress();
-  const { walletClient } = createPublicWalletClient(
-    CURRENT_COLLECTIONS[0].chainId
-  );
+  const { walletClient } = createPublicWalletClient();
   const connectionStatus = useConnectionStatus();
   const isConnected = connectionStatus === 'connected';
   const [isMinting, setIsMinting] = useState(false);
@@ -47,13 +49,12 @@ const Claim = ({ params: { nft } }: { params: { nft: any } }) => {
   const [isValidNFT, setIsValidNFT] = useState<boolean | null>(null);
   const [ready, setReady] = useState(false);
   const { data: nftContract, isError: contractError } = useContract(
-    nft[0] as Address
+    nft as Address
   );
   const { data: currentNFT, isLoading: currentNFTIsLoading } = useNFT(
     nftContract,
-    nft[1]
+    tokenId
   );
-
   const {
     data: ownedNFT,
     isFetched: ownedNFTFetched,
@@ -61,14 +62,14 @@ const Claim = ({ params: { nft } }: { params: { nft: any } }) => {
   } = useOwnedNFTs(nftContract, address);
 
   const ownsNFT = ownedNFT?.find(
-    (i) => Number(i.metadata.id) === Number(nft[1])
+    (i) => Number(i.metadata.id) === Number(tokenId)
   );
 
   const {
     trigger,
     error: mutationError,
     isMutating,
-  } = useSWRMutation('/api/mint', sendRequest);
+  } = useSWRMutation('/api/claim', sendRequest);
 
   const claim = async () => {
     try {
@@ -77,8 +78,8 @@ const Claim = ({ params: { nft } }: { params: { nft: any } }) => {
       setIsMinting(true);
       const result = await trigger({
         address: address as Address,
-        nftAddress: nft[0] as Address,
-        tokenId: nft[1] as string,
+        nftAddress: nft as Address,
+        tokenId: tokenId as string,
       });
       console.log({ result });
       if (result.error) {
@@ -104,9 +105,9 @@ const Claim = ({ params: { nft } }: { params: { nft: any } }) => {
   };
 
   useEffect(() => {
-    if (!nft || nft.length !== 2) return;
-    const contractAddress = nft[0];
-    const id = nft[1];
+    if (!nft) return;
+    const contractAddress = nft;
+    const id = tokenId;
     // Check if the NFT exists in myNFTs
     const collectionExists = CURRENT_COLLECTIONS.find(
       (nft: any) => nft.address === contractAddress
@@ -132,11 +133,10 @@ const Claim = ({ params: { nft } }: { params: { nft: any } }) => {
       <Loader color='white' />
     ) : (
       currentNFT && (
-        <NFTCard address={nft[0]} metadata={currentNFT.metadata} key={nft[1]} />
+        <NFTCard address={nft} metadata={currentNFT.metadata} key={tokenId} />
       )
     );
   };
-  
 
   const isError = contractError || !isValidNFT || mutationError || error;
   const connecting =
@@ -204,51 +204,59 @@ const Claim = ({ params: { nft } }: { params: { nft: any } }) => {
   }
 
   return (
-    <Center style={{ minHeight: '100vh' }} bg='black'>
-      <Flex align='center' direction='column' gap='lg'>
-        <CurrentCard />
-        {ownedNFTFetched && isValidNFT && !ownsNFT ? (
-          <Flex align='center' direction='column' gap='lg'>
-            <Button
-              bg='white'
-              c='black'
-              style={{ backgroundColor: 'black' }}
-              onClick={async () => await claim()}
-              fullWidth
-            >
-              Claim NFT
-            </Button>
-          </Flex>
-        ) : ownedNFTFetched && ownsNFT ? (
-          <Text c='white' size='xl' style={{ marginBottom: '1rem' }}>
-            You already own this NFT
-          </Text>
-        ) : null}
-        {receipt && (
-          <Flex align='center' direction='column' gap='xs'>
-            <Text c='white' size='md' style={{ marginBottom: '1rem' }}>
-              Claimed NFT!{' '}
+    <AppShell noPadding={true} noLogin={true}>
+      <Center style={{ minHeight: '100vh' }} bg='black'>
+        <Flex align='center' direction='column' gap='lg'>
+          <CurrentCard />
+          {ownedNFTFetched && isValidNFT && !ownsNFT ? (
+            <Flex align='center' direction='column' gap='lg'>
+              <Button
+                bg='white'
+                c='black'
+                style={{
+                  backgroundColor: 'black',
+                  fontFamily: 'MetamorBit-Latin',
+                }}
+                onClick={async () => await claim()}
+                fullWidth
+              >
+                Claim NFT
+              </Button>
+            </Flex>
+          ) : ownedNFTFetched && ownsNFT ? (
+            <Text c='white' size='xl' style={{ marginBottom: '1rem' }}>
+              You already own this NFT
+            </Text>
+          ) : null}
+          {receipt && (
+            <Flex align='center' direction='column' gap='xs'>
+              <Text c='white' size='md' style={{ marginBottom: '1rem' }}>
+                Claimed NFT!{' '}
+                <Link
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  style={{ textDecoration: 'underline' }}
+                  href={getExplorerLink(
+                    receipt?.transactionHash,
+                    currentNetwork.chainId
+                  )}
+                >
+                  {`tx: ${shortenAddress(receipt?.transactionHash)}`}
+                </Link>
+              </Text>
               <Link
                 target='_blank'
                 rel='noopener noreferrer'
-                style={{ textDecoration: 'underline' }}
-                href={getExplorerLink(receipt?.transactionHash, 80001)}
+                style={{ textDecoration: 'underline', color: 'white' }}
+                href={'/collections'}
               >
-                {`tx: ${shortenAddress(receipt?.transactionHash)}`}
+                See your collection
               </Link>
-            </Text>
-            <Link
-              target='_blank'
-              rel='noopener noreferrer'
-              style={{ textDecoration: 'underline', color: 'white' }}
-              href={'/collections'}
-            >
-              See your collection
-            </Link>
-          </Flex>
-        )}
-      </Flex>
-    </Center>
+            </Flex>
+          )}
+        </Flex>
+      </Center>
+    </AppShell>
   );
 };
 

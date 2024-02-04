@@ -1,4 +1,3 @@
-import './carousel.css';
 import { Carousel } from '@mantine/carousel';
 import { useMediaQuery } from '@mantine/hooks';
 import { Button, useMantineTheme, Flex, Image } from '@mantine/core';
@@ -24,7 +23,14 @@ interface CardProps {
 }
 
 function Card({ image, title, category }: CardProps) {
-  return <Image src={image} alt={title} w={{ base: 250, md: 500 }} ml={150} />;
+  return (
+    <Image
+      src={image}
+      alt={title}
+      w={{ base: '70%', sm: 300, md: 500 }}
+      mx={{ base: '15%', sm: 100 }}
+    />
+  );
 }
 
 export default function CarouselSection() {
@@ -57,7 +63,7 @@ export default function CarouselSection() {
       </Carousel>
       <Button
         onClick={() => router.push('/promos')}
-        className='connectButton2'
+        className={'connectButton2'}
         variant='light'
         mt={'lg'}
       >

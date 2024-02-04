@@ -1,5 +1,3 @@
-'use client';
-
 import {
   Card,
   Container,
@@ -17,26 +15,26 @@ import {
 } from '@/constants/addresses';
 import { NFTCard } from '../NFTCard';
 import { useState } from 'react';
-import { CURRENT_COLLECTIONS } from '@/constants/collections';
+import { CURRENT_COLLECTIONS, membership } from '@/constants/collections';
 import { ICardItem, ICollection } from '@/types';
 
 const collections: ICollection[] = CURRENT_COLLECTIONS;
 
 const CollectionCard: React.FC<{
-  item?: ICardItem;
+  item?: ICardItem | any;
   metadata?: any;
   showTitle?: boolean;
   address?: string;
   owned: boolean;
 }> = ({ item, owned, metadata, showTitle, address }) => {
   return (
-    <Card p='lg' bg='transparent' w='100%' opacity={owned ? 1 : 0.5}>
+    <Card p='lg' bg='transparent' w='100%' opacity={owned ? 1 : 0.7}>
       <Card.Section>
         {metadata ? (
           <NFTCard metadata={metadata} key={metadata.id} address={address} />
         ) : (
           item && (
-            <Image w={350} src={item.imageUrl} alt={item.name} fit='contain' />
+            <Image w={300} src={item.imageUrl} alt={item.name} fit='contain' />
           )
         )}
       </Card.Section>
@@ -45,38 +43,51 @@ const CollectionCard: React.FC<{
           {showTitle && (
             <Text
               size='lg'
-              style={{ fontWeight: 'bold' }}
+              style={{ fontWeight: 'bold', textTransform: 'capitalize' }}
               content={metadata ? metadata.name : item && item.name}
             />
           )}
         </Group>
       </Card.Section>
+      {!owned && (
+        <Image
+          w={100}
+          style={{
+            position: 'absolute',
+            top: 0,
+            right: 0,
+          }}
+          src={'/images/icons/missing_corner.svg'}
+          alt={'missing'}
+          fit='contain'
+        />
+      )}
     </Card>
   );
 };
 
 const CollectionsPage = () => {
-  const MEMBERSHIP_TOKEN_ID = 1;
-  const { data: membershipContract } = useContract(NFT_MEMBERSHIP_ADDRESS);
+  // const MEMBERSHIP_TOKEN_ID = 1;
+  // const { data: membershipContract } = useContract(NFT_MEMBERSHIP_ADDRESS);
   const { data: collectionContract } = useContract(NFT_COLLECTION_ADDRESS);
   const address = useAddress();
   const [currentCollection, setCurrentCollection] = useState<ICollection>(
     CURRENT_COLLECTIONS[0]
   );
-  const {
-    data: memberNFTs,
-    isLoading: membershipNFTLoading,
-    isFetched: fetchedMembershipNFT,
-  } = useOwnedNFTs(membershipContract, address);
+  // const {
+  //   data: memberNFTs,
+  //   isLoading: membershipNFTLoading,
+  //   isFetched: fetchedMembershipNFT,
+  // } = useOwnedNFTs(membershipContract, address);
 
   const { data: collectionNfts, isLoading: collectionIsLoading } = useOwnedNFTs(
     collectionContract,
     address
   );
 
-  const ownedMembership = memberNFTs?.find(
-    (i) => Number(i.metadata.id) === MEMBERSHIP_TOKEN_ID
-  );
+  // const ownedMembership = memberNFTs?.find(
+  //   (i) => Number(i.metadata.id) === MEMBERSHIP_TOKEN_ID
+  // );
 
   // const cards = Array(5)
   //   .fill(currentCollection.cards)
@@ -102,12 +113,21 @@ const CollectionsPage = () => {
           direction={{ base: 'column', md: 'row' }}
         >
           <Text
-            style={{ fontSize: '35px' }}
+            style={{
+              fontSize: '35px',
+            }}
             c='white'
             maw='300px'
             content='GIFME.BEER MEMBERSHIP'
           />
-          {ownedMembership ? (
+          <Flex w='400px' ml='md'>
+            <CollectionCard
+              address={NFT_MEMBERSHIP_ADDRESS}
+              item={membership.cards[0]}
+              owned={true}
+            />
+          </Flex>
+          {/* {ownedMembership ? (
             <Flex w='400px' ml='md'>
               <CollectionCard
                 address={NFT_MEMBERSHIP_ADDRESS}
@@ -124,7 +144,7 @@ const CollectionsPage = () => {
               maw='300px'
               content={!ownedMembership && 'No membership'}
             />
-          )}
+          )} */}
         </Flex>
       </Container>
 

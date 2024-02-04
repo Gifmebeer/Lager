@@ -1,5 +1,3 @@
-'use client';
-
 import { AppShell, Flex, Image } from '@mantine/core';
 import { ConnectWallet, darkTheme } from '@thirdweb-dev/react';
 import Link from 'next/link';
@@ -45,10 +43,10 @@ function Header({ children, isLanding, noPadding, noLogin }: IHeader) {
                   modalBg: 'black',
                   primaryText: 'white',
                   accentText: 'rgba(36, 195, 171, 1)',
-                  primaryButtonText: 'black',
+                  primaryButtonText: 'white',
                   secondaryButtonText: 'rgba(36, 195, 171, 1)',
                   secondaryText: 'darkgray',
-                  accentButtonText: 'black',
+                  accentButtonText: 'white',
                   accentButtonBg: 'rgba(36, 195, 171, 1)',
                 },
               })}

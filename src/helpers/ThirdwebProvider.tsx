@@ -1,5 +1,3 @@
-'use client';
-
 import { ReactNode } from 'react';
 
 interface ThirdWebProviderProps {
@@ -11,10 +9,9 @@ import {
   metamaskWallet,
   coinbaseWallet,
   embeddedWallet,
-  bloctoWallet,
   smartWallet,
 } from '@thirdweb-dev/react';
-import { Polygon, Mumbai } from '@thirdweb-dev/chains';
+import { Optimism } from '@thirdweb-dev/chains';
 import { FACTORY_ADDRESS } from '@/constants/addresses';
 
 const ThirdWebProvider: React.FC<ThirdWebProviderProps> = ({ children }) => {
@@ -25,14 +22,13 @@ const ThirdWebProvider: React.FC<ThirdWebProviderProps> = ({ children }) => {
 
   return (
     <ThirdwebProvider
-      activeChain='mumbai'
-      supportedChains={[Mumbai, Polygon]}
+      activeChain='optimism'
+      supportedChains={[Optimism]}
       clientId={process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID}
       supportedWallets={[
         smartWallet(embeddedWallet(), smartWalletConfig),
         metamaskWallet({ recommended: true }),
         coinbaseWallet(),
-        bloctoWallet(),
       ]}
     >
       {children}

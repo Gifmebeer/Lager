@@ -1,4 +1,3 @@
-import './Footer.css';
 import { Text, Container, ActionIcon, Group, rem, Image } from '@mantine/core';
 import {
   IconBrandXFilled,

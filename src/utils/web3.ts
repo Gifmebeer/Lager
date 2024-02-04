@@ -1,12 +1,11 @@
 import { privateKeyToAddress, privateKeyToAccount } from 'viem/accounts';
 import { Address, createWalletClient, http, publicActions, toHex } from 'viem';
-import { polygon, polygonMumbai } from 'viem/chains';
+import { optimism } from 'viem/chains';
+import currentNetwork from '@/constants/currentNetwork';
 
-export function privateKeyToWalletClient(privateKey: Address, chainId: number) {
-  const network = `https://${
-    chainId === 80001 ? 'polygon-mumbai' : 'polygon-mainnet'
-  }.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_PROJECT_ID}`;
-  const chain = chainId === 80001 ? polygonMumbai : polygon;
+export function privateKeyToWalletClient(privateKey: Address) {
+  const network = `https://${currentNetwork.infuraName}.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_PROJECT_ID}`;
+  const chain = optimism;
   const account = privateKeyToAccount(`0x${privateKey}`);
   const walletClient = createWalletClient({
     account,
@@ -17,11 +16,9 @@ export function privateKeyToWalletClient(privateKey: Address, chainId: number) {
   return { walletClient };
 }
 
-export function createPublicWalletClient(chainId: number) {
-  const network = `https://${
-    chainId === 80001 ? 'polygon-mumbai' : 'polygon-mainnet'
-  }.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_PROJECT_ID}`;
-  const chain = chainId === 80001 ? polygonMumbai : polygon;
+export function createPublicWalletClient() {
+  const network = `https://${currentNetwork.infuraName}.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_PROJECT_ID}`;
+  const chain = optimism;
 
   const walletClient = createWalletClient({
     chain,
@@ -37,6 +34,9 @@ export function getExplorerLink(txHash: string, chainId: number): string {
   switch (chainId) {
     case 1: // Ethereum Mainnet
       baseUrl = 'https://etherscan.io/tx/';
+      break;
+    case 10: // Optimism Mainnet
+      baseUrl = 'https://optimistic.etherscan.io/tx/';
       break;
     case 137: // Polygon Mainnet
       baseUrl = 'https://polygonscan.com/tx/';
