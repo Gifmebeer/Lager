@@ -1,5 +1,6 @@
 export default {
   name: 'Optimism',
-  infuraName: 'optimism-mainnet',
-  chainId: 10,
+  infuraName: 'optimism-sepolia',
+  thirdwebName: 'op-sepolia-testnet',
+  chainId: 11155420,
 };

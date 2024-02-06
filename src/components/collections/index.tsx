@@ -28,7 +28,7 @@ const CollectionCard: React.FC<{
   owned: boolean;
 }> = ({ item, owned, metadata, showTitle, address }) => {
   return (
-    <Card p='lg' bg='transparent' w='100%' opacity={owned ? 1 : 0.7}>
+    <Card w='300px' p='lg' bg='transparent' opacity={owned ? 1 : 0.7}>
       <Card.Section>
         {metadata ? (
           <NFTCard metadata={metadata} key={metadata.id} address={address} />
@@ -84,7 +84,7 @@ const CollectionsPage = () => {
     collectionContract,
     address
   );
-
+  console.log({ collectionNfts });
   // const ownedMembership = memberNFTs?.find(
   //   (i) => Number(i.metadata.id) === MEMBERSHIP_TOKEN_ID
   // );
@@ -187,9 +187,7 @@ const CollectionsPage = () => {
           backgroundColor: currentCollection.color,
         }}
       >
-        {collectionIsLoading ? (
-          <Loader color='white' />
-        ) : (
+        {
           <Grid grow gutter='xl' maw='1200px'>
             {collectionNfts?.map((nft: any, index: number) => (
               <Grid.Col key={index} span={{ sm: 12, md: 6, xl: 4 }}>
@@ -212,7 +210,7 @@ const CollectionsPage = () => {
               </Grid.Col>
             ))}
           </Grid>
-        )}
+        }
       </Flex>
     </>
   );

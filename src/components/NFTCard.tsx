@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import Link from 'next/link';
 import { NFT_MEMBERSHIP_ADDRESS } from '@/constants/addresses';
 import { Flex } from '@mantine/core';
+import currentNetwork from '@/constants/currentNetwork';
 
 interface NFTCardProps {
   metadata: NFT['metadata'];
@@ -12,7 +13,7 @@ interface NFTCardProps {
 export const NFTCard: FC<NFTCardProps> = ({ metadata, address }) => {
   return (
     <Link
-      href={`https://thirdweb.com/optimism/${
+      href={`https://thirdweb.com/${currentNetwork.thirdwebName}/${
         address || NFT_MEMBERSHIP_ADDRESS
       }/nfts/0/${metadata.id}`}
       target='_blank'
