@@ -34,7 +34,7 @@ function Header({ children, isLanding, noPadding, noLogin, isClaim }: IHeader) {
     <AppShell
       header={{
         height: isMobile ? 100 : 180,
-        collapsed: !isMenuOpen && !pinned,
+        collapsed: isMobile ? false : !isMenuOpen && !pinned,
         offset: false,
       }}
     >
