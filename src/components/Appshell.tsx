@@ -8,7 +8,7 @@ import {
   useConnectionStatus,
 } from '@thirdweb-dev/react';
 import { IconMenu2, IconX } from '@tabler/icons-react';
-import { useMediaQuery } from '@mantine/hooks';
+import { useHeadroom, useMediaQuery } from '@mantine/hooks';
 import Footer from './Footer';
 import Text from './Text';
 
@@ -26,11 +26,12 @@ function Header({ children, isLanding, noPadding, noLogin, isClaim }: IHeader) {
   const disconnect = useDisconnect();
   const connectionStatus = useConnectionStatus();
   const isConnected = connectionStatus === 'connected';
+  const pinned = useHeadroom({ fixedAt: 50 });
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <AppShell header={{ height: '0', offset: false }}>
+    <AppShell header={{ height: 180, collapsed: !pinned, offset: false }}>
       <AppShell.Header
         withBorder={false}
         bg={isLanding || noPadding ? 'transparent' : 'rgba(226,226,226,1)'}

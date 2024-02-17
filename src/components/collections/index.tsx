@@ -22,7 +22,12 @@ const CollectionCard: React.FC<{
     <Card w={w || '300px'} p='lg' bg='transparent' opacity={owned ? 1 : 0.7}>
       <Card.Section>
         {metadata ? (
-          <NFTCard metadata={metadata} key={metadata.id} address={address} />
+          <NFTCard
+            w={w || 300}
+            metadata={metadata}
+            key={metadata.id}
+            address={address}
+          />
         ) : (
           item && (
             <Image
@@ -47,7 +52,7 @@ const CollectionCard: React.FC<{
       </Card.Section>
       {!owned && (
         <Image
-          w={100}
+          w={80}
           style={{
             position: 'absolute',
             top: 0,

@@ -8,9 +8,10 @@ import currentNetwork from '@/constants/currentNetwork';
 interface NFTCardProps {
   metadata: NFT['metadata'];
   address?: string;
+  w?: number | string;
 }
 
-export const NFTCard: FC<NFTCardProps> = ({ metadata, address }) => {
+export const NFTCard: FC<NFTCardProps> = ({ metadata, address, w }) => {
   return (
     <Link
       href={`https://thirdweb.com/${currentNetwork.thirdwebName}/${
@@ -24,7 +25,7 @@ export const NFTCard: FC<NFTCardProps> = ({ metadata, address }) => {
         align='center'
         direction='column'
         key={metadata.id}
-        w={{ base: '300px' }}
+        w={{ base: w || '300px' }}
       >
         <ThirdwebNftMedia metadata={metadata} width='100%' height='100%' />
       </Flex>
