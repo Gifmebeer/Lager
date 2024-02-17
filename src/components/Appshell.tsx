@@ -31,12 +31,18 @@ function Header({ children, isLanding, noPadding, noLogin, isClaim }: IHeader) {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <AppShell header={{ height: 180, collapsed: !pinned, offset: false }}>
+    <AppShell
+      header={{
+        height: isMobile ? 100 : 180,
+        collapsed: !pinned,
+        offset: false,
+      }}
+    >
       <AppShell.Header
         withBorder={false}
         bg={isLanding || noPadding ? 'transparent' : 'rgba(226,226,226,1)'}
       >
-        {((isClaim && !isMobile) || !isClaim) && (
+        {((isClaim && !isMobile) || !isMobile) && (
           <Flex
             style={{
               background: isClaim
