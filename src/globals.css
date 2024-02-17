@@ -144,9 +144,10 @@ a {
 
 .connectButton2 {
   font-family: 'MetamorBit-Latin' !important;
+  font-weight: 100 !important;
   background-color: transparent !important;
   border-radius: 8px !important;
-  border: 2px solid black !important;
+  border: 1px solid black !important;
   color: #000 !important;
   cursor: pointer !important;
   font-size: 100% !important;

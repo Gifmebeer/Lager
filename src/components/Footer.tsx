@@ -46,7 +46,7 @@ export default function Footer() {
       <Container className={'inner'}>
         <Link href='/' legacyBehavior>
           <Image
-            w={'150px'}
+            w={{ base: '82px', md: '150px' }}
             src='/images/gmb_logo.svg'
             alt='Logo'
             style={{ cursor: 'pointer' }}

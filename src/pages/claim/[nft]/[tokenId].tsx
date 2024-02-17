@@ -10,6 +10,7 @@ import {
   useContract,
   useOwnedNFTs,
   useNFT,
+  useSetIsWalletModalOpen,
 } from '@thirdweb-dev/react';
 import useSWRMutation from 'swr/mutation';
 import { Address } from 'viem';
@@ -43,11 +44,13 @@ const Claim = (params: any) => {
   const { walletClient } = createPublicWalletClient();
   const connectionStatus = useConnectionStatus();
   const isConnected = connectionStatus === 'connected';
+  const isConnecting = connectionStatus === 'connecting';
   const [isMinting, setIsMinting] = useState(false);
   const [error, setError] = useState<any>(false);
   const [receipt, setReceipt] = useState<any>(null);
   const [isValidNFT, setIsValidNFT] = useState<boolean | null>(null);
   const [ready, setReady] = useState(false);
+  const setIsWalletModalOpen = useSetIsWalletModalOpen();
   const { data: nftContract, isError: contractError } = useContract(
     nft as Address
   );
@@ -128,6 +131,11 @@ const Claim = (params: any) => {
     setReady(true);
   }, [nft]);
 
+  useEffect(() => {
+    if (!ready || isConnecting) return;
+    if (!isConnected) return setIsWalletModalOpen(true);
+  }, [ready, isConnected]);
+
   const CurrentCard = () => {
     return currentNFTIsLoading ? (
       <Loader color='white' />
@@ -204,9 +212,14 @@ const Claim = (params: any) => {
   }
 
   return (
-    <AppShell noPadding={true} noLogin={true}>
+    <AppShell noPadding={true} noLogin={true} isClaim={true}>
       <Center style={{ minHeight: '100vh' }} bg='black'>
-        <Flex align='center' direction='column' gap='lg'>
+        <Flex
+          align='center'
+          direction='column'
+          gap='lg'
+          mt={{ base: '60px', md: 0 }}
+        >
           <CurrentCard />
           {ownedNFTFetched && isValidNFT && !ownsNFT ? (
             <Flex align='center' direction='column' gap='lg'>

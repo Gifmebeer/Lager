@@ -1,20 +1,7 @@
+import { CURRENT_PROMOS } from '@/constants/promos';
 import { Carousel } from '@mantine/carousel';
-import { useMediaQuery } from '@mantine/hooks';
 import { Button, useMantineTheme, Flex, Image } from '@mantine/core';
 import { useRouter } from 'next/navigation';
-
-const data = [
-  {
-    image: '/images/promos/horizontal-01.png',
-    title: 'promo 1',
-    category: 'promo',
-  },
-  {
-    image: '/images/promos/vertical-01.png',
-    title: 'promo 2',
-    category: 'promo',
-  },
-];
 
 interface CardProps {
   image: string;
@@ -36,8 +23,7 @@ function Card({ image, title, category }: CardProps) {
 export default function CarouselSection() {
   const theme = useMantineTheme();
   const router = useRouter();
-  const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
-  const slides = data.map((item) => (
+  const slides = CURRENT_PROMOS.map((item) => (
     <Carousel.Slide key={item.title}>
       <Card {...item} />
     </Carousel.Slide>
@@ -46,8 +32,8 @@ export default function CarouselSection() {
   return (
     <Flex
       w={'100%'}
-      py={100}
-      bg={'rgba(234, 134, 229, 1)'}
+      p={'100px 0 0 0'}
+      bg='#EAEAEA'
       align={'center'}
       justify='center'
       direction={'column'}
@@ -65,9 +51,9 @@ export default function CarouselSection() {
         onClick={() => router.push('/promos')}
         className={'connectButton2'}
         variant='light'
-        mt={'lg'}
+        mb={'xl'}
       >
-        SEE ALL PROMOS
+        See all Promotions
       </Button>
     </Flex>
   );
