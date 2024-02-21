@@ -210,18 +210,10 @@ img {
 .groups {
   display: flex;
   flex-wrap: wrap;
-
-  @media (max-width: $mantine-breakpoint-sm) {
-    display: none;
-  }
-}
-
-.wrapper {
-  width: rem(160px);
 }
 
 .link {
-  display: block;
+  display: flex;
   width: 100%;
   color: white;
   font-size: var(--mantine-font-size-sm);

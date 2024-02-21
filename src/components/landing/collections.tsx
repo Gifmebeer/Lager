@@ -46,7 +46,8 @@ const Collections = () => {
   return (
     <Flex
       w={'100%'}
-      py={100}
+      pt={50}
+      pb={100}
       bg={'rgba(53, 210, 193, 1)'}
       align={'center'}
       justify='center'
@@ -57,12 +58,12 @@ const Collections = () => {
           <Title
             style={{
               textTransform: 'uppercase',
-              fontSize: isMobile ? '2rem' : '6rem',
+              fontSize: isMobile ? '1.5rem' : '6rem',
               fontFamily: 'var(--font-metamorbit-latin)',
             }}
             order={1}
           >
-            NFTs Collections
+            NFT Collections
           </Title>
 
           <Flex direction={{ base: 'column', lg: 'row' }} gap={'md'} mt={40}>

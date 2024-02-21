@@ -2,6 +2,7 @@ import { Flex } from '@mantine/core';
 import Hero from './hero';
 import Collections from './collections';
 import Carousel from './carousel';
+import Ads from './ads';
 
 const LandingPage = () => {
   return (
@@ -9,6 +10,7 @@ const LandingPage = () => {
       <Hero />
       <Collections />
       <Carousel />
+      <Ads />
     </Flex>
   );
 };

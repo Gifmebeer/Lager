@@ -1,10 +1,9 @@
-import { Text, Container, ActionIcon, Group, rem, Image } from '@mantine/core';
+import { Text, Container, ActionIcon, Group, rem, Flex } from '@mantine/core';
 import {
   IconBrandXFilled,
   IconBrandDiscordFilled,
   IconBrandInstagram,
 } from '@tabler/icons-react';
-import Link from 'next/link';
 
 const data = [
   {
@@ -20,6 +19,7 @@ const data = [
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+
   const groups = data.map((group) => {
     const links = group.links.map((link, index) => (
       <Text<'a'>
@@ -34,24 +34,23 @@ export default function Footer() {
     ));
 
     return (
-      <div className={'wrapper'} key={group.title}>
+      <Container
+        w={{ base: '100vw', md: '100%' }}
+        maw='300px'
+        fluid
+        dir='column'
+        key={group.title}
+      >
         {/* <Text className={'title'}>{group.title}</Text> */}
         {links}
-      </div>
+      </Container>
     );
   });
 
   return (
     <footer className={'footer'}>
       <Container className={'inner'}>
-        <Link href='/' legacyBehavior>
-          <Image
-            w={{ base: '82px', md: '150px' }}
-            src='/images/gmb_logo.svg'
-            alt='Logo'
-            style={{ cursor: 'pointer' }}
-          />
-        </Link>
+        <div className={'groups'}>{groups}</div>
 
         <Group
           gap={'lg'}
@@ -79,7 +78,6 @@ export default function Footer() {
             />
           </ActionIcon>
         </Group>
-        <div className={'groups'}>{groups}</div>
       </Container>
       <Container className={'afterFooter'}>
         <Text c='white' size='sm'>

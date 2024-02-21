@@ -5,8 +5,12 @@ import { useMediaQuery } from '@mantine/hooks';
 const HeroPage = () => {
   const isMobile = useMediaQuery(`(max-width: ${em(850)})`);
   return (
-    <BackgroundImage src='/images/led_background.png'>
-      <Flex h={'100vh'} justify={'center'} align={'center'}>
+    <BackgroundImage src='/images/led_background.svg'>
+      <Flex
+        h={{ base: '80vh', md: '100vh' }}
+        justify={'center'}
+        align={'center'}
+      >
         {!isMobile && (
           <Flex
             h='80%'
