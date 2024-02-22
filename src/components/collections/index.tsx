@@ -9,31 +9,26 @@ import { ICardItem, ICollection } from '@/types';
 import { useMediaQuery } from '@mantine/hooks';
 
 const CollectionCard: React.FC<{
-  w?: number | string;
+  w?: number;
   item?: ICardItem | any;
   metadata?: any;
   showTitle?: boolean;
   address?: string;
   owned: boolean;
-}> = ({ w, item, owned, metadata, showTitle, address }) => {
+}> = ({ w = 300, item, owned, metadata, showTitle, address }) => {
   return (
-    <Card w={w || '300px'} p={'lg'} bg='transparent' opacity={owned ? 1 : 0.7}>
-      <Card.Section>
+    <Card w={w} bg='transparent'>
+      <Card.Section opacity={owned ? 1 : 0.7}>
         {metadata ? (
           <NFTCard
-            w={w || 300}
+            w={w}
             metadata={metadata}
             key={metadata.id}
             address={address}
           />
         ) : (
           item && (
-            <Image
-              w={w || 300}
-              src={item.imageUrl}
-              alt={item.name}
-              fit='contain'
-            />
+            <Image w={w} src={item.imageUrl} alt={item.name} fit='contain' />
           )
         )}
       </Card.Section>
@@ -41,8 +36,12 @@ const CollectionCard: React.FC<{
         <Group my={{ base: 6, md: 12 }} justify='center'>
           {showTitle && (
             <Text
-              size='lg'
-              style={{ fontWeight: 'bold', textTransform: 'capitalize' }}
+              size={'md'}
+              style={{
+                fontWeight: 'bold',
+                textTransform: 'capitalize',
+                textAlign: 'center',
+              }}
               content={metadata ? metadata.name : item && item.name}
             />
           )}
@@ -50,7 +49,7 @@ const CollectionCard: React.FC<{
       </Card.Section>
       {!owned && (
         <Image
-          w={80}
+          w={{ base: w / 2, md: 80 }}
           style={{
             position: 'absolute',
             top: 0,
@@ -196,11 +195,11 @@ const CollectionsPage = () => {
         }}
       >
         {
-          <Grid grow gutter={{ base: 'lg', md: 'xl' }} maw='1200px'>
+          <Grid gutter={{ base: 'xs', md: 'xl' }} maw='1200px'>
             {collectionNfts?.map((nft: any, index: number) => (
-              <Grid.Col key={index} span={{ sm: 12, md: 6, xl: 4 }}>
+              <Grid.Col key={index} span={{ base: 6, xl: 4 }}>
                 <CollectionCardMemo
-                  w={isMobile ? '100%' : '250px'}
+                  w={isMobile ? 150 : 250}
                   address={currentCollection.address}
                   metadata={nft.metadata}
                   owned={true}
@@ -209,9 +208,9 @@ const CollectionsPage = () => {
               </Grid.Col>
             ))}
             {filteredCards.map((item: ICardItem) => (
-              <Grid.Col key={item.name} span={{ sm: 12, md: 6, xl: 4 }}>
+              <Grid.Col key={item.name} span={{ base: 6, xl: 4 }}>
                 <CollectionCardMemo
-                  w={isMobile ? '100%' : '250px'}
+                  w={isMobile ? 150 : 250}
                   address={currentCollection.address}
                   item={item}
                   owned={false}
