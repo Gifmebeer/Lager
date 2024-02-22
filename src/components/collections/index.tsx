@@ -3,12 +3,10 @@ import Text from '@/components/Text';
 import { useAddress, useContract, useOwnedNFTs } from '@thirdweb-dev/react';
 import { NFT_COLLECTION_ADDRESS } from '@/constants/addresses';
 import { NFTCard } from '../NFTCard';
-import { useState } from 'react';
-import { CURRENT_COLLECTIONS, membership } from '@/constants/collections';
+import React, { useMemo, useState } from 'react';
+import { CURRENT_COLLECTIONS } from '@/constants/collections';
 import { ICardItem, ICollection } from '@/types';
 import { useMediaQuery } from '@mantine/hooks';
-
-const collections: ICollection[] = CURRENT_COLLECTIONS;
 
 const CollectionCard: React.FC<{
   w?: number | string;
@@ -19,7 +17,7 @@ const CollectionCard: React.FC<{
   owned: boolean;
 }> = ({ w, item, owned, metadata, showTitle, address }) => {
   return (
-    <Card w={w || '300px'} p='lg' bg='transparent' opacity={owned ? 1 : 0.7}>
+    <Card w={w || '300px'} p={'lg'} bg='transparent' opacity={owned ? 1 : 0.7}>
       <Card.Section>
         {metadata ? (
           <NFTCard
@@ -40,7 +38,7 @@ const CollectionCard: React.FC<{
         )}
       </Card.Section>
       <Card.Section>
-        <Group my={12} justify='center'>
+        <Group my={{ base: 6, md: 12 }} justify='center'>
           {showTitle && (
             <Text
               size='lg'
@@ -75,6 +73,8 @@ const CollectionsPage = () => {
   const [currentCollection, setCurrentCollection] = useState<ICollection>(
     CURRENT_COLLECTIONS[0]
   );
+  const CollectionCardMemo = React.memo(CollectionCard);
+
   const isMobile = useMediaQuery(`(max-width: ${em(850)})`);
   // const {
   //   data: memberNFTs,
@@ -86,7 +86,7 @@ const CollectionsPage = () => {
     collectionContract,
     address
   );
-  console.log({ collectionNfts });
+
   // const ownedMembership = memberNFTs?.find(
   //   (i) => Number(i.metadata.id) === MEMBERSHIP_TOKEN_ID
   // );
@@ -94,14 +94,34 @@ const CollectionsPage = () => {
   // const cards = Array(5)
   //   .fill(currentCollection.cards)
   //   .flatMap((x) => x);
-  const ownedFromCollection: number[] =
-    collectionNfts?.map((nft: any) => Number(nft.metadata.id)) || [];
+  const ownedFromCollection = useMemo(() => {
+    return collectionNfts?.map((nft) => Number(nft.metadata.id)) || [];
+  }, [collectionNfts]);
 
   const cards = currentCollection.cards;
 
-  const filteredCards = cards.filter(
-    (card) => !ownedFromCollection.includes(card.id)
-  );
+  const filteredCards = useMemo(() => {
+    return cards.filter((card) => !ownedFromCollection.includes(card.id));
+  }, [cards, ownedFromCollection]);
+
+  // Reorder collections based on current selection and device type
+  const reorderedCollections = useMemo(() => {
+    const index = CURRENT_COLLECTIONS.findIndex(
+      (collection) => collection.id === currentCollection.id
+    );
+    if (index === -1) return CURRENT_COLLECTIONS;
+
+    const reordered = [...CURRENT_COLLECTIONS];
+    const [selectedCollection] = reordered.splice(index, 1);
+    if (isMobile) {
+      // Move selected collection to the end for mobile
+      reordered.push(selectedCollection);
+    } else {
+      // Move selected collection to the start for web
+      reordered.unshift(selectedCollection);
+    }
+    return reordered;
+  }, [currentCollection, isMobile]);
 
   return (
     <>
@@ -133,23 +153,22 @@ const CollectionsPage = () => {
         </Flex>
       </Container>
 
-      <Flex direction='row'>
-        {Object.keys(collections).map((key: any, index) => {
-          const collection: ICollection = collections[key];
+      <Flex direction={{ base: 'column', md: 'row' }}>
+        {reorderedCollections.map((collection: ICollection, index: number) => {
           return (
             <Flex
               w={isMobile ? '100%' : 'auto'}
-              onClick={() => setCurrentCollection(CURRENT_COLLECTIONS[index])}
+              onClick={() => setCurrentCollection(collection)}
               key={index}
-              direction='row'
+              direction={'row'}
               align={'center'}
-              justify={'center'}
+              justify={{ base: 'flex-start', md: 'center' }}
               pos='relative'
               gap='16px'
               bg={collection.color}
               p={20}
-              pl={index === 0 ? 64 : 0}
-              pr={42}
+              px={{ base: 0, md: index === 0 ? 64 : 32 }}
+              pr={{ base: 0, md: 42 }}
               style={{ cursor: 'pointer' }}
             >
               <Image
@@ -159,13 +178,16 @@ const CollectionsPage = () => {
                 h={24}
                 fit='contain'
               />
-              <Text maw='200' content={`${collection.name} Collection`} />
+              <Text
+                maw={{ base: '100%', md: '300' }}
+                content={`${collection.name} Collection`}
+              />
             </Flex>
           );
         })}
       </Flex>
       <Flex
-        p={64}
+        p={{ base: 32, md: 64 }}
         justify={'center'}
         style={{
           width: '100%',
@@ -174,11 +196,11 @@ const CollectionsPage = () => {
         }}
       >
         {
-          <Grid grow gutter='xl' maw='1200px'>
+          <Grid grow gutter={{ base: 'lg', md: 'xl' }} maw='1200px'>
             {collectionNfts?.map((nft: any, index: number) => (
               <Grid.Col key={index} span={{ sm: 12, md: 6, xl: 4 }}>
-                <CollectionCard
-                  w='250px'
+                <CollectionCardMemo
+                  w={isMobile ? '100%' : '250px'}
                   address={currentCollection.address}
                   metadata={nft.metadata}
                   owned={true}
@@ -188,8 +210,8 @@ const CollectionsPage = () => {
             ))}
             {filteredCards.map((item: ICardItem) => (
               <Grid.Col key={item.name} span={{ sm: 12, md: 6, xl: 4 }}>
-                <CollectionCard
-                  w='250px'
+                <CollectionCardMemo
+                  w={isMobile ? '100%' : '250px'}
                   address={currentCollection.address}
                   item={item}
                   owned={false}

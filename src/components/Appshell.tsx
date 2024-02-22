@@ -175,7 +175,7 @@ function Header({ children, isLanding, noPadding, noLogin, isClaim }: IHeader) {
       </AppShell.Header>
       <AppShell.Main
         bg={isLanding ? 'none' : '#EAEAEA'}
-        pt={isLanding || noPadding ? 0 : '200px'}
+        pt={isLanding || noPadding ? 0 : '150px'}
       >
         {children}
         <Footer />

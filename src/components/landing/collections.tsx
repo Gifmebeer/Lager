@@ -16,24 +16,17 @@ import { useRouter } from 'next/navigation';
 
 const cards = [
   {
-    title: 'GifmeBeer Membership',
-    type: 'membership',
-    address: '0x0000...0000',
-    image: '/images/collections/membership_card.png',
-    icon: '/images/icons/smiley_3.svg',
-  },
-  {
     title: 'Breweries Collection',
     type: 'brewery',
     address: '0x0000...0000',
-    image: '/images/collections/brewery_card.png',
+    image: '/images/collections/op-sepolia-test/wiley_brewery.png',
     icon: '/images/icons/smiley_3.svg',
   },
   {
-    title: 'Festivals Collection',
-    type: 'festival',
+    title: 'Beers Collection',
+    type: 'beers',
     address: '0x0000...0000',
-    image: '/images/collections/festival_card.png',
+    image: '/images/collections/op-sepolia-test/wylie_idaho.png',
     icon: '/images/icons/smiley_3.svg',
   },
 ];
@@ -74,15 +67,20 @@ const Collections = () => {
                   h={'fit-content'}
                   bg={'transparent'}
                 >
-                  <Flex direction='column' align={'center'} gap='md'>
+                  <Flex
+                    style={{ textAlign: 'center' }}
+                    direction='column'
+                    justify={'center'}
+                    align={'center'}
+                  >
                     <Image src={card.image} alt='img' height={200} />
                     <Flex
                       mt={14}
-                      w={'200px'}
+                      pl={20}
+                      maw={'200px'}
                       align={'center'}
                       justify={'center'}
                       dir='row'
-                      gap={12}
                     >
                       <img
                         src={card.icon}
@@ -92,6 +90,8 @@ const Collections = () => {
                       />
                       <Text
                         style={{
+                          textAlign: 'left',
+                          marginLeft: '12px',
                           fontFamily: 'var(--font-metamorbit-latin)',
                         }}
                       >
