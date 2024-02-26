@@ -24,6 +24,7 @@ import {
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import currentNetwork from '@/constants/currentNetwork';
+import { ICollection } from '@/types';
 
 async function sendRequest(
   url: string,
@@ -112,14 +113,19 @@ const Claim = (params: any) => {
     const contractAddress = nft;
     const id = tokenId;
     // Check if the NFT exists in myNFTs
-    const collectionExists = CURRENT_COLLECTIONS.find(
-      (nft: any) => nft.address === contractAddress
+    const allCards = CURRENT_COLLECTIONS.reduce(
+      (acc: any, collection: ICollection) => {
+        // Assuming each collection has a 'cards' array
+        return acc.concat(collection.cards);
+      },
+      []
     );
-
+    const collectionExists = CURRENT_COLLECTIONS.find(
+      (collection: ICollection) =>
+        collection.address.toLowerCase() === contractAddress.toLowerCase()
+    );
     if (collectionExists) {
-      const nftExists = collectionExists.cards.find(
-        (card: any) => card.id === Number(id)
-      );
+      const nftExists = allCards.find((card: any) => card.id === Number(id));
       setIsValidNFT(!!nftExists);
     } else {
       // Checks if it's membership NFT

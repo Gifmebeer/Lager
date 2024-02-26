@@ -81,27 +81,35 @@ const CollectionsPage = () => {
   //   isFetched: fetchedMembershipNFT,
   // } = useOwnedNFTs(membershipContract, address);
 
-  const { data: collectionNfts, isLoading: collectionIsLoading } = useOwnedNFTs(
+  const { data: ownedNfts, isLoading: collectionIsLoading } = useOwnedNFTs(
     collectionContract,
     address
   );
 
-  // const ownedMembership = memberNFTs?.find(
-  //   (i) => Number(i.metadata.id) === MEMBERSHIP_TOKEN_ID
-  // );
-
-  // const cards = Array(5)
-  //   .fill(currentCollection.cards)
-  //   .flatMap((x) => x);
-  const ownedFromCollection = useMemo(() => {
-    return collectionNfts?.map((nft) => Number(nft.metadata.id)) || [];
-  }, [collectionNfts]);
-
   const cards = currentCollection.cards;
+  const ownedFromCurrentCollection = useMemo(() => {
+    const currentCollectionIds = new Set(
+      currentCollection.cards.map((card) => card.id)
+    );
+    console.log({ currentCollectionIds });
+    return (
+      ownedNfts?.filter((nft) =>
+        currentCollectionIds.has(Number(nft.metadata.id))
+      ) || []
+    );
+  }, [ownedNfts, currentCollection]);
+  console.log({ ownedFromCurrentCollection });
+
+  const ownedFromCollection = useMemo(() => {
+    return ownedNfts?.map((nft) => Number(nft.metadata.id)) || [];
+  }, [ownedNfts]);
 
   const filteredCards = useMemo(() => {
-    return cards.filter((card) => !ownedFromCollection.includes(card.id));
-  }, [cards, ownedFromCollection]);
+    const ownedIds = new Set(
+      ownedFromCurrentCollection.map((nft) => Number(nft.metadata.id))
+    );
+    return cards.filter((card) => !ownedIds.has(card.id));
+  }, [cards, ownedFromCurrentCollection]);
 
   // Reorder collections based on current selection and device type
   const reorderedCollections = useMemo(() => {
@@ -196,7 +204,7 @@ const CollectionsPage = () => {
       >
         {
           <Grid gutter={{ base: 'xl' }} align='center' w='100%' maw='1200px'>
-            {collectionNfts?.map((nft: any, index: number) => (
+            {ownedFromCurrentCollection?.map((nft: any, index: number) => (
               <Grid.Col key={index} span={{ base: 0, sm: 4 }}>
                 <CollectionCardMemo
                   w={isMobile ? 139 : 250}
