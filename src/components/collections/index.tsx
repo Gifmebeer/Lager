@@ -195,11 +195,11 @@ const CollectionsPage = () => {
         }}
       >
         {
-          <Grid gutter={{ base: 'xs', md: 'xl' }} maw='1200px'>
+          <Grid gutter={{ base: 'xl' }} align='center' w='100%' maw='1200px'>
             {collectionNfts?.map((nft: any, index: number) => (
-              <Grid.Col key={index} span={{ base: 6, xl: 4 }}>
+              <Grid.Col key={index} span={{ base: 0, sm: 4 }}>
                 <CollectionCardMemo
-                  w={isMobile ? 150 : 250}
+                  w={isMobile ? 139 : 250}
                   address={currentCollection.address}
                   metadata={nft.metadata}
                   owned={true}
@@ -208,9 +208,9 @@ const CollectionsPage = () => {
               </Grid.Col>
             ))}
             {filteredCards.map((item: ICardItem) => (
-              <Grid.Col key={item.name} span={{ base: 6, xl: 4 }}>
+              <Grid.Col key={item.name} span={{ base: 0, sm: 4 }}>
                 <CollectionCardMemo
-                  w={isMobile ? 150 : 250}
+                  w={isMobile ? 139 : 250}
                   address={currentCollection.address}
                   item={item}
                   owned={false}
