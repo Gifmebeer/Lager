@@ -11,19 +11,15 @@ import {
   useOwnedNFTs,
   useNFT,
   useSetIsWalletModalOpen,
+  darkTheme,
 } from '@thirdweb-dev/react';
 import useSWRMutation from 'swr/mutation';
 import { Address } from 'viem';
 import { NFTCard } from '@/components/NFTCard';
 import AppShell from '@/components/Appshell';
-import {
-  createPublicWalletClient,
-  getExplorerLink,
-  shortenAddress,
-} from '@/utils/web3';
+import { createPublicWalletClient, shortenAddress } from '@/utils/web3';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import currentNetwork from '@/constants/currentNetwork';
 import { ICollection } from '@/types';
 
 async function sendRequest(
@@ -212,7 +208,21 @@ const Claim = (params: any) => {
         <Text c='white' size='xl' maw={{ base: '300px', md: '100%' }}>
           Please connect your wallet to claim
         </Text>
-        <ConnectWallet />
+        <ConnectWallet
+          className={'connectButton'}
+          theme={darkTheme({
+            colors: {
+              modalBg: 'black',
+              primaryText: 'white',
+              accentText: 'rgba(36, 195, 171, 1)',
+              primaryButtonText: 'white',
+              secondaryButtonText: 'rgba(36, 195, 171, 1)',
+              secondaryText: 'darkgray',
+              accentButtonText: 'black',
+              accentButtonBg: 'rgba(36, 195, 171, 1)',
+            },
+          })}
+        />
       </Center>
     );
   }
@@ -224,7 +234,7 @@ const Claim = (params: any) => {
           align='center'
           direction='column'
           gap='lg'
-          mt={{ base: '60px', md: 0 }}
+          mt={{ base: '140px', md: 0 }}
         >
           <CurrentCard />
           {ownedNFTFetched && isValidNFT && !ownsNFT ? (
@@ -243,25 +253,9 @@ const Claim = (params: any) => {
               </Button>
             </Flex>
           ) : ownedNFTFetched && ownsNFT ? (
-            <Text c='white' size='xl' style={{ marginBottom: '1rem' }}>
-              You already own this NFT
-            </Text>
-          ) : null}
-          {receipt && (
             <Flex align='center' direction='column' gap='xs'>
-              <Text c='white' size='md' style={{ marginBottom: '1rem' }}>
-                Claimed NFT!{' '}
-                <Link
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  style={{ textDecoration: 'underline' }}
-                  href={getExplorerLink(
-                    receipt?.transactionHash,
-                    currentNetwork.chainId
-                  )}
-                >
-                  {`tx: ${shortenAddress(receipt?.transactionHash)}`}
-                </Link>
+              <Text c='white' size='xl'>
+                You already own this NFT
               </Text>
               <Link
                 target='_blank'
@@ -269,10 +263,12 @@ const Claim = (params: any) => {
                 style={{ textDecoration: 'underline', color: 'white' }}
                 href={'/collections'}
               >
-                See your collection
+                <Text c='white' size='xl'>
+                  See your collection
+                </Text>
               </Link>
             </Flex>
-          )}
+          ) : null}
         </Flex>
       </Center>
     </AppShell>

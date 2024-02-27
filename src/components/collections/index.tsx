@@ -18,18 +18,36 @@ const CollectionCard: React.FC<{
 }> = ({ w = 300, item, owned, metadata, showTitle, address }) => {
   return (
     <Card w={w} bg='transparent'>
-      <Card.Section opacity={owned ? 1 : 0.7}>
-        {metadata ? (
-          <NFTCard
-            w={w}
-            metadata={metadata}
-            key={metadata.id}
-            address={address}
+      <Card.Section>
+        <Card.Section m={0} opacity={owned ? 1 : 0.5}>
+          {metadata ? (
+            <NFTCard
+              w={w}
+              metadata={metadata}
+              key={metadata.id}
+              address={address}
+            />
+          ) : (
+            item && (
+              <Image w={w} src={item.imageUrl} alt={item.name} fit='contain' />
+            )
+          )}
+        </Card.Section>
+        {!owned && (
+          <Image
+            w={{ base: w / 2, md: 80 }}
+            m={0}
+            p={0}
+            style={{
+              position: 'absolute',
+              top: 0,
+              right: 0,
+              zIndex: 20,
+            }}
+            src={'/images/icons/missing_corner.svg'}
+            alt={'missing'}
+            fit='contain'
           />
-        ) : (
-          item && (
-            <Image w={w} src={item.imageUrl} alt={item.name} fit='contain' />
-          )
         )}
       </Card.Section>
       <Card.Section>
@@ -38,6 +56,7 @@ const CollectionCard: React.FC<{
             <Text
               size={'md'}
               style={{
+                fontFamily: 'GT America !important', //TODO: Add this typo
                 fontWeight: 'bold',
                 textTransform: 'capitalize',
                 textAlign: 'center',
@@ -47,19 +66,6 @@ const CollectionCard: React.FC<{
           )}
         </Group>
       </Card.Section>
-      {!owned && (
-        <Image
-          w={{ base: w / 2, md: 80 }}
-          style={{
-            position: 'absolute',
-            top: 0,
-            right: 0,
-          }}
-          src={'/images/icons/missing_corner.svg'}
-          alt={'missing'}
-          fit='contain'
-        />
-      )}
     </Card>
   );
 };
@@ -132,10 +138,15 @@ const CollectionsPage = () => {
 
   return (
     <>
-      <Container fluid py={{ base: 0, md: 30 }} bg={'#EAEAEA'}>
+      <Container
+        fluid
+        py={{ base: 0, md: 30 }}
+        pt={{ base: 15, md: 60 }}
+        bg={'#EAEAEA'}
+      >
         <Flex
           py={{ base: 0, md: 12 }}
-          px={24}
+          px={{ base: 0, md: 24 }}
           bg={'#EAEAEA'}
           m={'0 0 20px 0'}
           justify={'flex-start'}
@@ -203,7 +214,12 @@ const CollectionsPage = () => {
         }}
       >
         {
-          <Grid gutter={{ base: 'xl' }} align='center' w='100%' maw='1200px'>
+          <Grid
+            gutter={{ base: 'xl' }}
+            justify={isMobile ? 'center' : 'flex-start'}
+            w='100%'
+            maw='1200px'
+          >
             {ownedFromCurrentCollection?.map((nft: any, index: number) => (
               <Grid.Col key={index} span={{ base: 0, sm: 4 }}>
                 <CollectionCardMemo

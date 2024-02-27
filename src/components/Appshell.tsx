@@ -20,6 +20,29 @@ interface IHeader {
   isClaim?: boolean;
 }
 
+const Wallet = () => {
+  return (
+    <ConnectWallet
+      btnTitle='LOGIN'
+      className={'connectButton'}
+      switchToActiveChain={true}
+      modalSize={'compact'}
+      theme={darkTheme({
+        colors: {
+          modalBg: 'black',
+          primaryText: 'white',
+          accentText: 'rgba(36, 195, 171, 1)',
+          primaryButtonText: 'white',
+          secondaryButtonText: 'rgba(36, 195, 171, 1)',
+          secondaryText: 'darkgray',
+          accentButtonText: 'black',
+          accentButtonBg: 'rgba(36, 195, 171, 1)',
+        },
+      })}
+    />
+  );
+};
+
 function Header({ children, isLanding, noPadding, noLogin, isClaim }: IHeader) {
   const isMobile = useMediaQuery(`(max-width: ${em(850)})`);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -73,26 +96,7 @@ function Header({ children, isLanding, noPadding, noLogin, isClaim }: IHeader) {
               </Link>
             )}
 
-            {!noLogin && (
-              <ConnectWallet
-                btnTitle='LOGIN'
-                className={'connectButton'}
-                switchToActiveChain={true}
-                modalSize={'compact'}
-                theme={darkTheme({
-                  colors: {
-                    modalBg: 'black',
-                    primaryText: 'white',
-                    accentText: 'rgba(36, 195, 171, 1)',
-                    primaryButtonText: 'white',
-                    secondaryButtonText: 'rgba(36, 195, 171, 1)',
-                    secondaryText: 'darkgray',
-                    accentButtonText: 'white',
-                    accentButtonBg: 'rgba(36, 195, 171, 1)',
-                  },
-                })}
-              />
-            )}
+            {!noLogin && <Wallet />}
           </Flex>
         )}
         {isMobile && !isMenuOpen && (
@@ -100,19 +104,32 @@ function Header({ children, isLanding, noPadding, noLogin, isClaim }: IHeader) {
             mih={'36px'}
             m={0}
             p={0}
-            bg={isClaim ? 'transparent' : 'black'}
+            direction='column'
+            bg={isClaim ? 'transparent' : '#FFFFFF'}
             justify={isMobile ? 'space-between' : 'flex-end'}
           >
-            <Link href='/' legacyBehavior>
-              <Image
-                w={isMobile ? '74px' : '120px'}
-                src='/images/gmb_logo.svg'
-                alt='Logo'
-                m={isMobile ? 'sm' : 0}
-                style={{ cursor: 'pointer' }}
-              />
-            </Link>
-            <Flex p='md'>
+            <Flex align={'center'} justify={'space-between'} gap='xl'>
+              <Link href='/' legacyBehavior>
+                <Image
+                  w={isMobile ? '74px' : '120px'}
+                  src='/images/gmb_logo.svg'
+                  alt='Logo'
+                  m={isMobile ? 'sm' : 0}
+                  style={{ cursor: 'pointer' }}
+                />
+              </Link>
+              <Flex mr={4}>
+                <Wallet />
+              </Flex>
+            </Flex>
+
+            <Flex
+              h={50}
+              p='md'
+              bg='black'
+              align={'center'}
+              justify={'flex-end'}
+            >
               <IconMenu2
                 color='white'
                 style={{ width: rem(32), height: rem(32) }}
