@@ -105,7 +105,7 @@ function Header({ children, isLanding, noPadding, noLogin, isClaim }: IHeader) {
             m={0}
             p={0}
             direction='column'
-            bg={isClaim ? 'transparent' : '#FFFFFF'}
+            bg={isClaim ? 'black' : '#FFFFFF'}
             justify={isMobile ? 'space-between' : 'flex-end'}
           >
             <Flex align={'center'} justify={'space-between'} gap='xl'>
