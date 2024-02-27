@@ -55,8 +55,8 @@ const CollectionCard: React.FC<{
           {showTitle && (
             <Text
               size={'md'}
+              ff={'GT-America'}
               style={{
-                fontFamily: 'GT America !important', //TODO: Add this typo
                 fontWeight: 'bold',
                 textTransform: 'capitalize',
                 textAlign: 'center',

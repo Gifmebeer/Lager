@@ -12,8 +12,8 @@ interface TextProps extends MantineTextProps {
 const Text: React.FC<TextProps> = ({ content, style, ...rest }) => {
   return (
     <MantineText
-      {...rest}
       ff={'MetamorBit-Latin'}
+      {...rest}
       style={{
         ...style,
       }}
