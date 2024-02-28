@@ -255,7 +255,7 @@ const Claim = (params: any) => {
           ) : ownedNFTFetched && ownsNFT ? (
             <Flex align='center' direction='column' gap='xs'>
               <Text c='white' size='xl'>
-                You already own this NFT
+                You own this NFT!
               </Text>
               <Link
                 target='_blank'
