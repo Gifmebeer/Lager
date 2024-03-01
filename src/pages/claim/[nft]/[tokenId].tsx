@@ -205,11 +205,9 @@ const Claim = (params: any) => {
         }}
         bg='black'
       >
-        <Text c='white' size='xl' maw={{ base: '300px', md: '100%' }}>
-          Please connect your wallet to claim
-        </Text>
         <ConnectWallet
-          className={'connectButton'}
+          btnTitle='Login'
+          className={'connectButton3'}
           theme={darkTheme({
             colors: {
               modalBg: 'black',
