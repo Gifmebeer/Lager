@@ -20,6 +20,8 @@ interface IHeader {
   isClaim?: boolean;
 }
 
+const IS_PRELAUNCH = true;
+
 const Wallet = () => {
   return (
     <ConnectWallet
@@ -96,7 +98,7 @@ function Header({ children, isLanding, noPadding, noLogin, isClaim }: IHeader) {
               </Link>
             )}
 
-            {!noLogin && <Wallet />}
+            {!IS_PRELAUNCH && !noLogin && <Wallet />}
           </Flex>
         )}
         {isMobile && !isMenuOpen && (
@@ -118,25 +120,29 @@ function Header({ children, isLanding, noPadding, noLogin, isClaim }: IHeader) {
                   style={{ cursor: 'pointer' }}
                 />
               </Link>
-              <Flex mr={4}>
-                <Wallet />
-              </Flex>
+              {!IS_PRELAUNCH && (
+                <Flex mr={4}>
+                  <Wallet />
+                </Flex>
+              )}
             </Flex>
 
-            <Flex
-              h={50}
-              p='md'
-              bg='black'
-              align={'center'}
-              justify={'flex-end'}
-            >
-              <IconMenu2
-                color='white'
-                style={{ width: rem(32), height: rem(32) }}
-                stroke={1.5}
-                onClick={toggleMenu}
-              />
-            </Flex>
+            {!IS_PRELAUNCH && (
+              <Flex
+                h={50}
+                p='md'
+                bg='black'
+                align={'center'}
+                justify={'flex-end'}
+              >
+                <IconMenu2
+                  color='white'
+                  style={{ width: rem(32), height: rem(32) }}
+                  stroke={1.5}
+                  onClick={toggleMenu}
+                />
+              </Flex>
+            )}
           </Flex>
         )}
         {isMenuOpen && (
@@ -195,7 +201,7 @@ function Header({ children, isLanding, noPadding, noLogin, isClaim }: IHeader) {
         pt={isLanding || noPadding ? 0 : '150px'}
       >
         {children}
-        <Footer />
+        {!IS_PRELAUNCH && <Footer />}
       </AppShell.Main>
     </AppShell>
   );
