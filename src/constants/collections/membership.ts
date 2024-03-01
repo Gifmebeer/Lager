@@ -1,10 +1,11 @@
 import { NFT_MEMBERSHIP_ADDRESS } from '../addresses';
 
 export default {
+  id: 1,
   name: 'membership',
   address: NFT_MEMBERSHIP_ADDRESS,
-  network: 'mumbai',
-  chainId: 80001,
+  network: 'optimism',
+  chainId: 10,
   cards: [
     {
       name: 'Pre-launch Test',

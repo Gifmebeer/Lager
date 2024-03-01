@@ -1,51 +1,66 @@
-'use client';
-
-import {
-  Card,
-  Container,
-  Flex,
-  Grid,
-  Group,
-  Image,
-  Loader,
-} from '@mantine/core';
+import { Card, Container, Flex, Grid, Group, Image, em } from '@mantine/core';
 import Text from '@/components/Text';
 import { useAddress, useContract, useOwnedNFTs } from '@thirdweb-dev/react';
-import {
-  NFT_COLLECTION_ADDRESS,
-  NFT_MEMBERSHIP_ADDRESS,
-} from '@/constants/addresses';
+import { NFT_COLLECTION_ADDRESS } from '@/constants/addresses';
 import { NFTCard } from '../NFTCard';
-import { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { CURRENT_COLLECTIONS } from '@/constants/collections';
 import { ICardItem, ICollection } from '@/types';
-
-const collections: ICollection[] = CURRENT_COLLECTIONS;
+import { useMediaQuery } from '@mantine/hooks';
 
 const CollectionCard: React.FC<{
-  item?: ICardItem;
+  w?: number;
+  item?: ICardItem | any;
   metadata?: any;
   showTitle?: boolean;
   address?: string;
   owned: boolean;
-}> = ({ item, owned, metadata, showTitle, address }) => {
+}> = ({ w = 300, item, owned, metadata, showTitle, address }) => {
   return (
-    <Card p='lg' bg='transparent' w='100%' opacity={owned ? 1 : 0.5}>
+    <Card w={w} bg='transparent'>
       <Card.Section>
-        {metadata ? (
-          <NFTCard metadata={metadata} key={metadata.id} address={address} />
-        ) : (
-          item && (
-            <Image w={350} src={item.imageUrl} alt={item.name} fit='contain' />
-          )
+        <Card.Section m={0} opacity={owned ? 1 : 0.5}>
+          {metadata ? (
+            <NFTCard
+              w={w}
+              metadata={metadata}
+              key={metadata.id}
+              address={address}
+            />
+          ) : (
+            item && (
+              <Image w={w} src={item.imageUrl} alt={item.name} fit='contain' />
+            )
+          )}
+        </Card.Section>
+        {!owned && (
+          <Image
+            w={{ base: w / 2, md: 80 }}
+            m={0}
+            p={0}
+            style={{
+              position: 'absolute',
+              top: 0,
+              right: 0,
+              zIndex: 20,
+            }}
+            src={'/images/icons/missing_corner.svg'}
+            alt={'missing'}
+            fit='contain'
+          />
         )}
       </Card.Section>
       <Card.Section>
-        <Group my={12} justify='center'>
+        <Group my={{ base: 6, md: 12 }} justify='center'>
           {showTitle && (
             <Text
-              size='lg'
-              style={{ fontWeight: 'bold' }}
+              size={'md'}
+              ff={'GT-America'}
+              style={{
+                fontWeight: 'bold',
+                textTransform: 'capitalize',
+                textAlign: 'center',
+              }}
               content={metadata ? metadata.name : item && item.name}
             />
           )}
@@ -56,94 +71,122 @@ const CollectionCard: React.FC<{
 };
 
 const CollectionsPage = () => {
-  const MEMBERSHIP_TOKEN_ID = 1;
-  const { data: membershipContract } = useContract(NFT_MEMBERSHIP_ADDRESS);
+  // const MEMBERSHIP_TOKEN_ID = 1;
+  // const { data: membershipContract } = useContract(NFT_MEMBERSHIP_ADDRESS);
   const { data: collectionContract } = useContract(NFT_COLLECTION_ADDRESS);
   const address = useAddress();
   const [currentCollection, setCurrentCollection] = useState<ICollection>(
     CURRENT_COLLECTIONS[0]
   );
-  const {
-    data: memberNFTs,
-    isLoading: membershipNFTLoading,
-    isFetched: fetchedMembershipNFT,
-  } = useOwnedNFTs(membershipContract, address);
+  const CollectionCardMemo = React.memo(CollectionCard);
 
-  const { data: collectionNfts, isLoading: collectionIsLoading } = useOwnedNFTs(
+  const isMobile = useMediaQuery(`(max-width: ${em(850)})`);
+  // const {
+  //   data: memberNFTs,
+  //   isLoading: membershipNFTLoading,
+  //   isFetched: fetchedMembershipNFT,
+  // } = useOwnedNFTs(membershipContract, address);
+
+  const { data: ownedNfts, isLoading: collectionIsLoading } = useOwnedNFTs(
     collectionContract,
     address
   );
 
-  const ownedMembership = memberNFTs?.find(
-    (i) => Number(i.metadata.id) === MEMBERSHIP_TOKEN_ID
-  );
-
-  // const cards = Array(5)
-  //   .fill(currentCollection.cards)
-  //   .flatMap((x) => x);
-  const ownedFromCollection: number[] =
-    collectionNfts?.map((nft: any) => Number(nft.metadata.id)) || [];
-
   const cards = currentCollection.cards;
+  const ownedFromCurrentCollection = useMemo(() => {
+    const currentCollectionIds = new Set(
+      currentCollection.cards.map((card) => card.id)
+    );
+    console.log({ currentCollectionIds });
+    return (
+      ownedNfts?.filter((nft) =>
+        currentCollectionIds.has(Number(nft.metadata.id))
+      ) || []
+    );
+  }, [ownedNfts, currentCollection]);
+  console.log({ ownedFromCurrentCollection });
 
-  const filteredCards = cards.filter(
-    (card) => !ownedFromCollection.includes(card.id)
-  );
+  const ownedFromCollection = useMemo(() => {
+    return ownedNfts?.map((nft) => Number(nft.metadata.id)) || [];
+  }, [ownedNfts]);
+
+  const filteredCards = useMemo(() => {
+    const ownedIds = new Set(
+      ownedFromCurrentCollection.map((nft) => Number(nft.metadata.id))
+    );
+    return cards.filter((card) => !ownedIds.has(card.id));
+  }, [cards, ownedFromCurrentCollection]);
+
+  // Reorder collections based on current selection and device type
+  const reorderedCollections = useMemo(() => {
+    const index = CURRENT_COLLECTIONS.findIndex(
+      (collection) => collection.id === currentCollection.id
+    );
+    if (index === -1) return CURRENT_COLLECTIONS;
+
+    const reordered = [...CURRENT_COLLECTIONS];
+    const [selectedCollection] = reordered.splice(index, 1);
+    if (isMobile) {
+      // Move selected collection to the end for mobile
+      reordered.push(selectedCollection);
+    } else {
+      // Move selected collection to the start for web
+      reordered.unshift(selectedCollection);
+    }
+    return reordered;
+  }, [currentCollection, isMobile]);
 
   return (
     <>
-      <Container fluid mih={'40vh'} py={30} bg={'rgba(99,60, 230, 1)'}>
+      <Container
+        fluid
+        py={{ base: 0, md: 30 }}
+        pt={{ base: 15, md: 60 }}
+        bg={'#EAEAEA'}
+      >
         <Flex
-          py={12}
-          px={24}
-          m={0}
+          py={{ base: 0, md: 12 }}
+          px={{ base: 0, md: 24 }}
+          bg={'#EAEAEA'}
+          m={'0 0 20px 0'}
           justify={'flex-start'}
           align={'center'}
           direction={{ base: 'column', md: 'row' }}
         >
-          <Text
-            style={{ fontSize: '35px' }}
-            c='white'
-            maw='300px'
-            content='GIFME.BEER MEMBERSHIP'
-          />
-          {ownedMembership ? (
-            <Flex w='400px' ml='md'>
-              <CollectionCard
-                address={NFT_MEMBERSHIP_ADDRESS}
-                metadata={ownedMembership.metadata}
-                owned={true}
-              />
-            </Flex>
-          ) : membershipNFTLoading ? (
-            <Loader color='white' />
-          ) : (
+          <Flex w={isMobile ? '100%' : '400px'} ml={isMobile ? 0 : 'md'}>
+            {/* <CollectionCard
+              address={NFT_MEMBERSHIP_ADDRESS}
+              item={membership.cards[0]}
+              owned={true}
+            /> */}
             <Text
-              style={{ fontSize: '15px' }}
-              c='white'
-              maw='300px'
-              content={!ownedMembership && 'No membership'}
+              style={{
+                fontSize: isMobile ? '28px' : '35px',
+              }}
+              c='black'
+              maw={isMobile ? '100%' : '400px'}
+              content='My Collection'
             />
-          )}
+          </Flex>
         </Flex>
       </Container>
 
-      <Flex direction='row'>
-        {Object.keys(collections).map((key: any, index) => {
-          const collection: ICollection = collections[key];
+      <Flex direction={{ base: 'column', md: 'row' }}>
+        {reorderedCollections.map((collection: ICollection, index: number) => {
           return (
             <Flex
-              onClick={() => setCurrentCollection(CURRENT_COLLECTIONS[index])}
+              w={isMobile ? '100%' : 'auto'}
+              onClick={() => setCurrentCollection(collection)}
               key={index}
-              direction='row'
+              direction={'row'}
               align={'center'}
-              justify={'center'}
+              justify={{ base: 'flex-start', md: 'center' }}
               pos='relative'
               gap='16px'
               bg={collection.color}
               p={20}
-              pl={index === 0 ? 64 : 0}
-              pr={42}
+              px={{ base: 0, md: index === 0 ? 64 : 32 }}
+              pr={{ base: 0, md: 42 }}
               style={{ cursor: 'pointer' }}
             >
               <Image
@@ -153,13 +196,16 @@ const CollectionsPage = () => {
                 h={24}
                 fit='contain'
               />
-              <Text maw='200' content={`${collection.name} Collection`} />
+              <Text
+                maw={{ base: '100%', md: '300' }}
+                content={`${collection.name} Collection`}
+              />
             </Flex>
           );
         })}
       </Flex>
       <Flex
-        p={64}
+        p={{ base: 32, md: 64 }}
         justify={'center'}
         style={{
           width: '100%',
@@ -167,13 +213,17 @@ const CollectionsPage = () => {
           backgroundColor: currentCollection.color,
         }}
       >
-        {collectionIsLoading ? (
-          <Loader color='white' />
-        ) : (
-          <Grid grow gutter='xl' maw='1200px'>
-            {collectionNfts?.map((nft: any, index: number) => (
-              <Grid.Col key={index} span={{ sm: 12, md: 6, xl: 4 }}>
-                <CollectionCard
+        {
+          <Grid
+            gutter={{ base: 'xl' }}
+            justify={isMobile ? 'center' : 'flex-start'}
+            w='100%'
+            maw='1200px'
+          >
+            {ownedFromCurrentCollection?.map((nft: any, index: number) => (
+              <Grid.Col key={index} span={{ base: 0, sm: 4 }}>
+                <CollectionCardMemo
+                  w={isMobile ? 139 : 250}
                   address={currentCollection.address}
                   metadata={nft.metadata}
                   owned={true}
@@ -182,8 +232,9 @@ const CollectionsPage = () => {
               </Grid.Col>
             ))}
             {filteredCards.map((item: ICardItem) => (
-              <Grid.Col key={item.name} span={{ sm: 12, md: 6, xl: 4 }}>
-                <CollectionCard
+              <Grid.Col key={item.name} span={{ base: 0, sm: 4 }}>
+                <CollectionCardMemo
+                  w={isMobile ? 139 : 250}
                   address={currentCollection.address}
                   item={item}
                   owned={false}
@@ -192,7 +243,7 @@ const CollectionsPage = () => {
               </Grid.Col>
             ))}
           </Grid>
-        )}
+        }
       </Flex>
     </>
   );

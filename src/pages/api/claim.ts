@@ -1,32 +1,29 @@
+import { NextApiRequest, NextApiResponse } from 'next';
 import { Address } from 'viem';
 import DropERC1155_ABI from '@/abis/DropERC1155.json';
 import { privateKeyToWalletClient } from '@/utils/web3';
+import currentNetwork from '@/constants/currentNetwork';
 
-export async function POST(request: Request) {
+export default async function POST(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const req = await request.json();
-    const { address, nftAddress, tokenId } = req;
-    const NFT_ADDRESS = nftAddress;
+    const query = JSON.parse(req.body);
+    const { address, nftAddress, tokenId } = query;
+    const NFT_ADDRESS = nftAddress as Address;
     if (!address) {
-      return new Response(
-        JSON.stringify({
-          error: 'Address missing',
-        }),
-        {
-          status: 400,
-        }
-      );
+      return res.status(400).json({
+        error: 'Address Missing',
+      });
     }
 
     const TOKEN_ID = tokenId;
     const minterPvtKey = process.env.MINTER_PV_KEY as Address;
 
     if (!minterPvtKey) {
-      return new Response('No attester set', { status: 400 });
+      return res.status(400).json({ error: 'No attester set' });
     }
 
     // Set up the account and clients with Viem
-    const { walletClient } = privateKeyToWalletClient(minterPvtKey, 80001);
+    const { walletClient } = privateKeyToWalletClient(minterPvtKey);
 
     // Define the parameters for the claim function
     const _receiver = address;
@@ -40,15 +37,10 @@ export async function POST(request: Request) {
     })) as bigint;
 
     if (BigInt(balance) > BigInt(0)) {
-      return new Response(
-        JSON.stringify({
-          error: 'You already own this NFT',
-          balance: balance?.toString(),
-        }),
-        {
-          status: 400,
-        }
-      );
+      return res.status(400).json({
+        error: 'You already own this NFT',
+        balance: balance?.toString(),
+      });
     }
     // ... other parameters as required
     const _allowlistProof = {
@@ -83,20 +75,16 @@ export async function POST(request: Request) {
         functionName: 'claim',
         args: _args,
       });
-      return new Response(
-        JSON.stringify({ data: 'Claim successful', transactionRequest }),
-        {
-          status: 200,
-        }
-      );
+      return res.status(200).json({
+        data: 'Claim successful',
+        transactionRequest,
+      });
     } else {
-      return new Response(JSON.stringify({ somethingHappened: true }), {
-        status: 400,
+      return res.status(400).json({
+        somethingHappened: true,
       });
     }
   } catch (error) {
-    return new Response(JSON.stringify({ error }), {
-      status: 500,
-    });
+    return res.status(500).json({ error });
   }
 }
