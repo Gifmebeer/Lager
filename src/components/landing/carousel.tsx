@@ -1,6 +1,7 @@
 import { CURRENT_PROMOS } from '@/constants/promos';
 import { Carousel } from '@mantine/carousel';
-import { Button, useMantineTheme, Flex, Image } from '@mantine/core';
+import { Button, Flex, Image, em } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import { useRouter } from 'next/navigation';
 
 interface CardProps {
@@ -21,7 +22,7 @@ function Card({ image, title, category }: CardProps) {
 }
 
 export default function CarouselSection() {
-  const theme = useMantineTheme();
+  const isMobile = useMediaQuery(`(max-width: ${em(850)})`);
   const router = useRouter();
   const slides = CURRENT_PROMOS.map((item) => (
     <Carousel.Slide key={item.title}>
@@ -32,17 +33,16 @@ export default function CarouselSection() {
   return (
     <Flex
       w={'100%'}
-      p={'100px 0 0 0'}
+      p={{ base: '40px 0', md: '100px 0 50px 0' }}
       bg='#EAEAEA'
       align={'center'}
       justify='center'
       direction={'column'}
     >
       <Carousel
-        w={'100%'}
         slideSize={{ base: '100%', sm: 0 }}
         slideGap={{ base: 'xl', sm: 2 }}
-        align={'start'}
+        align={isMobile ? 'center' : 'start'}
         mb={'xl'}
       >
         {slides}
