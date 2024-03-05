@@ -122,7 +122,7 @@ const data = [
       { label: "FAQ", link: "/" },
       { label: "GIFME.BEER TEAM", link: "/" },
       { label: "TERMS & CONDITIONS", link: "/tos" },
-      { label: "HOLA@GIFME.BEER", link: "/", color: "#ffff00" },
+      { label: "HOLA@GIFME.BEER", link: "mailto:hola@gifme.beer", color: "#ffff00" },
     ],
   },
 ];
