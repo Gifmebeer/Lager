@@ -119,7 +119,7 @@ const data = [
     title: "Community",
     links: [
       { label: "ARE YOU IN THE BREWING BUSINESS? JOIN US!", link: "/" },
-      { label: "FAQ", link: "/" },
+      { label: "FAQ", link: "/faqs" },
       { label: "GIFME.BEER TEAM", link: "/" },
       { label: "TERMS & CONDITIONS", link: "/tos" },
       { label: "HOLA@GIFME.BEER", link: "mailto:hola@gifme.beer", color: "#ffff00" },
@@ -138,7 +138,7 @@ export default function Footer() {
         c={link.color}
         component="a"
         href={link.link}
-        onClick={(event) => event.preventDefault()}
+        /* onClick={(event) => event.preventDefault()}  */
       >
         {link.label}
       </Text>
