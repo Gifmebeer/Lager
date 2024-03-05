@@ -20,9 +20,9 @@ export default [
   {
     name: 'Synera Brewery',
     address: NFT_COLLECTION_ADDRESS,
-    id: 10,
+    id: 11,
     category: 'Brewery',
-    imageUrl: '/images/collections/op-sepolia-test/synera_brewery.png',
+    imageUrl: '/images/collections/op-sepolia-test/synera_brewery.gif',
     meta: {},
   },
 ];
