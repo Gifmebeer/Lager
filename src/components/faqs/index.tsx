@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Accordion, Container, em } from '@mantine/core';
+import { Accordion, Container, em, Image, Center } from '@mantine/core';
 
 import { useMediaQuery } from '@mantine/hooks';
 
@@ -75,10 +75,7 @@ const Faqs: React.FC = () => {
 
   return (
 
-
     <Container bg='#EAEAEA' mih='30vh'pt='lg' pb='lg' mt={{ base: 'lg', md: 'lg' }} pr='lg' pl='lg'  >
-
-
       <Text mb='lg'
         style={{
           fontSize: isMobile ? '28px' : '35px',
@@ -95,6 +92,14 @@ const Faqs: React.FC = () => {
         }}  >
       {items }
     </Accordion>
+    <Center>
+    <Image
+      
+      mt='lg'
+      src="/images/GifmeBeer-pre-launch-eng.png"
+    />
+    </Center>
+    
     </Container>
   );
 }
