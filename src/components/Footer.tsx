@@ -160,7 +160,7 @@ export default function Footer() {
 
   return (
     <footer className={"footer"}>
-      <Container className={"inner"}>
+      <Container className={"inner"} fluid>
         <div className={"groups"}>{groups}</div>
 
         <Group
@@ -176,7 +176,7 @@ export default function Footer() {
           <MirrorIcon style={{ width: rem(35), height: rem(35) }} />
         </Group>
       </Container>
-      <Container className={"afterFooter"}>
+      <Container className={"afterFooter"} mt='lg'>
         <Text className={"afterFooter-t"} c="white" size="sm">
           © {currentYear} of all contents Gifme.beer | 2024
         </Text>

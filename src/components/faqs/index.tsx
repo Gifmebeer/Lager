@@ -1,9 +1,13 @@
 import React from 'react';
 
-import { Accordion, Container } from '@mantine/core';
+import { Accordion, Container, em } from '@mantine/core';
+
+import { useMediaQuery } from '@mantine/hooks';
+
+import Text from '../Text';
 
 
-  const groceries = [
+  const faqsitems = [
     {
       value: '1. What is Gifme.Beer?',
       description:
@@ -59,17 +63,37 @@ import { Accordion, Container } from '@mantine/core';
   
 
 const Faqs: React.FC = () => {
-  const items = groceries.map((item) => (
-    <Accordion.Item key={item.value} value={item.value}>
+  const isMobile = useMediaQuery(`(max-width: ${em(850)})`);
+
+  
+  const items = faqsitems.map((item) => (
+    <Accordion.Item key={item.value} value={item.value} >
       <Accordion.Control >{item.value}</Accordion.Control>
-      <Accordion.Panel c='blue'>{item.description}</Accordion.Panel>
+      <Accordion.Panel c='#234FFF' >{item.description}</Accordion.Panel>
     </Accordion.Item>
   ));
 
   return (
-    <Container bg='#EAEAEA' mih='30vh' mt={{ base: 'lg', md: 'xl' }}>
-    <Accordion variant="separated" disableChevronRotation defaultValue="Apples">
-      {items}
+
+
+    <Container bg='#EAEAEA' mih='30vh'pt='lg' pb='lg' mt={{ base: 'lg', md: 'lg' }} pr='lg' pl='lg'  >
+
+
+      <Text mb='lg'
+        style={{
+          fontSize: isMobile ? '28px' : '35px',
+        }}
+        c='black'
+        maw={isMobile ? '100%' : '500px'}
+        content='FAQs'
+      />
+    <Accordion variant="separated" disableChevronRotation radius="md" styles={{
+          item: {
+            backgroundColor: 'white',
+            border: '1px solid black',
+          },
+        }}  >
+      {items }
     </Accordion>
     </Container>
   );

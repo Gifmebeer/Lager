@@ -243,6 +243,11 @@ img {
   }
 }
 
+.link:last-child {
+  border-bottom: 0px solid rgba(255, 251, 62, 1);
+ 
+}
+
 .title {
   font-size: var(--mantine-font-size-lg);
   font-weight: 700;
