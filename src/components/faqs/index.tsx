@@ -94,12 +94,10 @@ const Faqs: React.FC = () => {
     </Accordion>
     <Center>
     <Image
-      
       mt='lg'
       src="/images/GifmeBeer-pre-launch-eng.png"
     />
     </Center>
-    
     </Container>
   );
 }
