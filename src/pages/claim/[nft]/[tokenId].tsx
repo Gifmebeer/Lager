@@ -2,6 +2,7 @@ import { Flex, Loader } from '@mantine/core';
 
 import React, { useEffect, useState } from 'react';
 import { Button, Center, Text } from '@mantine/core';
+import CustomText from '@/components/Text';
 import { CURRENT_COLLECTIONS, membership } from '@/constants/collections';
 import {
   ConnectWallet,
@@ -24,7 +25,7 @@ import { ICollection } from '@/types';
 
 async function sendRequest(
   url: string,
-  { arg }: { arg: { address: Address; nftAddress: Address; tokenId: string } }
+  { arg }: { arg: { address: Address; nftAddress: Address; tokenId: string } },
 ) {
   return fetch(url, {
     method: 'POST',
@@ -49,11 +50,11 @@ const Claim = (params: any) => {
   const [ready, setReady] = useState(false);
   const setIsWalletModalOpen = useSetIsWalletModalOpen();
   const { data: nftContract, isError: contractError } = useContract(
-    nft as Address
+    nft as Address,
   );
   const { data: currentNFT, isLoading: currentNFTIsLoading } = useNFT(
     nftContract,
-    tokenId
+    tokenId,
   );
   const {
     data: ownedNFT,
@@ -62,7 +63,7 @@ const Claim = (params: any) => {
   } = useOwnedNFTs(nftContract, address);
 
   const ownsNFT = ownedNFT?.find(
-    (i) => Number(i.metadata.id) === Number(tokenId)
+    (i) => Number(i.metadata.id) === Number(tokenId),
   );
 
   const {
@@ -114,11 +115,11 @@ const Claim = (params: any) => {
         // Assuming each collection has a 'cards' array
         return acc.concat(collection.cards);
       },
-      []
+      [],
     );
     const collectionExists = CURRENT_COLLECTIONS.find(
       (collection: ICollection) =>
-        collection.address.toLowerCase() === contractAddress.toLowerCase()
+        collection.address.toLowerCase() === contractAddress.toLowerCase(),
     );
     if (collectionExists) {
       const nftExists = allCards.find((card: any) => card.id === Number(id));
@@ -140,7 +141,7 @@ const Claim = (params: any) => {
 
   const CurrentCard = () => {
     return currentNFTIsLoading ? (
-      <Loader color='white' />
+      <Loader color="white" />
     ) : (
       currentNFT && (
         <NFTCard address={nft} metadata={currentNFT.metadata} key={tokenId} />
@@ -159,14 +160,14 @@ const Claim = (params: any) => {
         style={{ minHeight: '100vh' }}
         justify={'center'}
         align={'center'}
-        direction='column'
-        gap='lg'
-        bg='black'
+        direction="column"
+        gap="lg"
+        bg="black"
       >
-        <Loader color='white' />
+        <Loader color="white" />
         {isMinting && (
-          <Text c='white'>
-            Minting... {claimDone && `tx: ${shortenAddress(claimDone)}`}
+          <Text c="white">
+            Brewing... {claimDone && `tx: ${shortenAddress(claimDone)}`}
           </Text>
         )}
       </Flex>
@@ -179,15 +180,15 @@ const Claim = (params: any) => {
         style={{ minHeight: '100vh', textAlign: 'center' }}
         justify={'center'}
         align={'center'}
-        direction='column'
-        gap='lg'
-        bg='black'
+        direction="column"
+        gap="lg"
+        bg="black"
       >
-        <Text c='white' size='xl' maw='500px'>
+        <Text c="white" size="xl" maw="500px">
           Error: Claim not valid or an error occurred.
         </Text>
         <br />
-        <Text c='white' size='md' maw='500px'>
+        <Text c="white" size="md" maw="500px">
           {mutationError && ` ${mutationError}`}
           {error && ` ${error?.cause?.message}`}
         </Text>
@@ -203,10 +204,10 @@ const Claim = (params: any) => {
           flexDirection: 'column',
           gap: '20px',
         }}
-        bg='black'
+        bg="black"
       >
         <ConnectWallet
-          btnTitle='Login'
+          btnTitle="Login"
           className={'connectButton3'}
           theme={darkTheme({
             colors: {
@@ -227,46 +228,95 @@ const Claim = (params: any) => {
 
   return (
     <AppShell noPadding={true} noLogin={true} isClaim={true}>
-      <Center style={{ minHeight: '100vh' }} bg='black'>
+      <Center style={{ minHeight: '100vh', position: 'relative' }} bg="black">
         <Flex
-          align='center'
-          direction='column'
-          gap='lg'
+          align="center"
+          justify={'center'}
+          direction="column"
+          gap="lg"
           mt={{ base: '140px', md: 0 }}
         >
-          <CurrentCard />
           {ownedNFTFetched && isValidNFT && !ownsNFT ? (
-            <Flex align='center' direction='column' gap='lg'>
+            <Flex
+              direction="column"
+              gap="lg"
+              style={{
+                position: 'absolute',
+                margin: 'auto',
+              }}
+            >
               <Button
-                bg='white'
-                c='black'
+                w="182px"
+                bg="#FF0"
+                c="black"
                 style={{
+                  margin: 'auto',
                   backgroundColor: 'black',
                   fontFamily: 'MetamorBit-Latin',
                 }}
                 onClick={async () => await claim()}
                 fullWidth
               >
-                Claim NFT
+                Download
               </Button>
             </Flex>
           ) : ownedNFTFetched && ownsNFT ? (
-            <Flex align='center' direction='column' gap='xs'>
-              <Text c='white' size='xl'>
-                You own this NFT!
-              </Text>
+            <Flex
+              align="center"
+              direction="column"
+              gap="xs"
+              // style={{ position: 'absolute', top: 0 }}
+            >
+              <Flex
+                justify={'center'}
+                align={'center'}
+                direction="column"
+                w="100vw"
+                bg="#FF0"
+                py={'xs'}
+                my={22}
+                style={{ textAlign: 'center' }}
+              >
+                <Text
+                  c="black"
+                  size="xl"
+                  maw="225px"
+                  style={{ fontWeight: 'bold' }}
+                >
+                  Congrats!!
+                </Text>
+                <Text
+                  c="black"
+                  size="xl"
+                  maw="225px"
+                  mt="-10px"
+                  style={{ fontWeight: 'bold' }}
+                >
+                  You got your GifMe
+                </Text>
+              </Flex>
+
               <Link
-                target='_blank'
-                rel='noopener noreferrer'
-                style={{ textDecoration: 'underline', color: 'white' }}
+                // target="_blank"
+                // rel="noopener noreferrer"
+                style={{ color: 'white' }}
                 href={'/collections'}
               >
-                <Text c='white' size='xl'>
-                  See your collection
-                </Text>
+                <Flex
+                  style={{
+                    border: '2px solid white',
+                    padding: '6px 24px',
+                    borderRadius: '18px',
+                    fontFamily: 'Metamor Bit_Latin',
+                  }}
+                  mb={10}
+                >
+                  <CustomText content="See your collection" />
+                </Flex>
               </Link>
             </Flex>
           ) : null}
+          <CurrentCard />
         </Flex>
       </Center>
     </AppShell>
