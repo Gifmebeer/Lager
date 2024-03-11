@@ -22,7 +22,8 @@ import {
   PRICE_PER_NFT_FORMATTED,
   MAX_MINT_AMOUNT,
   MAX_MINT_PER_WALLET,
-} from '@/constants/lifetimepass/bbf2024Test';
+  INFURA_NAME,
+} from '@/constants/lifetimepass/BBF2024Test';
 import Text from '../Text';
 import { createPublicWalletClient } from '@/utils/web3';
 import { Address } from 'viem';
@@ -42,7 +43,7 @@ const BBF = () => {
   const [quantity, setQuantity] = useState<string | number>(1);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { walletClient } = createPublicWalletClient();
+  const { walletClient } = createPublicWalletClient(INFURA_NAME);
   const connectionStatus = useConnectionStatus();
   const isConnected = connectionStatus === 'connected';
   const setIsWalletModalOpen = useSetIsWalletModalOpen();
@@ -64,7 +65,7 @@ const BBF = () => {
     contract,
     address,
   );
-  const currentCurrencyBalance = currencyBalance?.displayValue || 0;
+  const currentCurrencyBalance = currencyBalance?.value || 0;
   const ownsNFT = ownedNFT?.find(
     (i) => Number(i.metadata.id) === Number(BBFLP_TOKEN_ID),
   );
@@ -97,6 +98,10 @@ const BBF = () => {
         );
       }
       const _value = BigInt(PRICE_PER_NFT) * BigInt(quantity);
+      console.log({
+        _value,
+        currentCurrencyBalance: BigInt(Number(currentCurrencyBalance)),
+      });
       if (_value > BigInt(Number(currentCurrencyBalance))) {
         setLoading(false);
         return setError('Insufficient balance');

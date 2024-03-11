@@ -10,6 +10,7 @@ const PRICE_PER_NFT = (
 ).toString(); // 500 DAI
 const MAX_MINT_AMOUNT = 100;
 const MAX_MINT_PER_WALLET = 2;
+const INFURA_NAME = 'optimism-sepolia';
 
 export {
   PASS_CONTRACT,
@@ -21,4 +22,5 @@ export {
   PRICE_PER_NFT,
   MAX_MINT_AMOUNT,
   MAX_MINT_PER_WALLET,
+  INFURA_NAME,
 };

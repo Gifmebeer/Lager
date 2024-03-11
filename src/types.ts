@@ -5,6 +5,7 @@ export interface ICollection {
   network: string;
   chainId: number;
   color: string;
+  fontColor?: string;
   cards: ICardItem[];
 }
 
