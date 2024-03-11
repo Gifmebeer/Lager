@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Flex, NumberInput, em } from '@mantine/core';
+import { Button, Flex, Loader, NumberInput, em } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import {
   useAddress,
@@ -176,13 +176,15 @@ const BBF = () => {
             c={'white'}
           />
         </Flex>
-        {currentNFT && (
+        {currentNFT ? (
           <NFTCard
             w={isMobile ? 236 : 318}
             address={BBFLP_Contract}
             metadata={currentNFT.metadata}
             key={BBFLP_TOKEN_ID}
           />
+        ) : (
+          currentNFTIsLoading && <Loader color="white" />
         )}
       </Flex>
 

@@ -7,7 +7,7 @@ export default function Component() {
   const router = useRouter();
   const id = router.query.id as string;
 
-  let Content = null;
+  let Content = <Flex mih="100vh" />;
   if (id === 'bbf') {
     Content = <BBF />;
   }
