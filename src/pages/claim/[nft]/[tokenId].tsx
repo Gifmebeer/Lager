@@ -122,7 +122,9 @@ const Claim = (params: any) => {
         collection.address.toLowerCase() === contractAddress.toLowerCase(),
     );
     if (collectionExists) {
-      const nftExists = allCards.find((card: any) => card.id === Number(id));
+      const nftExists = allCards.find(
+        (card: any) => card.id === Number(id) && card.enabled !== false,
+      );
       setIsValidNFT(!!nftExists);
     } else {
       // Checks if it's membership NFT

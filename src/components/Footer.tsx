@@ -26,7 +26,7 @@ export default function Footer() {
         key={index}
         className={'link'}
         c={link.color}
-        component='a'
+        component="a"
         href={link.link}
         /* onClick={(event) => event.preventDefault()}  */
       >
@@ -37,9 +37,9 @@ export default function Footer() {
     return (
       <Container
         w={{ base: '100vw', sm: '100%' }}
-        maw='770px'
+        maw="770px"
         fluid
-        dir='column'
+        dir="column"
         key={group.title}
       >
         {/* <Text className={'title'}>{group.title}</Text> */}
@@ -50,36 +50,47 @@ export default function Footer() {
 
   return (
     <footer className={'footer'}>
-      <Container className={'inner'} fluid maw='1280px'>
+      <Container className={'inner'} fluid maw="1280px">
         <div className={'groups'}>{groups}</div>
 
         <Group
           gap={'sm'}
           className={'social'}
-          justify='flex-end'
-          wrap='nowrap'
+          justify="flex-end"
+          wrap="nowrap"
           mt={{ base: 'xl', md: 0 }}
         >
-          <Image
-            src='/images/icons/x.svg'
-            style={{ width: rem(35), height: rem(35) }}
-          />
-          <Image
-            src='/images/icons/instagram.svg'
-            style={{ width: rem(35), height: rem(35) }}
-          />
-          <Image
-            src='/images/icons/discord.svg'
-            style={{ width: rem(35), height: rem(35) }}
-          />
-          <Image
-            src='/images/icons/mirror.svg'
-            style={{ width: rem(35), height: rem(35) }}
-          />
+          <a href="https://twitter.com/GifmeBeer" target="_blank">
+            <Image
+              src="/images/icons/x.svg"
+              style={{ width: rem(35), height: rem(35) }}
+            />
+          </a>
+          <a href="https://www.instagram.com/gifmebeer/" target="_blank">
+            <Image
+              src="/images/icons/instagram.svg"
+              style={{ width: rem(35), height: rem(35) }}
+            />
+          </a>
+          <a href="https://discord.gg/n9tEPfQh" target="_blank">
+            <Image
+              src="/images/icons/discord.svg"
+              style={{ width: rem(35), height: rem(35) }}
+            />
+          </a>
+          <a
+            href="https://mirror.xyz/0xeB5da736d4b8036df743E6792a778696FAb80336"
+            target="_blank"
+          >
+            <Image
+              src="/images/icons/mirror.svg"
+              style={{ width: rem(35), height: rem(35) }}
+            />
+          </a>
         </Group>
       </Container>
-      <Container className={'afterFooter'} mt='lg'>
-        <Text className={'afterFooter-t'} c='white' size='sm'>
+      <Container className={'afterFooter'} mt="lg">
+        <Text className={'afterFooter-t'} c="white" size="sm">
           © {currentYear} of all contents Gifme.beer | 2024
         </Text>
       </Container>

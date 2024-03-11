@@ -52,10 +52,11 @@ const BBF = () => {
   const { contract } = useContract(BBFLP_Contract, 'edition-drop');
   const { contract: currencyContract } = useContract(CURRENCY);
   const { data: currencyBalance } = useTokenBalance(currencyContract, address);
-  const { data: allowance } = useContractRead(currencyContract, 'allowance', [
-    address,
-    BBFLP_Contract,
-  ]);
+  const { data: allowance, refetch: refetchAllowance } = useContractRead(
+    currencyContract,
+    'allowance',
+    [address, BBFLP_Contract],
+  );
 
   const { data: currentNFT, isLoading: currentNFTIsLoading } = useNFT(
     contract,
@@ -98,10 +99,7 @@ const BBF = () => {
         );
       }
       const _value = BigInt(PRICE_PER_NFT) * BigInt(quantity);
-      console.log({
-        _value,
-        currentCurrencyBalance: BigInt(Number(currentCurrencyBalance)),
-      });
+
       if (_value > BigInt(Number(currentCurrencyBalance))) {
         setLoading(false);
         return setError('Insufficient balance');
@@ -135,6 +133,7 @@ const BBF = () => {
         hash: `${data?.receipt?.transactionHash}` as Address,
       });
       setLoading(false);
+      refetchAllowance();
       console.log({ mintReceipt });
     } catch (err: any) {
       setLoading(false);
@@ -184,6 +183,7 @@ const BBF = () => {
         {currentNFT ? (
           <NFTCard
             w={isMobile ? 236 : 318}
+            withShadow
             address={BBFLP_Contract}
             metadata={currentNFT.metadata}
             key={BBFLP_TOKEN_ID}

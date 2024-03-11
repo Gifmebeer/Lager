@@ -16,4 +16,5 @@ export interface ICardItem {
   category: string;
   imageUrl: string;
   meta: any;
+  enabled?: boolean;
 }

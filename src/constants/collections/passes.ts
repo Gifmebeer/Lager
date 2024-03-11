@@ -16,6 +16,7 @@ export default {
       id: 16,
       category: 'Passes',
       imageUrl: '/images/collections/bbf_lifetime_pass_2024.png',
+      enabled: false,
       meta: {},
     },
   ],
