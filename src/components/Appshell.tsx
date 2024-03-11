@@ -223,7 +223,7 @@ function Header({
         pt={isLanding || noPadding ? 0 : '150px'}
       >
         {children}
-        {!IS_PRELAUNCH && <Footer />}
+        <Footer />
       </AppShell.Main>
     </AppShell>
   );
