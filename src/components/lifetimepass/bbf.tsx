@@ -314,7 +314,7 @@ const BBF = () => {
             ff={'GT-America'}
             size="16px"
             lh="20px"
-            content={`The Lifetime Pass collection is available on Optimism Mainnet and 150 of a total of 160 NFTs will be offered for public minting. The first 50 passes can be minted for 500 ${CURRENCY_SYMBOL} on early bird until March 21st 11:59pm CET when the Barcelona Beer Festival will launch. After that date price will increase to 650 ${CURRENCY_SYMBOL}.`}
+            content={`The Lifetime Pass collection is available on Optimism Mainnet and 150 of a total of 160 NFTs will be offered for public minting. The first 50 passes can be minted for 500 ${CURRENCY_SYMBOL} on early bird until March 21st 11:59pm CET when the Barcelona Beer Festival will launch. After that date price will increase to 650 ${CURRENCY_SYMBOL}. Max, two mints per address.`}
           />
         </Flex>
       </Flex>
