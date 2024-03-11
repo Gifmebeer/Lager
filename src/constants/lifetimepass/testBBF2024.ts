@@ -8,7 +8,7 @@ const PRICE_PER_NFT = (
   PRICE_PER_NFT_FORMATTED *
   10 ** CURRENCY_DECIMALS
 ).toString(); // 500 DAI
-const MAX_MINT_AMOUNT = 100;
+const MAX_MINT_AMOUNT = 12;
 const MAX_MINT_PER_WALLET = 2;
 const INFURA_NAME = 'optimism-sepolia';
 

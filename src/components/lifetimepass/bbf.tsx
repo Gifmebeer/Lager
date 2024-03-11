@@ -78,6 +78,7 @@ const BBF = () => {
     'approve',
   );
 
+  const reachedSupply = Number(currentSupply) >= MAX_MINT_AMOUNT;
   const _isLoading = loading || isLoading || currentNFTIsLoading || ownLoading;
 
   const call = async () => {
@@ -142,7 +143,10 @@ const BBF = () => {
     }
   };
 
-  const shouldMint = isConnected && Number(qtyOwned || 0) < MAX_MINT_PER_WALLET;
+  const shouldMint =
+    isConnected &&
+    Number(qtyOwned || 0) < MAX_MINT_PER_WALLET &&
+    !reachedSupply;
 
   return (
     <Flex
@@ -255,13 +259,13 @@ const BBF = () => {
           <Flex w="100%" justify={'space-between'}>
             <Text
               size={'12px'}
-              content="MAX MINT AMOUNT"
+              content="MAX MINT PER USER"
               c={'lightgray'}
               ff={'GT-America'}
             />
             <Text
               size={'16px'}
-              content={`${MAX_MINT_AMOUNT}`}
+              content={`${MAX_MINT_PER_WALLET}`}
               c={'white'}
               ff={'GT-America'}
               fw="bold"
@@ -301,6 +305,8 @@ const BBF = () => {
                       ? 'Mint'
                       : Number(qtyOwned) >= MAX_MINT_PER_WALLET
                       ? 'Max minted'
+                      : reachedSupply
+                      ? 'Reached supply'
                       : ''
                   }
                 />
