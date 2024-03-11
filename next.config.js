@@ -2,6 +2,13 @@
 const nextConfig = {
   async rewrites() {
     return {
+      afterFiles: [
+        {
+          source: '/:path*',
+          // destination: '/GIFMEBEER_WEBSITE_01.pdf',
+          destination: '/',
+        },
+      ],
       beforeFiles: [
         {
           source: '/tos',
