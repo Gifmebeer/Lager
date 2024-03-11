@@ -104,7 +104,7 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  font-family: 'MetamorBit-Latin' ;
+  font-family: 'MetamorBit-Latin';
 }
 
 body {
@@ -245,7 +245,6 @@ img {
 
 .link:last-child {
   border-bottom: 0px solid rgba(255, 251, 62, 1);
- 
 }
 
 .title {
@@ -263,13 +262,13 @@ img {
   margin-top: var(--mantine-spacing-sm);
   padding-top: var(--mantine-spacing-sm);
   padding-bottom: var(--mantine-spacing-xl);
-  
+
   @media (max-width: $mantine-breakpoint-sm) {
     flex-direction: column;
   }
 }
 
-.afterFooter-t{
+.afterFooter-t {
   font-family: 'GT-America', sans-serif !important;
 }
 
@@ -305,4 +304,3 @@ img {
   text-transform: uppercase;
   cursor: default;
 }
-
