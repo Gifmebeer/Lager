@@ -46,6 +46,7 @@ const BBF = () => {
   const { walletClient } = createPublicWalletClient(INFURA_NAME);
   const connectionStatus = useConnectionStatus();
   const isConnected = connectionStatus === 'connected';
+  const isDisconnected = connectionStatus === 'disconnected';
   const setIsWalletModalOpen = useSetIsWalletModalOpen();
   const isMobile = useMediaQuery(`(max-width: ${em(850)})`);
 
@@ -79,7 +80,9 @@ const BBF = () => {
   );
 
   const reachedSupply = Number(currentSupply) >= MAX_MINT_AMOUNT;
-  const _isLoading = loading || isLoading || currentNFTIsLoading || ownLoading;
+  const _isLoading =
+    !isDisconnected &&
+    (loading || isLoading || currentNFTIsLoading || ownLoading);
 
   const call = async () => {
     try {

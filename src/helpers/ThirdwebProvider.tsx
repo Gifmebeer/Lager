@@ -7,9 +7,7 @@ import {
   embeddedWallet,
   // smartWallet,
 } from '@thirdweb-dev/react';
-import {
-   Optimism,
-} from '@thirdweb-dev/chains';
+import { Optimism } from '@thirdweb-dev/chains';
 import currentNetwork from '@/constants/currentNetwork';
 // import { FACTORY_ADDRESS } from '@/constants/addresses';
 
