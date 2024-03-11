@@ -23,7 +23,7 @@ import {
   MAX_MINT_AMOUNT,
   MAX_MINT_PER_WALLET,
   INFURA_NAME,
-} from '@/constants/lifetimepass/testBBF2024';
+} from '@/constants/lifetimepass/BBF2024';
 import Text from '../Text';
 import { createPublicWalletClient } from '@/utils/web3';
 import { Address } from 'viem';
