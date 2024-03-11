@@ -18,6 +18,7 @@ interface IHeader {
   noPadding?: boolean;
   noLogin?: boolean;
   isClaim?: boolean;
+  isRegular?: boolean;
 }
 
 const IS_PRELAUNCH = true;
@@ -25,7 +26,7 @@ const IS_PRELAUNCH = true;
 const Wallet = () => {
   return (
     <ConnectWallet
-      btnTitle='LOGIN'
+      btnTitle="LOGIN"
       className={'connectButton'}
       switchToActiveChain={true}
       modalSize={'compact'}
@@ -45,7 +46,14 @@ const Wallet = () => {
   );
 };
 
-function Header({ children, isLanding, noPadding, noLogin, isClaim }: IHeader) {
+function Header({
+  children,
+  isLanding,
+  noPadding,
+  noLogin,
+  isClaim,
+  isRegular,
+}: IHeader) {
   const isMobile = useMediaQuery(`(max-width: ${em(850)})`);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const disconnect = useDisconnect();
@@ -88,11 +96,11 @@ function Header({ children, isLanding, noPadding, noLogin, isClaim }: IHeader) {
             }
           >
             {(!isLanding || !!isMobile) && (
-              <Link href='/' legacyBehavior>
+              <Link href="/" legacyBehavior>
                 <Image
-                  w={isMobile ? '74px' : '120px'}
-                  src='/images/gmb_logo.svg'
-                  alt='Logo'
+                  w={isMobile ? '74px' : isRegular ? '74px' : '120px'}
+                  src="/images/gmb_logo.svg"
+                  alt="Logo"
                   style={{ cursor: 'pointer' }}
                 />
               </Link>
@@ -106,16 +114,16 @@ function Header({ children, isLanding, noPadding, noLogin, isClaim }: IHeader) {
             mih={'36px'}
             m={0}
             p={0}
-            direction='column'
+            direction="column"
             bg={isClaim ? 'black' : '#FFFFFF'}
             justify={isMobile ? 'space-between' : 'flex-end'}
           >
-            <Flex align={'center'} justify={'space-between'} gap='xl'>
-              <Link href='/' legacyBehavior>
+            <Flex align={'center'} justify={'space-between'} gap="xl">
+              <Link href="/" legacyBehavior>
                 <Image
                   w={isMobile ? '74px' : '120px'}
-                  src='/images/gmb_logo.svg'
-                  alt='Logo'
+                  src="/images/gmb_logo.svg"
+                  alt="Logo"
                   m={isMobile ? 'sm' : 0}
                   style={{ cursor: 'pointer' }}
                 />
@@ -127,16 +135,30 @@ function Header({ children, isLanding, noPadding, noLogin, isClaim }: IHeader) {
               )}
             </Flex>
 
+            <Flex
+              h={50}
+              p="md"
+              bg="black"
+              align={'center'}
+              justify={'flex-end'}
+            >
+              <IconMenu2
+                color="white"
+                style={{ width: rem(32), height: rem(32) }}
+                stroke={1.5}
+                onClick={toggleMenu}
+              />
+            </Flex>
             {!IS_PRELAUNCH && (
               <Flex
                 h={50}
-                p='md'
-                bg='black'
+                p="md"
+                bg="black"
                 align={'center'}
                 justify={'flex-end'}
               >
                 <IconMenu2
-                  color='white'
+                  color="white"
                   style={{ width: rem(32), height: rem(32) }}
                   stroke={1.5}
                   onClick={toggleMenu}
@@ -148,7 +170,7 @@ function Header({ children, isLanding, noPadding, noLogin, isClaim }: IHeader) {
         {isMenuOpen && (
           <Flex
             bg={'black'}
-            direction='row-reverse'
+            direction="row-reverse"
             style={{
               position: 'fixed',
               top: 0,
@@ -160,27 +182,27 @@ function Header({ children, isLanding, noPadding, noLogin, isClaim }: IHeader) {
             }}
           >
             <IconX
-              color='white'
+              color="white"
               style={{ width: rem(32), height: rem(32), margin: '8px' }}
               stroke={1.5}
               onClick={toggleMenu}
             />
             <Flex
-              direction='column'
-              align='flex-start'
-              justify='flex-start'
+              direction="column"
+              align="flex-start"
+              justify="flex-start"
               gap={'lg'}
               p={'50px 0 20px 20px'}
               style={{ width: '100%' }}
             >
-              <Link href='/' onClick={toggleMenu}>
-                <Text content={'Home'} c='white' size='xl' />
+              <Link href="/" onClick={toggleMenu}>
+                <Text content={'Home'} c="white" size="xl" />
               </Link>
-              <Link href='/collections' onClick={toggleMenu}>
-                <Text content={'My Collections'} c='white' size='xl' />
+              <Link href="/collections" onClick={toggleMenu}>
+                <Text content={'My Collections'} c="white" size="xl" />
               </Link>
-              <Link href='/promos' onClick={toggleMenu}>
-                <Text content={'Promotions'} c='white' size='xl' />
+              <Link href="/promos" onClick={toggleMenu}>
+                <Text content={'Promotions'} c="white" size="xl" />
               </Link>
               {isConnected && (
                 <div
@@ -189,7 +211,7 @@ function Header({ children, isLanding, noPadding, noLogin, isClaim }: IHeader) {
                     toggleMenu();
                   }}
                 >
-                  <Text content={'Logout →'} c='#234FFF' size='lg' />
+                  <Text content={'Logout →'} c="#234FFF" size="lg" />
                 </div>
               )}
             </Flex>

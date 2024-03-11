@@ -1,9 +1,5 @@
 import { ReactNode } from 'react';
-
-interface ThirdWebProviderProps {
-  children: ReactNode;
-}
-
+import { useRouter } from 'next/router';
 import {
   ThirdwebProvider,
   metamaskWallet,
@@ -11,8 +7,13 @@ import {
   embeddedWallet,
   // smartWallet,
 } from '@thirdweb-dev/react';
-import { OpSepoliaTestnet } from '@thirdweb-dev/chains';
+import { Optimism } from '@thirdweb-dev/chains';
+import currentNetwork from '@/constants/currentNetwork';
 // import { FACTORY_ADDRESS } from '@/constants/addresses';
+
+interface ThirdWebProviderProps {
+  children: ReactNode;
+}
 
 const ThirdWebProvider: React.FC<ThirdWebProviderProps> = ({ children }) => {
   // const smartWalletConfig = {
@@ -20,10 +21,14 @@ const ThirdWebProvider: React.FC<ThirdWebProviderProps> = ({ children }) => {
   //   factoryAddress: FACTORY_ADDRESS,
   //   gasless: true,
   // };
+  const router = useRouter();
+  const isBBFLifetimePass = router.pathname.includes('lifetimepass');
 
   return (
     <ThirdwebProvider
-      activeChain={OpSepoliaTestnet}
+      // TODO: CHANGE THIS WHEN MOVING TO MAINNET
+      activeChain={isBBFLifetimePass ? Optimism : currentNetwork.thirdwebChain}
+      // activeChain={currentNetwork.thirdwebChain}
       clientId={process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID}
       supportedWallets={[
         embeddedWallet(),

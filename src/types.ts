@@ -5,6 +5,7 @@ export interface ICollection {
   network: string;
   chainId: number;
   color: string;
+  fontColor?: string;
   cards: ICardItem[];
 }
 
@@ -15,4 +16,5 @@ export interface ICardItem {
   category: string;
   imageUrl: string;
   meta: any;
+  enabled?: boolean;
 }

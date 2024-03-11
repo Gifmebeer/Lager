@@ -19,14 +19,14 @@ const cards = [
     title: 'Breweries Collection',
     type: 'brewery',
     address: '0x0000...0000',
-    image: '/images/collections/op-sepolia-test/wiley_brewery.png',
+    image: '/images/collections/op-sepolia-test/synera_brewery.png',
     icon: '/images/icons/smiley_3.svg',
   },
   {
     title: 'Beers Collection',
     type: 'beers',
     address: '0x0000...0000',
-    image: '/images/collections/op-sepolia-test/wylie_idaho.png',
+    image: '/images/collections/op-sepolia-test/synera_amber_ale.png',
     icon: '/images/icons/smiley_3.svg',
   },
 ];
@@ -43,11 +43,11 @@ const Collections = () => {
       pb={100}
       bg={'rgba(53, 210, 193, 1)'}
       align={'center'}
-      justify='center'
+      justify="center"
       direction={'column'}
     >
       <Container fluid mb={'lg'}>
-        <Flex w={'100%'} align={'center'} justify='center' direction={'column'}>
+        <Flex w={'100%'} align={'center'} justify="center" direction={'column'}>
           <Title
             style={{
               textTransform: 'uppercase',
@@ -69,22 +69,22 @@ const Collections = () => {
                 >
                   <Flex
                     style={{ textAlign: 'center' }}
-                    direction='column'
+                    direction="column"
                     justify={'center'}
                     align={'center'}
                   >
-                    <Image src={card.image} alt='img' height={200} />
+                    <Image src={card.image} alt="img" height={200} />
                     <Flex
                       mt={14}
                       pl={20}
                       maw={'200px'}
                       align={'center'}
                       justify={'center'}
-                      dir='row'
+                      dir="row"
                     >
                       <img
                         src={card.icon}
-                        alt='icon'
+                        alt="icon"
                         width={'16px'}
                         height={'16px'}
                       />
@@ -107,7 +107,7 @@ const Collections = () => {
       </Container>
       {!isConnected ? (
         <ConnectWallet
-          btnTitle='LOG IN TO SEE ALL COLLECTIONS'
+          btnTitle="LOG IN TO SEE ALL COLLECTIONS"
           className={'connectButton2'}
           switchToActiveChain={true}
           modalSize={'compact'}
@@ -115,8 +115,8 @@ const Collections = () => {
       ) : (
         <Button
           onClick={() => router.push('/collections')}
-          className='connectButton2'
-          variant='light'
+          className="connectButton2"
+          variant="light"
         >
           SEE ALL COLLECTIONS
         </Button>

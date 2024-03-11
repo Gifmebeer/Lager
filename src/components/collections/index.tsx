@@ -14,10 +14,11 @@ const CollectionCard: React.FC<{
   metadata?: any;
   showTitle?: boolean;
   address?: string;
+  fontColor?: string;
   owned: boolean;
-}> = ({ w = 300, item, owned, metadata, showTitle, address }) => {
+}> = ({ w = 300, item, owned, metadata, showTitle, address, fontColor }) => {
   return (
-    <Card w={w} bg='transparent'>
+    <Card w={w} bg="transparent">
       <Card.Section>
         <Card.Section m={0} opacity={owned ? 1 : 0.5}>
           {metadata ? (
@@ -29,7 +30,7 @@ const CollectionCard: React.FC<{
             />
           ) : (
             item && (
-              <Image w={w} src={item.imageUrl} alt={item.name} fit='contain' />
+              <Image w={w} src={item.imageUrl} alt={item.name} fit="contain" />
             )
           )}
         </Card.Section>
@@ -46,16 +47,17 @@ const CollectionCard: React.FC<{
             }}
             src={'/images/icons/missing_corner.svg'}
             alt={'missing'}
-            fit='contain'
+            fit="contain"
           />
         )}
       </Card.Section>
       <Card.Section>
-        <Group my={{ base: 6, md: 12 }} justify='center'>
+        <Group my={{ base: 6, md: 12 }} justify="center">
           {showTitle && (
             <Text
               size={'md'}
               ff={'GT-America'}
+              c={fontColor}
               style={{
                 fontWeight: 'bold',
                 textTransform: 'capitalize',
@@ -76,7 +78,7 @@ const CollectionsPage = () => {
   const { data: collectionContract } = useContract(NFT_COLLECTION_ADDRESS);
   const address = useAddress();
   const [currentCollection, setCurrentCollection] = useState<ICollection>(
-    CURRENT_COLLECTIONS[0]
+    CURRENT_COLLECTIONS[0],
   );
   const CollectionCardMemo = React.memo(CollectionCard);
 
@@ -89,22 +91,20 @@ const CollectionsPage = () => {
 
   const { data: ownedNfts, isLoading: collectionIsLoading } = useOwnedNFTs(
     collectionContract,
-    address
+    address,
   );
 
   const cards = currentCollection.cards;
   const ownedFromCurrentCollection = useMemo(() => {
     const currentCollectionIds = new Set(
-      currentCollection.cards.map((card) => card.id)
+      currentCollection.cards.map((card) => card.id),
     );
-    console.log({ currentCollectionIds });
     return (
       ownedNfts?.filter((nft) =>
-        currentCollectionIds.has(Number(nft.metadata.id))
+        currentCollectionIds.has(Number(nft.metadata.id)),
       ) || []
     );
   }, [ownedNfts, currentCollection]);
-  console.log({ ownedFromCurrentCollection });
 
   const ownedFromCollection = useMemo(() => {
     return ownedNfts?.map((nft) => Number(nft.metadata.id)) || [];
@@ -112,7 +112,7 @@ const CollectionsPage = () => {
 
   const filteredCards = useMemo(() => {
     const ownedIds = new Set(
-      ownedFromCurrentCollection.map((nft) => Number(nft.metadata.id))
+      ownedFromCurrentCollection.map((nft) => Number(nft.metadata.id)),
     );
     return cards.filter((card) => !ownedIds.has(card.id));
   }, [cards, ownedFromCurrentCollection]);
@@ -120,7 +120,7 @@ const CollectionsPage = () => {
   // Reorder collections based on current selection and device type
   const reorderedCollections = useMemo(() => {
     const index = CURRENT_COLLECTIONS.findIndex(
-      (collection) => collection.id === currentCollection.id
+      (collection) => collection.id === currentCollection.id,
     );
     if (index === -1) return CURRENT_COLLECTIONS;
 
@@ -163,9 +163,9 @@ const CollectionsPage = () => {
               style={{
                 fontSize: isMobile ? '28px' : '35px',
               }}
-              c='black'
+              c="black"
               maw={isMobile ? '100%' : '400px'}
-              content='My Collection'
+              content="My Collection"
             />
           </Flex>
         </Flex>
@@ -181,8 +181,8 @@ const CollectionsPage = () => {
               direction={'row'}
               align={'center'}
               justify={{ base: 'flex-start', md: 'center' }}
-              pos='relative'
-              gap='16px'
+              pos="relative"
+              gap="16px"
               bg={collection.color}
               p={20}
               px={{ base: 0, md: index === 0 ? 64 : 32 }}
@@ -194,10 +194,11 @@ const CollectionsPage = () => {
                 alt={'smiley'}
                 w={24}
                 h={24}
-                fit='contain'
+                fit="contain"
               />
               <Text
                 maw={{ base: '100%', md: '300' }}
+                color={collection?.fontColor || 'black'}
                 content={`${collection.name} Collection`}
               />
             </Flex>
@@ -217,8 +218,8 @@ const CollectionsPage = () => {
           <Grid
             gutter={{ base: 'xl' }}
             justify={isMobile ? 'center' : 'flex-start'}
-            w='100%'
-            maw='1200px'
+            w="100%"
+            maw="1200px"
           >
             {ownedFromCurrentCollection?.map((nft: any, index: number) => (
               <Grid.Col key={index} span={{ base: 0, sm: 4 }}>
@@ -228,6 +229,7 @@ const CollectionsPage = () => {
                   metadata={nft.metadata}
                   owned={true}
                   showTitle
+                  fontColor={currentCollection?.fontColor || 'black'}
                 />
               </Grid.Col>
             ))}
@@ -238,6 +240,7 @@ const CollectionsPage = () => {
                   address={currentCollection.address}
                   item={item}
                   owned={false}
+                  fontColor={currentCollection?.fontColor || 'black'}
                   showTitle
                 />
               </Grid.Col>
