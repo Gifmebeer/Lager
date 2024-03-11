@@ -296,3 +296,12 @@ img {
   text-transform: uppercase;
   cursor: default;
 }
+
+.input_error {
+  border-radius: 4px;
+  padding: 4px;
+  background: #fa5252;
+  font-weight: bold;
+  font-size: 15px;
+  color: white !important;
+}

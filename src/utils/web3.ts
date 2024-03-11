@@ -18,8 +18,10 @@ export function privateKeyToWalletClient(privateKey: Address) {
   return { walletClient };
 }
 
-export function createPublicWalletClient() {
-  const network = `https://${currentNetwork.infuraName}.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_PROJECT_ID}`;
+export function createPublicWalletClient(infuraName?: string) {
+  const network = `https://${
+    infuraName || currentNetwork.infuraName
+  }.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_PROJECT_ID}`;
   const chain = currentChain;
 
   const walletClient = createWalletClient({

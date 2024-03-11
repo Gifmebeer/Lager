@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Button, Flex, NumberInput } from '@mantine/core';
+import { Button, Flex, NumberInput, em } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import {
   useAddress,
   useConnectionStatus,
@@ -7,7 +8,9 @@ import {
   useContractRead,
   useContractWrite,
   useNFT,
+  useOwnedNFTs,
   useSetIsWalletModalOpen,
+  useTokenBalance,
 } from '@thirdweb-dev/react';
 import { NFTCard } from '@/components/NFTCard';
 import {
@@ -21,6 +24,8 @@ import {
   MAX_MINT_PER_WALLET,
 } from '@/constants/lifetimepass/bbf2024Test';
 import Text from '../Text';
+import { createPublicWalletClient } from '@/utils/web3';
+import { Address } from 'viem';
 
 const BBFLP_Contract = PASS_CONTRACT;
 const BBFLP_TOKEN_ID = PASS_TOKEN_ID;
@@ -34,20 +39,36 @@ const _allowlistProof = {
 
 const BBF = () => {
   const address = useAddress();
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState<string | number>(1);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const { walletClient } = createPublicWalletClient();
   const connectionStatus = useConnectionStatus();
   const isConnected = connectionStatus === 'connected';
   const setIsWalletModalOpen = useSetIsWalletModalOpen();
+  const isMobile = useMediaQuery(`(max-width: ${em(850)})`);
+
   const { contract } = useContract(BBFLP_Contract, 'edition-drop');
   const { contract: currencyContract } = useContract(CURRENCY);
+  const { data: currencyBalance } = useTokenBalance(currencyContract, address);
   const { data: allowance } = useContractRead(currencyContract, 'allowance', [
     address,
     BBFLP_Contract,
   ]);
+
   const { data: currentNFT, isLoading: currentNFTIsLoading } = useNFT(
     contract,
     BBFLP_TOKEN_ID,
   );
+  const { data: ownedNFT, isLoading: ownLoading } = useOwnedNFTs(
+    contract,
+    address,
+  );
+  const currentCurrencyBalance = currencyBalance?.displayValue || 0;
+  const ownsNFT = ownedNFT?.find(
+    (i) => Number(i.metadata.id) === Number(BBFLP_TOKEN_ID),
+  );
+  const qtyOwned = ownsNFT && ownsNFT?.quantityOwned;
   const currentSupply = currentNFT?.supply || 0;
   const { mutateAsync: claim, isLoading } = useContractWrite(contract, 'claim');
   const { mutateAsync: approve } = useContractWrite(
@@ -55,19 +76,43 @@ const BBF = () => {
     'approve',
   );
 
+  const _isLoading = loading || isLoading || currentNFTIsLoading || ownLoading;
+
   const call = async () => {
     try {
-      if (!isConnected) setIsWalletModalOpen(true);
+      setError('');
+      setLoading(true);
+      if (!isConnected) {
+        setLoading(false);
+        setIsWalletModalOpen(true);
+      }
+      if (!quantity) {
+        setLoading(false);
+        return setError('Please enter a quantity');
+      }
+      if (qtyOwned && Number(qtyOwned) >= MAX_MINT_PER_WALLET) {
+        setLoading(false);
+        return setError(
+          `You can only mint ${MAX_MINT_PER_WALLET} NFTs per wallet`,
+        );
+      }
+      const _value = BigInt(PRICE_PER_NFT) * BigInt(quantity);
+      if (_value > BigInt(Number(currentCurrencyBalance))) {
+        setLoading(false);
+        return setError('Insufficient balance');
+      }
       // check if the user has enough allowance
-      if (BigInt(allowance) < BigInt(quantity)) {
+      if (BigInt(allowance) < BigInt(_value)) {
         const _approve = await approve({
           args: [
             BBFLP_Contract, //_spender,
-            BigInt(PRICE_PER_NFT) * BigInt(quantity), //_value,
+            _value,
           ],
         });
-        console.log({ _approve });
-        return;
+        const approveReceipt = await walletClient.waitForTransactionReceipt({
+          hash: `${_approve?.receipt?.transactionHash}` as Address,
+        });
+        console.log({ approveReceipt });
       }
       const data = await claim({
         args: [
@@ -81,18 +126,26 @@ const BBF = () => {
         ],
       });
       console.info('contract call successs', data);
-    } catch (err) {
+      const mintReceipt = await walletClient.waitForTransactionReceipt({
+        hash: `${data?.receipt?.transactionHash}` as Address,
+      });
+      setLoading(false);
+      console.log({ mintReceipt });
+    } catch (err: any) {
+      setLoading(false);
+      setError(`Error: ${err?.reason || 'contract call failure'}`);
       console.error('contract call failure', err);
     }
   };
 
-  const shouldClaim = !!isConnected;
+  const shouldMint = isConnected && Number(qtyOwned || 0) < MAX_MINT_PER_WALLET;
 
   return (
     <Flex
       w="100%"
+      maw="1280px"
       align={'center'}
-      justify={'center'}
+      justify={{ base: 'center', md: 'space-evenly' }}
       p={{ base: '180px 0 80px 0', md: '220px 0' }}
       mih={'100vh'}
       gap="xl"
@@ -100,19 +153,32 @@ const BBF = () => {
       direction={{ base: 'column', md: 'row' }}
       bg="linear-gradient(180deg, #2647CD 0%, #0D2175 100%)"
     >
-      <Flex align={'center'} gap="xl" direction={{ base: 'column' }}>
+      <Flex
+        align={'center'}
+        gap={{ base: 'xl', md: '52px' }}
+        direction={{ base: 'column' }}
+      >
         <Flex
           miw="277px"
           direction={'column'}
           align={'flex-start'}
           justify={'flex-start'}
         >
-          <Text content="VIP Lifetime Pass" size="xl" c={'white'} />
-          <Text content="Barcelona Beer Festival" size="sm" c={'white'} />
+          <Text
+            content="VIP Lifetime Pass"
+            size={isMobile ? 'xl' : '38px'}
+            c={'white'}
+          />
+          <Text
+            content="Barcelona Beer Festival"
+            size={isMobile ? 'sm' : '22px'}
+            mt={isMobile ? '0' : 'xs'}
+            c={'white'}
+          />
         </Flex>
         {currentNFT && (
           <NFTCard
-            w={236}
+            w={isMobile ? 236 : 318}
             address={BBFLP_Contract}
             metadata={currentNFT.metadata}
             key={BBFLP_TOKEN_ID}
@@ -125,13 +191,24 @@ const BBF = () => {
         gap="xl"
         direction={{ base: 'column', md: 'column-reverse' }}
       >
+        {qtyOwned && (
+          <Text
+            content={
+              Number(qtyOwned) > 1
+                ? `You own ${ownsNFT.quantityOwned} Lifetime passes!`
+                : 'You own one Lifetime pass!'
+            }
+            c="#FF0"
+            fw="bold"
+          />
+        )}
         <Flex
           bg="#234FFF"
           direction={'column'}
           align={'flex-start'}
           justify={'center'}
           gap="md"
-          w={'283px'}
+          w={{ base: '283px', md: '399px' }}
           p="lg"
           style={{ borderRadius: 12 }}
         >
@@ -152,6 +229,13 @@ const BBF = () => {
             variant="filled"
             radius="md"
             placeholder="Amount"
+            error={error}
+            value={quantity}
+            onChange={(n: string | number) => {
+              setError('');
+              setQuantity(n);
+            }}
+            classNames={{ error: 'input_error' }}
           />
           <Text
             c={'white'}
@@ -192,24 +276,38 @@ const BBF = () => {
             />
           </Flex>
           <Flex my="xs" w="100%" justify={'center'}>
-            <Button
-              w="100%"
-              bg="#FF0"
-              c={'black'}
-              style={{ borderRadius: 12 }}
-              onClick={call}
-            >
-              <Text content={shouldClaim ? 'Claim' : 'Connect Wallet'} />
-            </Button>
+            {
+              <Button
+                w="100%"
+                disabled={!shouldMint}
+                loading={_isLoading}
+                bg={_isLoading ? 'transparent' : '#FF0'}
+                c={'black'}
+                style={{ borderRadius: 12 }}
+                onClick={call}
+              >
+                <Text
+                  content={
+                    !isConnected
+                      ? 'Connect Wallet'
+                      : shouldMint
+                      ? 'Mint'
+                      : Number(qtyOwned) >= MAX_MINT_PER_WALLET
+                      ? 'Max minted'
+                      : ''
+                  }
+                />
+              </Button>
+            }
           </Flex>
         </Flex>
-        <Flex w="260px">
+        <Flex w={{ base: '260px', md: '405px' }}>
           <Text
             c={'white'}
             ff={'GT-America'}
             size="16px"
             lh="20px"
-            content="The Lifetime Pass collection is available on Optimism Mainnet and 150 of a total of 160 NFTs will be offered for public minting. The first 50 passes can be minted for DAI 500 on early bird until March 21st 11:59pm CET when the Barcelona Beer Festival will launch. After that date price will increase to DAI 650."
+            content={`The Lifetime Pass collection is available on Optimism Mainnet and 150 of a total of 160 NFTs will be offered for public minting. The first 50 passes can be minted for 500 ${CURRENCY_SYMBOL} on early bird until March 21st 11:59pm CET when the Barcelona Beer Festival will launch. After that date price will increase to 650 ${CURRENCY_SYMBOL}.`}
           />
         </Flex>
       </Flex>

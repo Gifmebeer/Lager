@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { Flex } from '@mantine/core';
 import BBF from '@/components/lifetimepass/bbf';
 import AppShell from '@/components/Appshell';
 
@@ -11,5 +12,11 @@ export default function Component() {
     Content = <BBF />;
   }
 
-  return <AppShell noPadding={true}>{Content}</AppShell>;
+  return (
+    <AppShell isRegular noPadding={true}>
+      <Flex bg="linear-gradient(180deg, #2647CD 0%, #0D2175 100%)">
+        {Content}
+      </Flex>
+    </AppShell>
+  );
 }
