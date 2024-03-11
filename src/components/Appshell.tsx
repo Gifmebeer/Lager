@@ -21,7 +21,7 @@ interface IHeader {
   isRegular?: boolean;
 }
 
-const IS_PRELAUNCH = true;
+const IS_PRELAUNCH = false;
 
 const Wallet = () => {
   return (
