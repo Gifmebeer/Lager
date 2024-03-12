@@ -7,14 +7,14 @@ const nextConfig = {
           source: '/tos',
           destination: '/GifmeBeer_Terms_and_Conditions.pdf',
         },
-        // {
-        //   source: '/collections',
-        //   destination: '/',
-        // },
-        // {
-        //   source: '/claim/:path*',
-        //   destination: '/',
-        // },
+        {
+          source: '/collections',
+          destination: '/',
+        },
+        {
+          source: '/claim/:path*',
+          destination: '/',
+        },
       ],
     };
   },
