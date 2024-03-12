@@ -1,4 +1,4 @@
-import LandingPage from '@/components/landing';
+import { LandingPage } from '@/components/landing';
 import Appshell from '@/components/Appshell';
 
 export default function Home() {

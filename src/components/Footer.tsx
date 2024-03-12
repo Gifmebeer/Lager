@@ -4,9 +4,9 @@ const data = [
   {
     title: 'Community',
     links: [
-      { label: 'ARE YOU IN THE BREWING BUSINESS? JOIN US!', link: '/' },
-      { label: 'FAQ', link: '/faqs' },
-      { label: 'GIFME.BEER TEAM', link: '/' },
+      { label: 'ARE YOU IN THE BREWING BUSINESS? JOIN US!', link: null },
+      { label: 'FAQS', link: '/faqs' },
+      { label: 'GIFME.BEER TEAM', link: null },
       { label: 'TERMS & CONDITIONS', link: '/tos' },
       {
         label: 'HOLA@GIFME.BEER',
@@ -27,7 +27,7 @@ export default function Footer() {
         className={'link'}
         c={link.color}
         component="a"
-        href={link.link}
+        href={link.link || ''}
         /* onClick={(event) => event.preventDefault()}  */
       >
         {link.label}
