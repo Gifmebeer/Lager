@@ -4,7 +4,7 @@ const data = [
   {
     title: 'Community',
     links: [
-      { label: 'ARE YOU IN THE BREWING BUSINESS? JOIN US!', link: null },
+      { label: 'ARE YOU IN THE BREWING BUSINESS? JOIN US!', link: '/breweries' },
       { label: 'FAQS', link: '/faqs' },
       { label: 'GIFME.BEER TEAM', link: null },
       { label: 'TERMS & CONDITIONS', link: '/tos' },
