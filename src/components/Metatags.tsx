@@ -1,8 +1,14 @@
 import Head from 'next/head';
+import { ColorSchemeScript } from '@mantine/core';
 
 const Metatags = () => {
   return (
     <Head>
+      <ColorSchemeScript />
+      <meta
+        name="viewport"
+        content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
+      />
       <title>GifmeBeer | Collect your Craft Beer Experiences</title>
 
       <meta name="description" content="Collect your Craft Beer Experiences" />

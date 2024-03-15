@@ -2,7 +2,7 @@ import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
 import '@/globals.css';
 import type { AppProps } from 'next/app';
-import { ColorSchemeScript, MantineProvider } from '@mantine/core';
+import { MantineProvider } from '@mantine/core';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import ThirdwebProvider from '@/helpers/ThirdwebProvider';
@@ -33,13 +33,6 @@ export const metadata: Metadata = {
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <MantineProvider theme={theme}>
-      <Head>
-        <ColorSchemeScript />
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
-        />
-      </Head>
       <Metatags />
       <main
         lang="en"
