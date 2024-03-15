@@ -1,8 +1,14 @@
 import Head from 'next/head';
+import { ColorSchemeScript } from '@mantine/core';
 
 const Metatags = () => {
   return (
     <Head>
+      <ColorSchemeScript />
+      <meta
+        name="viewport"
+        content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
+      />
       <title>GifmeBeer | Collect your Craft Beer Experiences</title>
 
       <meta name="description" content="Collect your Craft Beer Experiences" />
@@ -21,7 +27,7 @@ const Metatags = () => {
         content="GifmeBeer - Collect your craft beer experiences"
       />
       <meta name="twitter:description" content="Brewing Art into Blockchain" />
-      <link rel="icon" href="/favicon.ico" />
+      <link rel="icon" href="https://gifme.beer/favicon.ico" />
     </Head>
   );
 };
