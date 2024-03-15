@@ -8,6 +8,7 @@ import localFont from 'next/font/local';
 import ThirdwebProvider from '@/helpers/ThirdwebProvider';
 import { theme } from '@/../theme';
 import Head from 'next/head';
+import Metatags from '@/components/Metatags';
 
 const metamorBit_Latin = localFont({
   src: '../fonts/MetamorBit_Latin-Regular.otf',
@@ -35,12 +36,13 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <ColorSchemeScript />
         <meta
-          name='viewport'
-          content='minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no'
+          name="viewport"
+          content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
         />
       </Head>
+      <Metatags />
       <main
-        lang='en'
+        lang="en"
         className={`${metamorBit_Latin.variable} ${gtAmericaStandard_Regular.className} ${gtAmericaStandard_Medium.variable}`}
       >
         <ThirdwebProvider>

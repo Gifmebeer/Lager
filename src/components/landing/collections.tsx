@@ -11,8 +11,9 @@ import {
 } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import Link from 'next/link';
-import { ConnectWallet, useConnectionStatus } from '@thirdweb-dev/react';
+import { useConnectionStatus } from '@thirdweb-dev/react';
 import { useRouter } from 'next/navigation';
+import ConnectWalletBtn from '../ConnectWallet';
 
 const cards = [
   {
@@ -106,11 +107,9 @@ const Collections = () => {
         </Flex>
       </Container>
       {!isConnected ? (
-        <ConnectWallet
-          btnTitle="LOG IN TO SEE ALL COLLECTIONS"
+        <ConnectWalletBtn
+          btntitle="LOG IN TO SEE ALL COLLECTIONS"
           className={'connectButton2'}
-          switchToActiveChain={true}
-          modalSize={'compact'}
         />
       ) : (
         <Button
