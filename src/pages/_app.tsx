@@ -2,12 +2,12 @@ import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
 import '@/globals.css';
 import type { AppProps } from 'next/app';
+import Script from 'next/script';
 import { MantineProvider } from '@mantine/core';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import ThirdwebProvider from '@/helpers/ThirdwebProvider';
 import { theme } from '@/../theme';
-import Head from 'next/head';
 import Metatags from '@/components/Metatags';
 
 const metamorBit_Latin = localFont({
@@ -38,6 +38,17 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         lang="en"
         className={`${metamorBit_Latin.variable} ${gtAmericaStandard_Regular.className} ${gtAmericaStandard_Medium.variable}`}
       >
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-8QY9E6TQHS"
+        />
+        <Script>
+          {`window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-8QY9E6TQHS');
+          `}
+        </Script>
         <ThirdwebProvider>
           <Component {...pageProps} />
         </ThirdwebProvider>
