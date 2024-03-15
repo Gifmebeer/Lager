@@ -1,16 +1,12 @@
 import { ReactNode, useState } from 'react';
 import Link from 'next/link';
 import { AppShell, Flex, rem, em, Image } from '@mantine/core';
-import {
-  ConnectWallet,
-  useDisconnect,
-  darkTheme,
-  useConnectionStatus,
-} from '@thirdweb-dev/react';
+import { useDisconnect, useConnectionStatus } from '@thirdweb-dev/react';
 import { IconMenu2, IconX } from '@tabler/icons-react';
 import { useHeadroom, useMediaQuery } from '@mantine/hooks';
 import Footer from './Footer';
 import Text from './Text';
+import ConnectWalletBtn from './ConnectWallet';
 
 interface IHeader {
   children: ReactNode;
@@ -24,26 +20,7 @@ interface IHeader {
 const IS_PRELAUNCH = false;
 
 const Wallet = () => {
-  return (
-    <ConnectWallet
-      btnTitle="LOGIN"
-      className={'connectButton'}
-      switchToActiveChain={true}
-      modalSize={'compact'}
-      theme={darkTheme({
-        colors: {
-          modalBg: 'black',
-          primaryText: 'white',
-          accentText: 'rgba(36, 195, 171, 1)',
-          primaryButtonText: 'white',
-          secondaryButtonText: 'rgba(36, 195, 171, 1)',
-          secondaryText: 'darkgray',
-          accentButtonText: 'black',
-          accentButtonBg: 'rgba(36, 195, 171, 1)',
-        },
-      })}
-    />
-  );
+  return <ConnectWalletBtn btntitle="LOGIN" className={'connectButton'} />;
 };
 
 function Header({

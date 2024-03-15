@@ -5,17 +5,16 @@ import { Button, Center, Text } from '@mantine/core';
 import CustomText from '@/components/Text';
 import { CURRENT_COLLECTIONS, membership } from '@/constants/collections';
 import {
-  ConnectWallet,
   useAddress,
   useConnectionStatus,
   useContract,
   useOwnedNFTs,
   useNFT,
   useSetIsWalletModalOpen,
-  darkTheme,
 } from '@thirdweb-dev/react';
 import useSWRMutation from 'swr/mutation';
 import { Address } from 'viem';
+import ConnectWallet from '@/components/ConnectWallet';
 import { NFTCard } from '@/components/NFTCard';
 import AppShell from '@/components/Appshell';
 import { createPublicWalletClient, shortenAddress } from '@/utils/web3';
@@ -208,22 +207,7 @@ const Claim = (params: any) => {
         }}
         bg="black"
       >
-        <ConnectWallet
-          btnTitle="Login"
-          className={'connectButton3'}
-          theme={darkTheme({
-            colors: {
-              modalBg: 'black',
-              primaryText: 'white',
-              accentText: 'rgba(36, 195, 171, 1)',
-              primaryButtonText: 'white',
-              secondaryButtonText: 'rgba(36, 195, 171, 1)',
-              secondaryText: 'darkgray',
-              accentButtonText: 'black',
-              accentButtonBg: 'rgba(36, 195, 171, 1)',
-            },
-          })}
-        />
+        <ConnectWallet btntitle="Login" className={'connectButton3'} />
       </Center>
     );
   }
