@@ -17,40 +17,7 @@ import { useMediaQuery } from '@mantine/hooks';
 
 const Legal: React.FC = () => {
   const isMobile = useMediaQuery(`(max-width: ${em(850)})`);
-  /*  const termsItems = [
-      
-    {
-        content: 'We are Volga Tanganyika SL, (“Company,” “we,” “us,” “our”). Our VAT number is B66312810.',
-      },
-      {
-        content: 'We operate the website http://gifme.beer (the “Site”), the mobile application Gifme.Beer (the “App”), as well as any other related products and services that refer or link to these legal terms (the “Legal Terms”) (collectively, the “Services”).',
-      },
-      {
-        content: 'Gifme.Beer is a craft beer collectibles service in NFT format. Imagine an online platform where beer lovers can earn non-fungible tokens (NFT). Each NFT corresponds to a brewer, a specific beer, a bar, a specialized establishment in the sector, or a craft beer festival, with detailed information about the entity, and in the event, it is a beer, the ingredients, the manufacturing process, and even history or anecdotes related to this beer. in particular. Collectors will have the opportunity to acquire the NFTs as unique and collectible digital property. In addition, these NFTs will offer exclusive benefits, such as access to new beer releases, discounts at the bar or brewery that offers them, or even the possibility of redeeming them to obtain the physical beer they represent, sent to the collector’s home. You can contact us email at hola@gifme.beer',
-      },
-
-      {
-        content: 'These Legal Terms constitute a legally binding agreement made between you, whether personally or on behalf of an entity (“you”), and Company SL, concerning your access to and use of the Services. You agree that by accessing the Services, you have read, understood, and agreed to be bound by all of these Legal Terms. IF YOU DO NOT AGREE WITH ALL OF THESE LEGAL TERMS, THEN YOU ARE EXPRESSLY PROHIBITED FROM USING THE SERVICES AND YOU MUST DISCONTINUE USE IMMEDIATELY.',
-      },
-      {
-        content: 'Supplemental terms and conditions or documents that may be posted on the Services from time to time are hereby expressly incorporated herein by reference. We reserve the right, in our sole discretion, to make changes or modifications to these Legal Terms from time to time. We will alert you about any changes by updating the “Last updated” date of these Legal Terms, and you waive any right to receive specific notice of each such change. It is your responsibility to periodically review these Legal Terms to stay informed of updates. You will be subject to, and will be deemed to have been made aware of and to have accepted, the changes in any revised Legal Terms by your continued use of the Services after the date such revised Legal Terms are posted.',
-      },
-      {
-        content: 'The services are intended for users who are at least 18 years old. Persons under the age of 18 are not permitted to use or register for the Services.',
-      },
-      {
-        content: 'We recommend that you print a copy of these Legal Terms for your records.',
-      },
-   
-    
-    
-    
-    
-    
-
-    
-   ] */
-
+ 
   return (
     <Container
       bg="#EAEAEA"

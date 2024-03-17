@@ -11,7 +11,7 @@ const data = [
       { label: 'FAQS', link: '/faqs' },
       { label: 'GIFME.BEER TEAM', link: '/team' },
       { label: 'TERMS & CONDITIONS', link: '/legal' },
-      { label: 'LEGAL ADVISE', link: '/legal' },
+      { label: 'LEGAL ADVISE', link: '/legaladvise' },
       {
         label: 'HOLA@GIFME.BEER',
         link: 'mailto:hola@gifme.beer',
