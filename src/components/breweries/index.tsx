@@ -187,11 +187,13 @@ const Breweries: React.FC = () => {
                 label="COMPANY NAME "
                 placeholder="Company Name"
                 mb="lg"
+                radius="md"
                 styles={{
                   input: {
                     backgroundColor: 'white',
                     border: '1px solid black',
                   },
+                  
                 }}
                 {...form.getInputProps('company')}
               />
@@ -202,6 +204,7 @@ const Breweries: React.FC = () => {
                 label="CONTACT PERSON NAME"
                 placeholder="Name"
                 mb="lg"
+                radius="md"
                 styles={{
                   input: {
                     backgroundColor: 'white',
@@ -220,6 +223,7 @@ const Breweries: React.FC = () => {
                 label="CITY / TOWN"
                 placeholder="City - Town"
                 mb="lg"
+                radius="md"
                 styles={{
                   input: {
                     backgroundColor: 'white',
@@ -235,6 +239,7 @@ const Breweries: React.FC = () => {
                 label="PROVINCE"
                 placeholder="Province"
                 mb="lg"
+                radius="md"
                 styles={{
                   input: {
                     backgroundColor: 'white',
@@ -251,6 +256,7 @@ const Breweries: React.FC = () => {
                 placeholder="Select country"
                 searchable
                 error
+                radius="md"
                 data={[
                   'Afghanistan',
                   'Albania',
@@ -502,6 +508,7 @@ const Breweries: React.FC = () => {
                 withAsterisk
                 label="E-MAIL"
                 mb="lg"
+                radius="md"
                 styles={{
                   input: {
                     backgroundColor: 'white',
@@ -517,7 +524,7 @@ const Breweries: React.FC = () => {
                 label="PHONE NUMBER"
                 placeholder="Phone"
                 mb="lg"
-                format="+7 (000)000 0000"
+                radius="md"
                 styles={{
                   input: {
                     backgroundColor: 'white',
@@ -526,6 +533,8 @@ const Breweries: React.FC = () => {
                 }}
                 {...form.getInputProps('phone')}
               />
+
+              
             </Grid.Col>
           </Grid>
 
@@ -533,6 +542,7 @@ const Breweries: React.FC = () => {
             label="WEBSITE"
             placeholder="web"
             mb="lg"
+            radius="md"
             styles={{
               input: {
                 backgroundColor: 'white',
@@ -551,6 +561,7 @@ const Breweries: React.FC = () => {
                 defaultValue="Selecct"
                 clearable
                 mb="lg"
+                radius="md"
                 styles={{
                   input: {
                     backgroundColor: 'white',
@@ -571,6 +582,7 @@ const Breweries: React.FC = () => {
                 defaultValue="Selecct"
                 clearable
                 mb="lg"
+                radius="md"
                 styles={{
                   input: {
                     backgroundColor: 'white',
@@ -588,6 +600,7 @@ const Breweries: React.FC = () => {
                 label="HOW MANY BEERS DO YOU PRODUCE? "
                 placeholder="15200"
                 mb="lg"
+                radius="md"
                 styles={{
                   input: {
                     backgroundColor: 'white',
@@ -605,6 +618,7 @@ const Breweries: React.FC = () => {
                 label="INSTAGRAM "
                 placeholder=""
                 mb="lg"
+                radius="md"
                 styles={{
                   input: {
                     backgroundColor: 'white',
@@ -619,6 +633,7 @@ const Breweries: React.FC = () => {
                 label="FACEBOOK"
                 placeholder=""
                 mb="lg"
+                radius="md"
                 styles={{
                   input: {
                     backgroundColor: 'white',
@@ -670,7 +685,10 @@ const Breweries: React.FC = () => {
               ff="MetamorBit-Latin"
               variant="filled"
               color="rgba(0, 0, 0, 1)"
-              size="md"
+              size="lg"
+              radius='md'
+              pt='sm'
+              pb='md'
             >
               SEND
             </Button>
