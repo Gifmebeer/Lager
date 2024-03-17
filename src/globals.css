@@ -323,3 +323,7 @@ img {
 .right-chk{
   order: var(--_checkbox-inner-order, ) !important
 }
+
+.mantine-Checkbox-label{
+  padding-left: 8px !important;
+  }
