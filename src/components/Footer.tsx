@@ -4,7 +4,10 @@ const data = [
   {
     title: 'Community',
     links: [
-      { label: 'ARE YOU IN THE BREWING BUSINESS? JOIN US!', link: '/breweries' },
+      {
+        label: 'ARE YOU IN THE BREWING BUSINESS? JOIN US!',
+        link: '/breweries',
+      },
       { label: 'FAQS', link: '/faqs' },
       { label: 'GIFME.BEER TEAM', link: '/team' },
       { label: 'TERMS & CONDITIONS', link: '/tos' },
@@ -69,6 +72,15 @@ export default function Footer() {
           <a href="https://www.instagram.com/gifmebeer/" target="_blank">
             <Image
               src="/images/icons/instagram.svg"
+              style={{ width: rem(35), height: rem(35) }}
+            />
+          </a>
+          <a
+            href="https://www.facebook.com/profile.php?id=61557180067153"
+            target="_blank"
+          >
+            <Image
+              src="/images/icons/facebook.svg"
               style={{ width: rem(35), height: rem(35) }}
             />
           </a>
