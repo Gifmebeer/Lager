@@ -186,8 +186,9 @@ img {
 
 .footer {
   padding-top: calc(var(--mantine-spacing-xl) * 2);
-/*   padding-bottom: calc(var(--mantine-spacing-xl) * 2);
- */  background-color: black;
+  /*   padding-bottom: calc(var(--mantine-spacing-xl) * 2);
+ */
+  background-color: black;
   * {
     font-family: 'MetamorBit-Latin' !important;
   }
@@ -247,7 +248,7 @@ img {
   border-bottom: 0px solid rgba(255, 251, 62, 1);
   &:hover {
     color: rgba(255, 255, 255, 255) !important;
-  } 
+  }
 }
 
 .title {
@@ -320,10 +321,10 @@ img {
 /* .m-26062bec {
   order: var(--_checkbox-inner-order, ) !important
 } */
-.right-chk{
-  order: var(--_checkbox-inner-order, ) !important
+.right-chk {
+  order: var(--_checkbox-inner-order) !important;
 }
 
-.mantine-Checkbox-label{
+.mantine-Checkbox-label {
   padding-left: 8px !important;
-  }
+}
