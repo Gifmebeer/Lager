@@ -2,7 +2,7 @@ import { ICollection } from '@/types';
 import { NFT_COLLECTION_ADDRESS } from '../addresses';
 
 export default {
-  id: 0,
+  id: 2,
   name: 'Festivals',
   address: NFT_COLLECTION_ADDRESS,
   network: 'optimism',

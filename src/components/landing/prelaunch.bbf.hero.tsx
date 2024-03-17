@@ -54,6 +54,23 @@ const HeroPage = () => {
   return (
     <BackgroundImage src="/images/led_background.svg">
       <Flex
+        px="12px"
+        bg="#E2E1E1"
+        w="100%"
+        h={'35px'}
+        align={'center'}
+        justify={'center'}
+        pos={'absolute'}
+      >
+        <Text
+          style={{ textAlign: 'center' }}
+          content="Collect your craft beer experiences"
+          c="#231F20"
+          lh={{ base: '19px', md: '34px' }}
+          size="13px"
+        />
+      </Flex>
+      <Flex
         maw="1440px"
         h={{ base: 'auto', md: '100vh' }}
         p={0}
@@ -65,7 +82,7 @@ const HeroPage = () => {
         {!isMobile ? (
           <Flex
             h="80%"
-            w={{ base: '60%', md: '30%' }}
+            w={{ base: '60%', md: '40%' }}
             pos={{ base: 'absolute', sm: 'relative' }}
             justify={'flex-start'}
             direction={'column'}
@@ -110,16 +127,16 @@ const HeroPage = () => {
           {!isMobile ? (
             <Flex pos="relative">
               <Image
-                w={{ base: '100%', sm: 'auto' }}
+                w={{ base: '100%', sm: '600px' }}
                 p={'20px'}
-                src="/images/landing_beers.png"
+                src="/images/landing_beers.svg"
                 alt="Beers"
               />
               <Image
                 pos={'absolute'}
                 bottom={{ md: 0, xl: '40%' }}
                 left={{ md: '25%', xl: '-70%' }}
-                w={{ base: '200px', xl: '220px' }}
+                w={{ base: '200px', xl: '250px' }}
                 style={{ transform: 'rotate(9.684deg)' }}
                 src="/images/prelaunch_card_bbf.gif"
                 alt="bbf card"
@@ -129,7 +146,7 @@ const HeroPage = () => {
             <Image
               w={{ base: '100%', sm: 'auto' }}
               p={'20px'}
-              src="/images/landing_beers.png"
+              src="/images/landing_beers.svg"
               alt="Beers"
             />
           )}

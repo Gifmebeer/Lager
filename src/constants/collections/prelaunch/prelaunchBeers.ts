@@ -1,10 +1,10 @@
 import { ICollection } from '@/types';
-import { NFT_COLLECTION_ADDRESS } from '../addresses';
-import wiley from './prelaunch/wiley';
-import synera from './prelaunch/synera';
+import { NFT_COLLECTION_ADDRESS } from '../../addresses';
+import wiley from './wiley';
+import synera from './synera';
 
 export default {
-  id: 0,
+  id: 1,
   name: 'Beers',
   address: NFT_COLLECTION_ADDRESS,
   network: 'op-sepolia-testnet',

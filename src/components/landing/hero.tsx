@@ -37,7 +37,7 @@ const HeroPage = () => {
           mx={{ base: 'lg', md: 0 }}
           mt={{ base: '130px', md: 0 }}
         >
-          <Image src="/images/landing_beers.png" alt="Beers" />
+          <Image src="/images/landing_beers.svg" alt="Beers" />
         </Flex>
       </Flex>
     </BackgroundImage>
