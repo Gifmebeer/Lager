@@ -59,12 +59,12 @@ const Breweries: React.FC = () => {
       country: isNotEmpty('Select country'),
       email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
       phone: isNotEmpty('Fill in a phone'),
-      web: (value) =>
+      /* web: (value) =>
         /(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?\/[a-zA-Z0-9]{2,}|((https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?)|(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})?/g.test(
           value,
         )
           ? null
-          : 'Invalid web adress',
+          : 'Invalid web adress', */
       shoponline: isNotEmpty('Shop online?'),
       tpowner: isNotEmpty('Tap owner?'),
       legal: isNotEmpty('Terms of use must be accepted'),
@@ -193,7 +193,6 @@ const Breweries: React.FC = () => {
                     backgroundColor: 'white',
                     border: '1px solid black',
                   },
-                  
                 }}
                 {...form.getInputProps('company')}
               />
@@ -533,8 +532,6 @@ const Breweries: React.FC = () => {
                 }}
                 {...form.getInputProps('phone')}
               />
-
-              
             </Grid.Col>
           </Grid>
 
@@ -557,7 +554,7 @@ const Breweries: React.FC = () => {
               <Select
                 label="SHOP ONLINE"
                 placeholder="Shop online"
-                data={['Si', 'No']}
+                data={['Yes', 'No']}
                 defaultValue="Selecct"
                 clearable
                 mb="lg"
@@ -578,7 +575,7 @@ const Breweries: React.FC = () => {
               <Select
                 label="DO YOU OWN A TAPROOM?"
                 placeholder="Do you own a taproom?"
-                data={['Si', 'No']}
+                data={['Yes', 'No']}
                 defaultValue="Selecct"
                 clearable
                 mb="lg"
@@ -597,8 +594,8 @@ const Breweries: React.FC = () => {
             </Grid.Col>
             <Grid.Col span={{ base: 12, md: 4 }}>
               <NumberInput
-                label="HOW MANY BEERS DO YOU PRODUCE? "
-                placeholder="15200"
+                label="HOW MANY BEERS DO YOU HAVE? "
+                placeholder="5"
                 mb="lg"
                 radius="md"
                 styles={{
@@ -686,9 +683,9 @@ const Breweries: React.FC = () => {
               variant="filled"
               color="rgba(0, 0, 0, 1)"
               size="lg"
-              radius='md'
-              pt='sm'
-              pb='md'
+              radius="md"
+              pt="sm"
+              pb="md"
             >
               SEND
             </Button>

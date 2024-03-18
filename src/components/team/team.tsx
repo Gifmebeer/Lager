@@ -1,12 +1,6 @@
 import React from 'react';
 
-import {
-  Container,
-  em,
-  Image,
-  Center,
-  Divider,
-} from '@mantine/core';
+import { Container, em, Image, Center, Divider } from '@mantine/core';
 
 import { useMediaQuery } from '@mantine/hooks';
 
@@ -38,8 +32,8 @@ const Team: React.FC = () => {
       <Center>
         <Image
           src="/images/team/santi.png"
-          /*           height={160}
-           */ alt=""
+          /*           height={280} */
+          alt=""
         />
       </Center>
 
@@ -172,7 +166,7 @@ const Team: React.FC = () => {
 
       <Center>
         <Image
-          src="/images/team/xavier.png"
+          src="/images/team/xavi.png"
           /*           height={160}
            */ alt=""
         />

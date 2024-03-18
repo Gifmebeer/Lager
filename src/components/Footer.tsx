@@ -67,13 +67,13 @@ export default function Footer() {
           <a href="https://twitter.com/GifmeBeer" target="_blank">
             <Image
               src="/images/icons/x.svg"
-              style={{ width: rem(35), height: rem(35) }}
+              style={{ width: rem(40), height: rem(40) }}
             />
           </a>
           <a href="https://www.instagram.com/gifmebeer/" target="_blank">
             <Image
               src="/images/icons/instagram.svg"
-              style={{ width: rem(35), height: rem(35) }}
+              style={{ width: rem(40), height: rem(40) }}
             />
           </a>
           <a
@@ -82,13 +82,13 @@ export default function Footer() {
           >
             <Image
               src="/images/icons/facebook.svg"
-              style={{ width: rem(35), height: rem(35) }}
+              style={{ width: rem(40), height: rem(40) }}
             />
           </a>
           <a href="https://discord.gg/n9tEPfQh" target="_blank">
             <Image
               src="/images/icons/discord.svg"
-              style={{ width: rem(35), height: rem(35) }}
+              style={{ width: rem(40), height: rem(40) }}
             />
           </a>
           <a
@@ -97,7 +97,7 @@ export default function Footer() {
           >
             <Image
               src="/images/icons/mirror.svg"
-              style={{ width: rem(35), height: rem(35) }}
+              style={{ width: rem(40), height: rem(40) }}
             />
           </a>
         </Group>
