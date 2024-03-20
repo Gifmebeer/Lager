@@ -12,8 +12,9 @@ import {
   Box,
   Flex,
   Select,
+  Dialog,
 } from '@mantine/core';
-import { useMediaQuery } from '@mantine/hooks';
+import { useDisclosure, useMediaQuery } from '@mantine/hooks';
 
 // @ts-ignore
 import { isNotEmpty, useForm } from '@mantine/form';
@@ -22,6 +23,7 @@ import { COUNTRIES } from '@/constants/legal';
 import Text from '../Text';
 
 const Breweries: React.FC = () => {
+  const [opened, { toggle, close }] = useDisclosure(false);
   const [checked, setChecked] = useState(false);
   const isMobile = useMediaQuery(`(max-width: ${em(850)})`);
   const form = useForm({
@@ -74,6 +76,28 @@ const Breweries: React.FC = () => {
     },
   });
 
+  const handleSubmit = async (values: any) => {
+    try {
+      const response = await fetch('/api/saveForm', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ form: values }), // Assuming your API expects an object with a `form` key
+      });
+      const result = await response.json();
+      if (response.ok) {
+        console.log('Form submitted successfully:', result);
+        form.reset();
+        toggle();
+      } else {
+        console.error('Form submission error:', result.error);
+      }
+    } catch (error) {
+      console.error('Form submission exception:', error);
+    }
+  };
+
   return (
     <Container
       bg="#EAEAEA"
@@ -84,6 +108,22 @@ const Breweries: React.FC = () => {
       pr="lg"
       pl="lg"
     >
+      <Dialog
+        opened={opened}
+        withCloseButton
+        onClose={close}
+        size="lg"
+        radius="md"
+        bg="#FF0"
+      >
+        <Text
+          c="black"
+          size="lg"
+          mb="xs"
+          fw={'bold'}
+          content="Form submitted!"
+        />
+      </Dialog>
       <Text
         mb="lg"
         style={{
@@ -96,7 +136,7 @@ const Breweries: React.FC = () => {
       />
 
       <Box maw={1200} mx="auto">
-        <form onSubmit={form.onSubmit((values: any) => console.log(values))}>
+        <form onSubmit={form.onSubmit((values: any) => handleSubmit(values))}>
           <Flex
             mih={50}
             mb="lg"
