@@ -12,6 +12,8 @@ import {
   useSetIsWalletModalOpen,
   useTokenBalance,
 } from '@thirdweb-dev/react';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
 import { NFTCard } from '@/components/NFTCard';
 import {
   PASS_CONTRACT,
@@ -27,6 +29,7 @@ import {
 import Text from '../Text';
 import { createPublicWalletClient } from '@/utils/web3';
 import { Address } from 'viem';
+import CreditCardForm from './creditcard.form';
 
 const BBFLP_Contract = PASS_CONTRACT;
 const BBFLP_TOKEN_ID = PASS_TOKEN_ID;
@@ -40,6 +43,8 @@ const _allowlistProof = {
 
 const BBF = () => {
   const address = useAddress();
+  const buyerWalletAddress = address;
+  const [clientSecret, setClientSecret] = useState('');
   const [quantity, setQuantity] = useState<string | number>(1);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -83,6 +88,21 @@ const BBF = () => {
   const _isLoading =
     !isDisconnected &&
     (loading || isLoading || currentNFTIsLoading || ownLoading);
+
+  // Retrieve a Stripe client secret to display the credit card form.
+  const onClickPurchase = async () => {
+    const resp = await fetch('/api/stripe/intent', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        buyerWalletAddress,
+        amount: PRICE_PER_NFT_FORMATTED,
+      }),
+    });
+    const json = await resp.json();
+    setClientSecret(json.clientSecret);
+  };
+  const stripe = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY!);
 
   const call = async () => {
     try {
@@ -145,7 +165,7 @@ const BBF = () => {
       console.error('contract call failure', err);
     }
   };
-
+  const shouldUseStripe = !_isLoading;
   const shouldMint =
     isConnected &&
     Number(qtyOwned || 0) < MAX_MINT_PER_WALLET &&
@@ -289,32 +309,55 @@ const BBF = () => {
               fw="bold"
             />
           </Flex>
-          <Flex my="xs" w="100%" justify={'center'}>
-            {
-              <Button
-                w="100%"
-                disabled={!shouldMint}
-                loading={_isLoading}
-                bg={_isLoading ? 'transparent' : '#FF0'}
-                c={'black'}
-                style={{ borderRadius: 12 }}
-                onClick={call}
-              >
-                <Text
-                  content={
-                    !isConnected
-                      ? 'Connect Wallet'
-                      : shouldMint
-                      ? 'Mint'
-                      : Number(qtyOwned) >= MAX_MINT_PER_WALLET
-                      ? 'Max minted'
-                      : reachedSupply
-                      ? 'Reached supply'
-                      : ''
-                  }
-                />
-              </Button>
-            }
+          <Flex
+            gap={'md'}
+            my="xs"
+            w="100%"
+            justify={'center'}
+            direction="column"
+          >
+            <Button
+              w="100%"
+              disabled={!shouldMint}
+              loading={_isLoading}
+              bg={_isLoading ? 'transparent' : '#FF0'}
+              c={'black'}
+              style={{ borderRadius: 12 }}
+              onClick={call}
+            >
+              <Text
+                content={
+                  !isConnected
+                    ? 'Connect Wallet'
+                    : shouldMint
+                    ? 'Mint'
+                    : Number(qtyOwned) >= MAX_MINT_PER_WALLET
+                    ? 'Max minted'
+                    : reachedSupply
+                    ? 'Reached supply'
+                    : ''
+                }
+              />
+            </Button>
+            {shouldUseStripe && (
+              <>
+                <Button
+                  w="100%"
+                  // disabled={!shouldMint}
+                  bg={'transparent'}
+                  c={'#FF0'}
+                  style={{ borderRadius: 12 }}
+                  onClick={onClickPurchase}
+                >
+                  <Text content={'Buy with credit card'} />
+                </Button>
+                {!!clientSecret && (
+                  <Elements stripe={stripe} options={{ clientSecret }}>
+                    <CreditCardForm onDismiss={() => setClientSecret('')} />
+                  </Elements>
+                )}
+              </>
+            )}
           </Flex>
         </Flex>
         <Flex w={{ base: '260px', md: '405px' }}>
