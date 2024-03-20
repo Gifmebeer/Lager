@@ -1,6 +1,6 @@
 import { ICollection } from '@/types';
-import { NFT_COLLECTION_ADDRESS } from '../addresses';
-import breweries from './prelaunch/breweries';
+import { NFT_COLLECTION_ADDRESS } from '../../addresses';
+import breweries from './breweries';
 
 export default {
   id: 1,

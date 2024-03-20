@@ -1,6 +1,7 @@
 import { ReactNode, useState } from 'react';
 import Link from 'next/link';
-import { AppShell, Flex, rem, em, Image } from '@mantine/core';
+import { useRouter } from 'next/router';
+import { AppShell, Flex, rem, em, Image, Button } from '@mantine/core';
 import { useDisconnect, useConnectionStatus } from '@thirdweb-dev/react';
 import { IconMenu2, IconX } from '@tabler/icons-react';
 import { useHeadroom, useMediaQuery } from '@mantine/hooks';
@@ -19,8 +20,13 @@ interface IHeader {
 
 const IS_PRELAUNCH = false;
 
-const Wallet = () => {
-  return <ConnectWalletBtn btntitle="LOGIN" className={'connectButton'} />;
+const Wallet = ({ isConnected }: any) => {
+  return (
+    <ConnectWalletBtn
+      btntitle="LOGIN"
+      className={isConnected ? 'connectButtonDefault' : 'connectButton'}
+    />
+  );
 };
 
 function Header({
@@ -33,17 +39,17 @@ function Header({
 }: IHeader) {
   const isMobile = useMediaQuery(`(max-width: ${em(850)})`);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router = useRouter();
   const disconnect = useDisconnect();
   const connectionStatus = useConnectionStatus();
   const isConnected = connectionStatus === 'connected';
   const pinned = useHeadroom({ fixedAt: 50 });
-
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
     <AppShell
       header={{
-        height: isMobile ? 100 : 180,
+        height: isMobile ? 100 : 135,
         collapsed: isMobile ? false : !isMenuOpen && !pinned,
         offset: false,
       }}
@@ -63,7 +69,8 @@ function Header({
                 ? ''
                 : 'white',
             }}
-            p={isMobile ? 'lg' : '32px 64px'}
+            p={isMobile ? 'lg' : '32px'}
+            align={'center'}
             justify={
               isMobile
                 ? 'space-between'
@@ -75,7 +82,7 @@ function Header({
             {(!isLanding || !!isMobile) && (
               <Link href="/" legacyBehavior>
                 <Image
-                  w={isMobile ? '74px' : isRegular ? '74px' : '120px'}
+                  w={isMobile ? '74px' : isRegular ? '74px' : '150px'}
                   src="/images/gmb_logo.svg"
                   alt="Logo"
                   style={{ cursor: 'pointer' }}
@@ -83,7 +90,31 @@ function Header({
               </Link>
             )}
 
-            {!IS_PRELAUNCH && !noLogin && <Wallet />}
+            <Flex
+              direction="column"
+              align={'flex-end'}
+              gap="10px"
+              mt={isLanding ? 'lg' : 0}
+            >
+              {!IS_PRELAUNCH && !noLogin && (
+                <Flex maw={{ base: '163px', md: '100%' }}>
+                  <Wallet isConnected={!!isConnected} />
+                </Flex>
+              )}
+              {isLanding && !isMobile && (
+                <Button
+                  maw={'230px'}
+                  bg={'#C5C4C6'}
+                  c={'black'}
+                  style={{ borderRadius: 10 }}
+                  onClick={() => {
+                    router.push('/collections');
+                  }}
+                >
+                  <Text content={'My Collections'} />
+                </Button>
+              )}
+            </Flex>
           </Flex>
         )}
         {isMobile && !isMenuOpen && (
@@ -106,8 +137,8 @@ function Header({
                 />
               </Link>
               {!IS_PRELAUNCH && (
-                <Flex mr={4}>
-                  <Wallet />
+                <Flex mr={12}>
+                  <Wallet isConnected={!!isConnected} />
                 </Flex>
               )}
             </Flex>

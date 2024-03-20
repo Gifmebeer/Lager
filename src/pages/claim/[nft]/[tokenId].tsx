@@ -1,4 +1,4 @@
-import { Flex, Loader } from '@mantine/core';
+import { Flex, Loader, em } from '@mantine/core';
 
 import React, { useEffect, useState } from 'react';
 import { Button, Center, Text } from '@mantine/core';
@@ -21,6 +21,7 @@ import { createPublicWalletClient, shortenAddress } from '@/utils/web3';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ICollection } from '@/types';
+import { useMediaQuery } from '@mantine/hooks';
 
 async function sendRequest(
   url: string,
@@ -38,6 +39,7 @@ const Claim = (params: any) => {
   const tokenId = router.query.tokenId as string;
   const [claimDone, setClaimDone] = useState('');
   const address = useAddress();
+  const isMobile = useMediaQuery(`(max-width: ${em(850)})`);
   const { walletClient } = createPublicWalletClient();
   const connectionStatus = useConnectionStatus();
   const isConnected = connectionStatus === 'connected';
@@ -45,6 +47,8 @@ const Claim = (params: any) => {
   const [isMinting, setIsMinting] = useState(false);
   const [error, setError] = useState<any>(false);
   const [receipt, setReceipt] = useState<any>(null);
+  const [redeemCode, setRedeemCode] = useState(null);
+  const [redeemed, setRedeemed] = useState(false);
   const [isValidNFT, setIsValidNFT] = useState<boolean | null>(null);
   const [ready, setReady] = useState(false);
   const setIsWalletModalOpen = useSetIsWalletModalOpen();
@@ -64,7 +68,8 @@ const Claim = (params: any) => {
   const ownsNFT = ownedNFT?.find(
     (i) => Number(i.metadata.id) === Number(tokenId),
   );
-
+  const owned = ownedNFT?.length;
+  const giftReady = owned === 7;
   const {
     trigger,
     error: mutationError,
@@ -103,6 +108,32 @@ const Claim = (params: any) => {
       alert(e);
     }
   };
+
+  useEffect(() => {
+    const getRedeemCode = async () => {
+      if (!giftReady || !address) return;
+      try {
+        const response = await fetch('/api/generateGiftCode', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ address }),
+        });
+        const data = await response.json();
+        if (data?.code) {
+          setRedeemCode(data?.code); // Save the received code to state
+          setRedeemed(data?.redeemed);
+        } else {
+          console.error('Error fetching code:', data.error);
+        }
+      } catch (error) {
+        console.error('Error fetching code:', error);
+      }
+    };
+
+    getRedeemCode();
+  }, [giftReady, address]);
 
   useEffect(() => {
     if (!nft) return;
@@ -258,7 +289,7 @@ const Claim = (params: any) => {
                 align={'center'}
                 direction="column"
                 w="100vw"
-                bg="#FF0"
+                bg="#E2E1E1"
                 py={'xs'}
                 my={22}
                 style={{ textAlign: 'center' }}
@@ -269,16 +300,20 @@ const Claim = (params: any) => {
                   maw="225px"
                   style={{ fontWeight: 'bold' }}
                 >
-                  Congrats!!
+                  {owned} de 7 NFTs{' '}
+                  {giftReady && !redeemed ? ` / ${redeemCode || ''}` : ''}
                 </Text>
                 <Text
+                  maw="500px"
                   c="black"
-                  size="xl"
-                  maw="225px"
-                  mt="-10px"
-                  style={{ fontWeight: 'bold' }}
+                  size={isMobile ? 'md' : 'lg'}
+                  w="100%"
                 >
-                  You got your GifMe
+                  {redeemed
+                    ? '¡Ya tienes regalo! '
+                    : !giftReady
+                    ? '¡Ya tienes regalo! Enseña tu código para recogerlo'
+                    : '¡Sigue coleccionando para tener tu regalo!'}
                 </Text>
               </Flex>
 
@@ -290,14 +325,15 @@ const Claim = (params: any) => {
               >
                 <Flex
                   style={{
-                    border: '2px solid white',
+                    border: '2px solid transparent',
                     padding: '6px 24px',
                     borderRadius: '18px',
                     fontFamily: 'Metamor Bit_Latin',
                   }}
+                  bg="#FF0"
                   mb={10}
                 >
-                  <CustomText content="See your collection" />
+                  <CustomText c={'black'} content="See my collection" />
                 </Flex>
               </Link>
             </Flex>

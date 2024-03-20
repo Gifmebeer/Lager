@@ -2,7 +2,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { Address } from 'viem';
 import DropERC1155_ABI from '@/abis/DropERC1155.json';
 import { privateKeyToWalletClient } from '@/utils/web3';
-import currentNetwork from '@/constants/currentNetwork';
 
 export default async function POST(req: NextApiRequest, res: NextApiResponse) {
   try {
