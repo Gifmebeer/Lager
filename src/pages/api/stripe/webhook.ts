@@ -3,6 +3,8 @@ import { Engine } from '@thirdweb-dev/engine';
 import Stripe from 'stripe';
 import getRawBody from 'raw-body';
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
 const IS_TEST_MODE = true;
 
 const NFT_CONTRACT = '0xcA8602488619dd2A0F6E926d75659554dAcfCa16';
@@ -24,6 +26,12 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
 
     if (!STRIPE_SECRET_KEY) {
       return res.status(400).json({ error: 'No Stripe secret key found' });
+    }
+
+    if (!THIRDWEB_ENGINE_ACCESS_TOKEN) {
+      return res
+        .status(400)
+        .json({ error: 'No Thirdweb engine access token found' });
     }
 
     const body = await getRawBody(req);
@@ -52,14 +60,13 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
         url: THIRDWEB_ENGINE_URL!,
         accessToken: THIRDWEB_ENGINE_ACCESS_TOKEN!,
       });
-
       await engine.erc1155.claimTo(
         NFT_NETWORK,
         NFT_CONTRACT,
         BACKEND_WALLET_ADDRESS!,
         {
           receiver: buyerWalletAddress,
-          tokenId: '16',
+          tokenId: '17',
           quantity: '1',
         },
       );

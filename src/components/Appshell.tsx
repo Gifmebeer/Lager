@@ -49,7 +49,7 @@ function Header({
   return (
     <AppShell
       header={{
-        height: isMobile ? 100 : 180,
+        height: isMobile ? 100 : 135,
         collapsed: isMobile ? false : !isMenuOpen && !pinned,
         offset: false,
       }}

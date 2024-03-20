@@ -96,7 +96,7 @@ const BBF = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         buyerWalletAddress,
-        amount: PRICE_PER_NFT_FORMATTED,
+        amount: PRICE_PER_NFT_FORMATTED * Number(quantity),
       }),
     });
     const json = await resp.json();
@@ -165,11 +165,11 @@ const BBF = () => {
       console.error('contract call failure', err);
     }
   };
-  const shouldUseStripe = !_isLoading;
   const shouldMint =
     isConnected &&
     Number(qtyOwned || 0) < MAX_MINT_PER_WALLET &&
     !reachedSupply;
+  const shouldUseStripe = !_isLoading && shouldMint;
 
   return (
     <Flex
