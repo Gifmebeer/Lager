@@ -4,10 +4,14 @@ const data = [
   {
     title: 'Community',
     links: [
-      { label: 'ARE YOU IN THE BREWING BUSINESS? JOIN US!', link: null },
+      {
+        label: 'ARE YOU IN THE BREWING BUSINESS? JOIN US!',
+        link: '/breweries',
+      },
       { label: 'FAQS', link: '/faqs' },
-      { label: 'GIFME.BEER TEAM', link: null },
-      { label: 'TERMS & CONDITIONS', link: '/tos' },
+      { label: 'GIFME.BEER TEAM', link: '/team' },
+      { label: 'TERMS & CONDITIONS', link: '/legal' },
+      { label: 'LEGAL ADVISE', link: '/legaladvise' },
       {
         label: 'HOLA@GIFME.BEER',
         link: 'mailto:hola@gifme.beer',
@@ -63,19 +67,28 @@ export default function Footer() {
           <a href="https://twitter.com/GifmeBeer" target="_blank">
             <Image
               src="/images/icons/x.svg"
-              style={{ width: rem(35), height: rem(35) }}
+              style={{ width: rem(40), height: rem(40) }}
             />
           </a>
           <a href="https://www.instagram.com/gifmebeer/" target="_blank">
             <Image
               src="/images/icons/instagram.svg"
-              style={{ width: rem(35), height: rem(35) }}
+              style={{ width: rem(40), height: rem(40) }}
+            />
+          </a>
+          <a
+            href="https://www.facebook.com/profile.php?id=61557180067153"
+            target="_blank"
+          >
+            <Image
+              src="/images/icons/facebook.svg"
+              style={{ width: rem(40), height: rem(40) }}
             />
           </a>
           <a href="https://discord.gg/n9tEPfQh" target="_blank">
             <Image
               src="/images/icons/discord.svg"
-              style={{ width: rem(35), height: rem(35) }}
+              style={{ width: rem(40), height: rem(40) }}
             />
           </a>
           <a
@@ -84,7 +97,7 @@ export default function Footer() {
           >
             <Image
               src="/images/icons/mirror.svg"
-              style={{ width: rem(35), height: rem(35) }}
+              style={{ width: rem(40), height: rem(40) }}
             />
           </a>
         </Group>

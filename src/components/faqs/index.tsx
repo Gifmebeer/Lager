@@ -66,33 +66,33 @@ const Faqs: React.FC = () => {
   const items = faqsitems.map((item) => (
     <Accordion.Item key={item.value} value={item.value}>
       <Accordion.Control>{item.value}</Accordion.Control>
-      <Accordion.Panel c='#234FFF'>{item.description}</Accordion.Panel>
+      <Accordion.Panel c="#234FFF">{item.description}</Accordion.Panel>
     </Accordion.Item>
   ));
 
   return (
     <Container
-      bg='#EAEAEA'
-      mih='30vh'
-      pt='lg'
-      pb='lg'
+      bg="#EAEAEA"
+      mih="30vh"
+      pt="lg"
+      pb="lg"
       mt={{ base: 'lg', md: 'lg' }}
-      pr='lg'
-      pl='lg'
+      pr="lg"
+      pl="lg"
     >
       <Text
-        mb='lg'
+        mb="lg"
         style={{
           fontSize: isMobile ? '28px' : '35px',
         }}
-        c='black'
+        c="black"
         maw={isMobile ? '100%' : '500px'}
-        content='FAQs'
+        content="FAQs"
       />
       <Accordion
-        variant='separated'
+        variant="separated"
         disableChevronRotation
-        radius='md'
+        radius="md"
         styles={{
           item: {
             backgroundColor: 'white',
@@ -103,7 +103,7 @@ const Faqs: React.FC = () => {
         {items}
       </Accordion>
       <Center>
-        <Image mt='lg' src='/images/GifmeBeer-pre-launch-eng.png' />
+        <Image mt="lg" src="/images/GifmeBeer-pre-launch-eng.png" />
       </Center>
     </Container>
   );
