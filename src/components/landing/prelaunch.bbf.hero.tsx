@@ -11,8 +11,8 @@ const Content = () => {
     <Flex direction={{ base: 'column-reverse', md: 'column' }}>
       <Flex
         bg="black"
-        w={{ base: 'auto', md: '257px' }}
-        h={{ base: 'auto', md: '257px' }}
+        w={{ base: 'auto', md: '237px' }}
+        h={{ base: 'auto', md: '237px' }}
         py={20}
         direction={'column'}
         mt={{ base: 0, xl: 'xl' }}

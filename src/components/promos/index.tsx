@@ -11,19 +11,20 @@ const Promos: React.FC = () => {
   const isMobile = useMediaQuery(`(max-width: ${em(850)})`);
 
   return (
-    <Container bg='#EAEAEA' mih='30vh' mt={{ base: 'lg', md: 'xl' }}>
+    <Container bg="#EAEAEA" mih="30vh" mt={{ base: 'lg', md: 'xl' }}>
       <Text
+        mt="100px"
         style={{
           fontSize: isMobile ? '28px' : '35px',
         }}
-        c='black'
+        c="black"
         maw={isMobile ? '100%' : '500px'}
-        content='Active Promotions'
+        content="Active Promotions"
       />
       <SimpleGrid
         cols={isMobile ? 1 : 2}
         spacing={{ base: 'lg', md: 'xl' }}
-        my='50px'
+        my="50px"
       >
         {data.map((promo, index) => (
           <div

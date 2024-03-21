@@ -8,6 +8,7 @@ const data = [
         label: 'ARE YOU IN THE BREWING BUSINESS? JOIN US!',
         link: '/breweries',
       },
+      { label: 'PROMOS', link: '/promos' },
       { label: 'FAQS', link: '/faqs' },
       { label: 'GIFME.BEER TEAM', link: '/team' },
       { label: 'TERMS & CONDITIONS', link: '/legal' },
