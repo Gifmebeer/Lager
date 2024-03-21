@@ -17,5 +17,13 @@ export default {
       imageUrl: '/images/collections/op-mainnet/bbf_2024.gif',
       meta: {},
     },
+    {
+      name: 'GifMeBeer Membership',
+      address: NFT_COLLECTION_ADDRESS,
+      id: 7,
+      category: 'Festival',
+      imageUrl: '/images/collections/membership_prelaunch_card.png',
+      meta: {},
+    },
   ],
 } as ICollection;
