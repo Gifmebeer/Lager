@@ -22,7 +22,7 @@ export default {
       address: NFT_COLLECTION_ADDRESS,
       id: 7,
       category: 'Festival',
-      imageUrl: '/images/collections/membership_prelaunch_card.png',
+      imageUrl: '/images/collections/membership_prelaunch_card.gif',
       meta: {},
     },
   ],
