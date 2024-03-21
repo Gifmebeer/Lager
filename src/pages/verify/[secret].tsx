@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { Button, Container, Input } from '@mantine/core';
 import AppShell from '@/components/Appshell';
 import Text from '@/components/Text';
-import { useAddress } from '@thirdweb-dev/react';
+
+const NOT_SO_SECRET_SECRET = 'IpaPixelsAndGoldenAleTokens';
 
 const VerifyGiftPage: React.FC = () => {
-  const admin = useAddress();
+  const router = useRouter();
+  const secret = router.query.secret;
   const [code, setCode] = useState('');
   const [message, setMessage] = useState('');
   const [isVerified, setIsVerified] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   // TODO: Manage this eventually if needed
-  const isAllowed = true;
+  const isAllowed = secret === NOT_SO_SECRET_SECRET;
 
   const handleVerify = async () => {
     try {
