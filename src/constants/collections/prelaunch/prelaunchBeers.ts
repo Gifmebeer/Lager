@@ -2,13 +2,16 @@ import { ICollection } from '@/types';
 import { NFT_COLLECTION_ADDRESS } from '../../addresses';
 import wiley from './wiley';
 import synera from './synera';
+import laquince from './laquince';
+import naparbier from './naparbier';
+import lapirata from './lapirata';
 
 export default {
-  id: 1,
+  id: 1111111111111, // deprecated
   name: 'Beers',
   address: NFT_COLLECTION_ADDRESS,
   network: 'op-sepolia-testnet',
   chainId: 11155420,
   color: '#FFC73B',
-  cards: [...synera, ...wiley],
+  cards: [...synera, ...wiley, ...laquince, ...naparbier, ...lapirata],
 } as ICollection;

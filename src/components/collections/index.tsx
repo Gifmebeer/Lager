@@ -1,12 +1,21 @@
-import { Card, Container, Flex, Grid, Group, Image, em } from '@mantine/core';
+import {
+  Card,
+  Container,
+  Flex,
+  Grid,
+  Group,
+  Image,
+  Overlay,
+  Transition,
+  em,
+} from '@mantine/core';
 import Text from '@/components/Text';
 import { useAddress, useContract, useOwnedNFTs } from '@thirdweb-dev/react';
-import { NFT_COLLECTION_ADDRESS } from '@/constants/addresses';
 import { NFTCard } from '../NFTCard';
 import React, { useMemo, useState } from 'react';
 import { CURRENT_COLLECTIONS } from '@/constants/collections';
 import { ICardItem, ICollection } from '@/types';
-import { useMediaQuery } from '@mantine/hooks';
+import { useMediaQuery, useClickOutside } from '@mantine/hooks';
 
 const CARD_WIDTH = 290;
 const CollectionCard: React.FC<{
@@ -18,69 +27,129 @@ const CollectionCard: React.FC<{
   fontColor?: string;
   owned: boolean;
 }> = ({ w = 300, item, owned, metadata, showTitle, address, fontColor }) => {
+  const [isZoomed, setIsZoomed] = useState(false);
+  const cardRef = useClickOutside(
+    () => setIsZoomed(false),
+    ['mouseup', 'touchend'],
+  );
+
+  const toggleZoom = () => setIsZoomed(!isZoomed);
+
   return (
-    <Card w={w} bg="transparent" mb="lg">
-      <Card.Section>
-        <Card.Section m={0} opacity={owned ? 1 : 0.5}>
-          {metadata ? (
-            <NFTCard
-              w={w}
-              metadata={metadata}
-              key={metadata.id}
-              address={address}
-            />
-          ) : (
-            item && (
-              <Image w={w} src={item.imageUrl} alt={item.name} fit="contain" />
-            )
-          )}
-        </Card.Section>
-        {!owned && (
-          <Image
-            w={{ base: w / 2, sm: (w * 1) / 3 }}
-            m={0}
-            p={0}
+    <>
+      <Transition transition="fade" duration={400} mounted={isZoomed}>
+        {(styles) => (
+          <Overlay
+            color="#000"
+            zIndex={999} // Ensure it's below the zoomed item but above everything else
             style={{
-              position: 'absolute',
+              position: 'fixed',
               top: 0,
-              right: 0,
-              zIndex: 20,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              ...styles,
+              transition: 'opacity 0.5s ease-in-out',
+              opacity: isZoomed ? 0.75 : 0,
             }}
-            src={'/images/icons/missing_corner.svg'}
-            alt={'missing'}
-            fit="contain"
           />
         )}
-      </Card.Section>
-      <Card.Section>
-        <Group my={{ base: 6, md: 12 }} justify="center">
-          {showTitle && (
-            <Text
-              size={'md'}
-              ff={'GT-America'}
-              c={fontColor}
+      </Transition>
+      <Card
+        w={w}
+        ref={cardRef}
+        bg="transparent"
+        mb="lg"
+        onClick={(e) => {
+          e.stopPropagation();
+          toggleZoom();
+        }}
+        style={{
+          position: isZoomed ? 'fixed' : 'relative',
+          zIndex: isZoomed ? 1000 : 0,
+          transition: 'transform 0.3s ease, left 0.3s ease, top 0.3s ease',
+          transformOrigin: 'center',
+          margin: isZoomed ? 'auto' : '0',
+          maxWidth: isZoomed ? '90%' : 'initial', // Adjust if necessary
+          maxHeight: isZoomed ? '90vh' : 'initial', // Adjust for viewport height, maintaining aspect ratio
+          cursor: 'pointer',
+          // Centering adjustments
+          left: isZoomed ? '50%' : 'unset',
+          top: isZoomed ? '50%' : 'unset',
+          transform: isZoomed
+            ? 'translate(-50%, -50%) scale(1.8)'
+            : 'translate(0, 0) scale(1)',
+          overflow: 'hidden',
+        }}
+      >
+        <Card.Section>
+          <Card.Section m={0} opacity={owned || isZoomed ? 1 : 0.5}>
+            {metadata ? (
+              <NFTCard
+                w={w}
+                metadata={metadata}
+                key={metadata.id}
+                address={address}
+              />
+            ) : (
+              item && (
+                <Image
+                  w={w}
+                  src={item.imageUrl}
+                  alt={item.name}
+                  fit="contain"
+                />
+              )
+            )}
+          </Card.Section>
+          {!owned && (
+            <Image
+              w={{ base: w / 2, sm: (w * 1) / 3 }}
+              m={0}
+              p={0}
               style={{
-                fontWeight: 'bold',
-                textTransform: 'capitalize',
-                textAlign: 'center',
+                position: 'absolute',
+                top: 0,
+                right: 0,
+                zIndex: 20,
               }}
-              content={metadata ? metadata.name : item && item.name}
+              src={'/images/icons/missing_corner.svg'}
+              alt={'missing'}
+              fit="contain"
             />
           )}
-        </Group>
-      </Card.Section>
-    </Card>
+        </Card.Section>
+        <Card.Section>
+          <Group my={{ base: 6, md: 12 }} justify="center">
+            {showTitle && !isZoomed && (
+              <Text
+                size={'md'}
+                ff={'GT-America'}
+                c={fontColor}
+                style={{
+                  fontWeight: 'bold',
+                  textTransform: 'capitalize',
+                  textAlign: 'center',
+                }}
+                content={metadata ? metadata.name : item && item.name}
+              />
+            )}
+          </Group>
+        </Card.Section>
+      </Card>
+    </>
   );
 };
 
 const CollectionsPage = () => {
   // const MEMBERSHIP_TOKEN_ID = 1;
   // const { data: membershipContract } = useContract(NFT_MEMBERSHIP_ADDRESS);
-  const { data: collectionContract } = useContract(NFT_COLLECTION_ADDRESS);
-  const address = useAddress();
   const [currentCollection, setCurrentCollection] = useState<ICollection>(
     CURRENT_COLLECTIONS[0],
   );
+  const { data: collectionContract } = useContract(currentCollection.address);
+  const address = useAddress();
+
   const CollectionCardMemo = React.memo(CollectionCard);
 
   const isMobile = useMediaQuery(`(max-width: ${em(850)})`);
@@ -116,7 +185,9 @@ const CollectionsPage = () => {
     const ownedIds = new Set(
       ownedFromCurrentCollection.map((nft) => Number(nft.metadata.id)),
     );
-    return cards.filter((card) => !ownedIds.has(card.id));
+    return cards
+      .filter((card) => !ownedIds.has(Number(card.id)))
+      .sort((a, b) => a.name.localeCompare(b.name));
   }, [cards, ownedFromCurrentCollection]);
 
   // Reorder collections based on current selection and device type

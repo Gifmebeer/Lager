@@ -4,7 +4,7 @@ export default [
   {
     name: 'Synera Amber Ale',
     address: NFT_COLLECTION_ADDRESS,
-    id: 12,
+    id: 1000001,
     category: 'Beer',
     imageUrl: '/images/collections/op-sepolia-test/synera_amber_ale.png',
     meta: {},
@@ -12,7 +12,7 @@ export default [
   {
     name: 'Synera Cacao Funk Stout',
     address: NFT_COLLECTION_ADDRESS,
-    id: 13,
+    id: 1000002,
     category: 'Beer',
     imageUrl: '/images/collections/op-sepolia-test/synera_cacao_funk_stout.png',
     meta: {},
@@ -20,7 +20,7 @@ export default [
   {
     name: 'Synera Lad Cuig Punk IPA',
     address: NFT_COLLECTION_ADDRESS,
-    id: 14,
+    id: 1000003,
     category: 'Beer',
     imageUrl:
       '/images/collections/op-sepolia-test/synera_lad_cuig_punk_ipa.png',
@@ -29,7 +29,7 @@ export default [
   {
     name: 'Synera Wave of Strawberries',
     address: NFT_COLLECTION_ADDRESS,
-    id: 15,
+    id: 1000004,
     category: 'Beer',
     imageUrl:
       '/images/collections/op-sepolia-test/synera_wave_of_strawberries.png',
