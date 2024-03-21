@@ -344,12 +344,12 @@ const BBF = () => {
                 <Button
                   w="100%"
                   // disabled={!shouldMint}
-                  bg={'transparent'}
-                  c={'#FF0'}
+                  bg={'black'}
+                  c={'white'}
                   style={{ borderRadius: 12 }}
                   onClick={onClickPurchase}
                 >
-                  <Text content={'Buy with credit card'} />
+                  <Text content={'credit card'} />
                 </Button>
                 {!!clientSecret && (
                   <Elements stripe={stripe} options={{ clientSecret }}>

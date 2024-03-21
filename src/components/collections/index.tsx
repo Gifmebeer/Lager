@@ -267,7 +267,11 @@ const CollectionsPage = () => {
               style={{ cursor: 'pointer' }}
             >
               <Image
-                src={`/images/icons/smiley_${(index % 3) + 1}.svg`}
+                src={
+                  collection.name === 'Lifetime Passes'
+                    ? '/images/icons/star.svg'
+                    : `/images/icons/smiley_${(index % 3) + 1}.svg`
+                }
                 alt={'smiley'}
                 w={24}
                 h={24}
