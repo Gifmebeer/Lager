@@ -48,7 +48,6 @@ const Claim = (params: any) => {
   const [error, setError] = useState<any>(false);
   const [receipt, setReceipt] = useState<any>(null);
   const [redeemCode, setRedeemCode] = useState(null);
-  const [redeemed, setRedeemed] = useState(false);
   const [isValidNFT, setIsValidNFT] = useState<boolean | null>(null);
   const [ready, setReady] = useState(false);
   const setIsWalletModalOpen = useSetIsWalletModalOpen();
@@ -98,7 +97,7 @@ const Claim = (params: any) => {
         });
         console.log({ receipt });
         setReceipt(receipt);
-        refetchOwnNFTS();
+        await refetchOwnNFTS();
         setIsMinting(false);
       }
     } catch (e) {
@@ -111,7 +110,7 @@ const Claim = (params: any) => {
 
   useEffect(() => {
     const getRedeemCode = async () => {
-      if (!giftReady || !address) return;
+      if (!address) return;
       try {
         const response = await fetch('/api/generateGiftCode', {
           method: 'POST',
@@ -123,7 +122,6 @@ const Claim = (params: any) => {
         const data = await response.json();
         if (data?.code) {
           setRedeemCode(data?.code); // Save the received code to state
-          setRedeemed(data?.redeemed);
         } else {
           console.error('Error fetching code:', data.error);
         }
@@ -133,7 +131,7 @@ const Claim = (params: any) => {
     };
 
     getRedeemCode();
-  }, [giftReady, address]);
+  }, [address]);
 
   useEffect(() => {
     if (!nft) return;
@@ -300,8 +298,7 @@ const Claim = (params: any) => {
                   maw="225px"
                   style={{ fontWeight: 'bold' }}
                 >
-                  {owned} de 7 NFTs{' '}
-                  {giftReady && !redeemed ? ` / ${redeemCode || ''}` : ''}
+                  {owned} de 7 NFTs {giftReady ? ` / ${redeemCode || ''}` : ''}
                 </Text>
                 <Text
                   maw="500px"
@@ -309,9 +306,7 @@ const Claim = (params: any) => {
                   size={isMobile ? 'md' : 'lg'}
                   w="100%"
                 >
-                  {redeemed
-                    ? '¡Ya tienes regalo! '
-                    : !giftReady
+                  {giftReady
                     ? '¡Ya tienes regalo! Enseña tu código para recogerlo'
                     : '¡Sigue coleccionando para tener tu regalo!'}
                 </Text>

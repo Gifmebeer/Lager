@@ -5,6 +5,7 @@ import {
   metamaskWallet,
   coinbaseWallet,
   embeddedWallet,
+  lightTheme,
   // smartWallet,
 } from '@thirdweb-dev/react';
 import { Optimism } from '@thirdweb-dev/chains';
@@ -29,6 +30,9 @@ const ThirdWebProvider: React.FC<ThirdWebProviderProps> = ({ children }) => {
       // TODO: CHANGE THIS WHEN MOVING TO MAINNET
       activeChain={isBBFLifetimePass ? Optimism : currentNetwork.thirdwebChain}
       // activeChain={currentNetwork.thirdwebChain}
+      theme={lightTheme({
+        colors: { accentButtonBg: '#c8c9cb' },
+      })}
       clientId={process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID}
       supportedWallets={[
         embeddedWallet(),

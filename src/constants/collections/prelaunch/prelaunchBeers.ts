@@ -5,6 +5,7 @@ import synera from './synera';
 import laquince from './laquince';
 import naparbier from './naparbier';
 import lapirata from './lapirata';
+import mager from './mager';
 
 export default {
   id: 1111111111111, // deprecated
@@ -13,5 +14,12 @@ export default {
   network: 'op-sepolia-testnet',
   chainId: 11155420,
   color: '#FFC73B',
-  cards: [...synera, ...wiley, ...laquince, ...naparbier, ...lapirata],
+  cards: [
+    ...synera,
+    ...wiley,
+    ...laquince,
+    ...naparbier,
+    ...lapirata,
+    ...mager,
+  ],
 } as ICollection;

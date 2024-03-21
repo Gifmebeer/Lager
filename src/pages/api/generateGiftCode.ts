@@ -18,15 +18,11 @@ export default async function handler(
   }
 
   try {
-    const { data: existingCode, error: findError } = await supabase
+    const { data: existingCode } = await supabase
       .from('bbf2024_gifts')
       .select()
       .eq('address', address)
       .single();
-
-    if (findError && findError.message !== 'Item not found') {
-      throw findError; // Throws if any error other than 'Item not found'
-    }
 
     if (existingCode) {
       return res.status(200).json({ ...existingCode });
