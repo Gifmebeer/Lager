@@ -1,7 +1,7 @@
 const CURRENT_PROMOS = [
   {
-    image: '/images/promos/promo-wiley.png',
-    title: 'promo wiley',
+    image: '/images/promos/promo-bbf24.png',
+    title: 'promo bbf',
     category: 'promo',
   },
   // {
