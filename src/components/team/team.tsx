@@ -15,12 +15,12 @@ const Team: React.FC = () => {
       mih="30vh"
       pt="lg"
       pb="lg"
-      mt={{ base: 'lg', md: 'lg' }}
+      mt={{ base: 'lg', md: '100px' }}
       pr="lg"
       pl="lg"
     >
       <Text
-        mb="lg"
+        mb="xl"
         style={{
           fontSize: isMobile ? '28px' : '35px',
         }}

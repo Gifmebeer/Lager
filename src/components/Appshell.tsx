@@ -49,15 +49,12 @@ function Header({
   return (
     <AppShell
       header={{
-        height: isMobile ? 100 : 208,
+        height: isMobile ? 100 : 220,
         collapsed: isMobile ? false : !isMenuOpen && !pinned,
         offset: false,
       }}
     >
-      <AppShell.Header
-        withBorder={false}
-        bg={isLanding || noPadding ? 'transparent' : 'rgba(226,226,226,1)'}
-      >
+      <AppShell.Header withBorder={false} bg={'transparent'}>
         {((isClaim && !isMobile) || !isMobile) && (
           <Flex
             style={{
