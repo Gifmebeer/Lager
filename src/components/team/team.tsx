@@ -121,7 +121,7 @@ const Team: React.FC = () => {
 
       <Center>
         <Image
-          src="/images/team/carol.png"
+          src="/images/team/Carol.png"
           /*           height={160}
            */ alt=""
         />
