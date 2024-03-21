@@ -25,6 +25,7 @@ import Text from '../Text';
 const Breweries: React.FC = () => {
   const [opened, { toggle, close }] = useDisclosure(false);
   const [checked, setChecked] = useState(false);
+  const [loading, setLoading] = useState(false);
   const isMobile = useMediaQuery(`(max-width: ${em(850)})`);
   const form = useForm({
     initialValues: {
@@ -78,6 +79,7 @@ const Breweries: React.FC = () => {
 
   const handleSubmit = async (values: any) => {
     try {
+      setLoading(true);
       const response = await fetch('/api/saveForm', {
         method: 'POST',
         headers: {
@@ -93,21 +95,15 @@ const Breweries: React.FC = () => {
       } else {
         console.error('Form submission error:', result.error);
       }
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.error('Form submission exception:', error);
     }
   };
 
   return (
-    <Container
-      bg="#EAEAEA"
-      mih="30vh"
-      pt="lg"
-      pb="lg"
-      mt={{ base: 'lg', md: 'lg' }}
-      pr="lg"
-      pl="lg"
-    >
+    <Container bg="#EAEAEA" mih="30vh" p="lg" mb={'xl'}>
       <Dialog
         opened={opened}
         withCloseButton
@@ -125,7 +121,8 @@ const Breweries: React.FC = () => {
         />
       </Dialog>
       <Text
-        mb="lg"
+        mb="xl"
+        mt="100px"
         style={{
           fontSize: isMobile ? '28px' : '35px',
         }}
@@ -493,6 +490,7 @@ const Breweries: React.FC = () => {
 
           <Group justify="flex-end" mt="md">
             <Button
+              loading={loading}
               type="submit"
               ff="MetamorBit-Latin"
               variant="filled"
