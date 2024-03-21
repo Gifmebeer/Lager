@@ -12,7 +12,7 @@ export interface ICollection {
 export interface ICardItem {
   name: string;
   address: string;
-  id: number;
+  id: number | string;
   category: string;
   imageUrl: string;
   meta: any;

@@ -11,9 +11,8 @@ import {
 } from '@mantine/core';
 import Text from '@/components/Text';
 import { useAddress, useContract, useOwnedNFTs } from '@thirdweb-dev/react';
-import { NFT_COLLECTION_ADDRESS } from '@/constants/addresses';
 import { NFTCard } from '../NFTCard';
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { CURRENT_COLLECTIONS } from '@/constants/collections';
 import { ICardItem, ICollection } from '@/types';
 import { useMediaQuery, useClickOutside } from '@mantine/hooks';
@@ -145,11 +144,12 @@ const CollectionCard: React.FC<{
 const CollectionsPage = () => {
   // const MEMBERSHIP_TOKEN_ID = 1;
   // const { data: membershipContract } = useContract(NFT_MEMBERSHIP_ADDRESS);
-  const { data: collectionContract } = useContract(NFT_COLLECTION_ADDRESS);
-  const address = useAddress();
   const [currentCollection, setCurrentCollection] = useState<ICollection>(
     CURRENT_COLLECTIONS[0],
   );
+  const { data: collectionContract } = useContract(currentCollection.address);
+  const address = useAddress();
+
   const CollectionCardMemo = React.memo(CollectionCard);
 
   const isMobile = useMediaQuery(`(max-width: ${em(850)})`);
@@ -185,7 +185,9 @@ const CollectionsPage = () => {
     const ownedIds = new Set(
       ownedFromCurrentCollection.map((nft) => Number(nft.metadata.id)),
     );
-    return cards.filter((card) => !ownedIds.has(card.id));
+    return cards
+      .filter((card) => !ownedIds.has(Number(card.id)))
+      .sort((a, b) => a.name.localeCompare(b.name));
   }, [cards, ownedFromCurrentCollection]);
 
   // Reorder collections based on current selection and device type
