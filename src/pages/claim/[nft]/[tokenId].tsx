@@ -261,9 +261,10 @@ const Claim = (params: any) => {
               }}
             >
               <Button
-                w="182px"
+                w="250px"
                 bg="#FF0"
                 c="black"
+                size="xl"
                 style={{
                   margin: 'auto',
                   backgroundColor: 'black',
@@ -272,7 +273,9 @@ const Claim = (params: any) => {
                 onClick={async () => await claim()}
                 fullWidth
               >
-                Download
+                <Text fw="bold" size="xl" c="black">
+                  Download
+                </Text>
               </Button>
             </Flex>
           ) : ownedNFTFetched && ownsNFT ? (
