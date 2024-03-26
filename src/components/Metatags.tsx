@@ -28,6 +28,10 @@ const Metatags = () => {
       />
       <meta name="twitter:description" content="Brewing Art into Blockchain" />
       <link rel="icon" href="https://gifme.beer/favicon.ico" />
+      <link
+        rel="apple-touch-icon"
+        href="https://gifme.beer/images/gmb_logo.png"
+      />
     </Head>
   );
 };
