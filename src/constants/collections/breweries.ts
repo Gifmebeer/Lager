@@ -59,7 +59,7 @@ export default {
       meta: {},
     },
     {
-      name: 'Wiley',
+      name: 'Wylie',
       address: NFT_COLLECTION_ADDRESS,
       id: 8,
       category: 'Brewery',
