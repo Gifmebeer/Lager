@@ -301,17 +301,7 @@ const Claim = (params: any) => {
                   maw="225px"
                   style={{ fontWeight: 'bold' }}
                 >
-                  {owned} de 7 NFTs {giftReady ? ` / ${redeemCode || ''}` : ''}
-                </Text>
-                <Text
-                  maw="500px"
-                  c="black"
-                  size={isMobile ? 'md' : 'lg'}
-                  w="100%"
-                >
-                  {giftReady
-                    ? '¡Ya tienes regalo! Enseña tu código para recogerlo'
-                    : '¡Sigue coleccionando para tener tu regalo!'}
+                  ¡Ya tienes tu NFT!
                 </Text>
               </Flex>
 

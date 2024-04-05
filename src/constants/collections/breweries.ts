@@ -58,5 +58,21 @@ export default {
       imageUrl: '/images/collections/op-mainnet/lapirata.gif',
       meta: {},
     },
+    {
+      name: 'Wiley',
+      address: NFT_COLLECTION_ADDRESS,
+      id: 8,
+      category: 'Brewery',
+      imageUrl: '/images/collections/op-mainnet/wiley.gif',
+      meta: {},
+    },
+    {
+      name: 'Synera',
+      address: NFT_COLLECTION_ADDRESS,
+      id: 9,
+      category: 'Brewery',
+      imageUrl: '/images/collections/op-mainnet/synera.gif',
+      meta: {},
+    },
   ],
 } as ICollection;
