@@ -25,4 +25,46 @@ export default [
     imageUrl: '/images/collections/op-sepolia-test/wylie_afterglow.png',
     meta: {},
   },
+  {
+    name: 'La Belle de Roquetes',
+    address: NFT_COLLECTION_ADDRESS,
+    id: 11,
+    category: 'Beer',
+    imageUrl:
+      '/images/collections/op-mainnet/wylie/WYLIE-La_Belle_de_Roquetes.png',
+    meta: {},
+  },
+  {
+    name: 'Atlantis',
+    address: NFT_COLLECTION_ADDRESS,
+    id: 222221,
+    category: 'Beer',
+    imageUrl: '/images/collections/op-mainnet/wylie/WYLIE-Atlantis.png',
+    meta: {},
+  },
+  {
+    name: 'Enter the Dragon',
+    address: NFT_COLLECTION_ADDRESS,
+    id: 222222,
+    category: 'Beer',
+    imageUrl: '/images/collections/op-mainnet/wylie/WYLIE-Enter_the_Dragon.png',
+    meta: {},
+  },
+  {
+    name: 'Peace Yeast Love',
+    address: NFT_COLLECTION_ADDRESS,
+    id: 222223,
+    category: 'Beer',
+    imageUrl:
+      '/images/collections/op-mainnet/wylie/WYLIE-Peace_Yeast__Love.png',
+    meta: {},
+  },
+  {
+    name: 'Rain Dance',
+    address: NFT_COLLECTION_ADDRESS,
+    id: 222224,
+    category: 'Beer',
+    imageUrl: '/images/collections/op-mainnet/wylie/WYLIE-Rain_Dance.png',
+    meta: {},
+  },
 ];

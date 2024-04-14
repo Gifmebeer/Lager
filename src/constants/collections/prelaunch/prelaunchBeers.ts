@@ -6,13 +6,14 @@ import laquince from './laquince';
 import naparbier from './naparbier';
 import lapirata from './lapirata';
 import mager from './mager';
+import maresme from './maresme';
 
 export default {
   id: 1111111111111, // deprecated
   name: 'Beers',
   address: NFT_COLLECTION_ADDRESS,
-  network: 'op-sepolia-testnet',
-  chainId: 11155420,
+  network: 'optimism',
+  chainId: 10,
   color: '#FFC73B',
   cards: [
     ...synera,
@@ -21,5 +22,6 @@ export default {
     ...naparbier,
     ...lapirata,
     ...mager,
+    ...maresme,
   ],
 } as ICollection;
