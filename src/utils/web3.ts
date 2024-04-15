@@ -1,9 +1,11 @@
 import { privateKeyToAccount } from 'viem/accounts';
 import { Address, createWalletClient, http, publicActions, toHex } from 'viem';
 import { optimism } from 'viem/chains';
+import { optimism as thirdwebOptimism } from 'thirdweb/chains';
 import currentNetwork from '@/constants/currentNetwork';
 
 export const currentChain = optimism;
+export const currentThirdwebChain = thirdwebOptimism;
 
 export function privateKeyToWalletClient(privateKey: Address) {
   const network = `https://${currentNetwork.infuraName}.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_PROJECT_ID}`;

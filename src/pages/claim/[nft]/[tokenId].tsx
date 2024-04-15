@@ -269,6 +269,7 @@ const Claim = (params: any) => {
                   margin: 'auto',
                   backgroundColor: 'black',
                   fontFamily: 'MetamorBit-Latin',
+                  border: '2px solid black',
                 }}
                 onClick={async () => await claim()}
                 fullWidth

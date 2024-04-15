@@ -28,7 +28,6 @@ import {
 } from '@/constants/lifetimepass/BBF2024';
 import Text from '../Text';
 import { createPublicWalletClient } from '@/utils/web3';
-import { Address } from 'viem';
 import CreditCardForm from './creditcard.form';
 
 const BBFLP_Contract = PASS_CONTRACT;
@@ -137,7 +136,7 @@ const BBF = () => {
           ],
         });
         const approveReceipt = await walletClient.waitForTransactionReceipt({
-          hash: `${_approve?.receipt?.transactionHash}` as Address,
+          hash: `${_approve?.receipt?.transactionHash}` as `0x${string}`,
         });
         console.log({ approveReceipt });
       }
@@ -154,7 +153,7 @@ const BBF = () => {
       });
       console.info('contract call successs', data);
       const mintReceipt = await walletClient.waitForTransactionReceipt({
-        hash: `${data?.receipt?.transactionHash}` as Address,
+        hash: `${data?.receipt?.transactionHash}` as `0x${string}`,
       });
       setLoading(false);
       refetchAllowance();
