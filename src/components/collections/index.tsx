@@ -1,21 +1,23 @@
 import { Container, Flex, Grid, Image, em } from '@mantine/core';
 import Text from '@/components/Text';
-import { useAddress, useContract, useOwnedNFTs } from '@thirdweb-dev/react';
+import { useContract, useOwnedNFTs } from '@thirdweb-dev/react';
 import React, { useMemo, useState } from 'react';
 import { CURRENT_COLLECTIONS } from '@/constants/collections';
 import { ICardItem, ICollection } from '@/types';
 import { useMediaQuery } from '@mantine/hooks';
 import { CollectionCard, CARD_WIDTH } from './collection.card';
+import { useActiveAccount } from 'thirdweb/react';
 
 const CollectionsPage = () => {
+  const account = useActiveAccount();
+  const address = account?.address;
+
   // const MEMBERSHIP_TOKEN_ID = 1;
   // const { data: membershipContract } = useContract(NFT_MEMBERSHIP_ADDRESS);
   const [currentCollection, setCurrentCollection] = useState<ICollection>(
     CURRENT_COLLECTIONS[0],
   );
   const { data: collectionContract } = useContract(currentCollection.address);
-  const address = useAddress();
-
   const CollectionCardMemo = React.memo(CollectionCard);
 
   const isMobile = useMediaQuery(`(max-width: ${em(850)})`);

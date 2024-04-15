@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Button, Flex, Loader, NumberInput, em } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import {
-  useAddress,
   useConnectionStatus,
   useContract,
   useContractRead,
@@ -29,6 +28,7 @@ import {
 import Text from '../Text';
 import { createPublicWalletClient } from '@/utils/web3';
 import CreditCardForm from './creditcard.form';
+import { useActiveAccount } from 'thirdweb/react';
 
 const BBFLP_Contract = PASS_CONTRACT;
 const BBFLP_TOKEN_ID = PASS_TOKEN_ID;
@@ -41,7 +41,8 @@ const _allowlistProof = {
 };
 
 const BBF = () => {
-  const address = useAddress();
+  const account = useActiveAccount();
+  const address = account?.address;
   const buyerWalletAddress = address;
   const [clientSecret, setClientSecret] = useState('');
   const [quantity, setQuantity] = useState<string | number>(1);

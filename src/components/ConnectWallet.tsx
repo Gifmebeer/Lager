@@ -22,6 +22,7 @@ const ConnectWalletBtn = ({ btntitle, className }: any) => {
     <ConnectButton
       client={client}
       wallets={wallets}
+      autoConnect
       chain={currentThirdwebChain}
       connectButton={{ label: btntitle, className: className }}
       connectModal={{
