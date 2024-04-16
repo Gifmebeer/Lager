@@ -20,6 +20,7 @@ interface IHeader {
   noLogin?: boolean;
   isClaim?: boolean;
   isRegular?: boolean;
+  noFooter?: boolean;
 }
 
 const IS_PRELAUNCH = false;
@@ -40,6 +41,7 @@ function Header({
   noLogin,
   isClaim,
   isRegular,
+  noFooter,
 }: IHeader) {
   const isMobile = useMediaQuery(`(max-width: ${em(850)})`);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -217,7 +219,7 @@ function Header({
         pt={isLanding || noPadding ? 0 : '150px'}
       >
         {children}
-        <Footer />
+        {!noFooter && <Footer />}
       </AppShell.Main>
     </AppShell>
   );

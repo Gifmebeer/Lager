@@ -1,0 +1,1002 @@
+[
+  {
+    "address": "0x00d18ca9782bE1CaEF611017c2Fbc1a39779A57C",
+    "uniqueName": "Crisp Jade IPA Boy with super long name"
+  },
+  {
+    "address": "0xe7ab1029465b1d008a7588e05ce79a21f60ee2bc",
+    "uniqueName": "Crisp Jade IPA"
+  },
+  {
+    "address": "0x81437755cd81c866e36fa5617399817a59fb1534",
+    "uniqueName": "Mystic Silver Kolsch"
+  },
+  {
+    "address": "0x5b85c4ede31be16173236264ce92c67e12db24c5",
+    "uniqueName": "Rustic Sapphire Pilsner"
+  },
+  {
+    "address": "0x683a2ffa2564c1f1be1d3bf344662558605c41e1",
+    "uniqueName": "Enchanted Azure Marzen"
+  },
+  {
+    "address": "0xe26e28a0d16feb0d5ef57aa9dfb0bd76cdc35f35",
+    "uniqueName": "Twilight Silver Stout"
+  },
+  {
+    "address": "0xf5d1b03c423b813fa153f49ebf1e3a678de55687",
+    "uniqueName": "Rustic Jade Stout"
+  },
+  {
+    "address": "0xa5499f77d10b4ba3191a44d42cdd59df05891d5f",
+    "uniqueName": "Mystic Sapphire Bock"
+  },
+  {
+    "address": "0xa683d9142d77ffd0f93f9042df9081d1f98753b1",
+    "uniqueName": "Roaring Jade Brown Ale"
+  },
+  {
+    "address": "0x3d8f6a66b6556446bd59ae6a5c8dd6d86f548500",
+    "uniqueName": "Roaring Ebony Blonde Ale"
+  },
+  {
+    "address": "0xde51c26d10afe2ac7e8b217ba6583748644b6b95",
+    "uniqueName": "Golden Emerald IPA"
+  },
+  {
+    "address": "0x96a4d1b16b974a7a9e92b7dabdc3dbc2272a500a",
+    "uniqueName": "Radiant Azure Amber Ale"
+  },
+  {
+    "address": "0x21775091f0c69597b9766c8051a35cfb725a4eea",
+    "uniqueName": "Crisp Crimson Weissbier"
+  },
+  {
+    "address": "0xfe959a13d064eb30bce58e098e193421a3ada339",
+    "uniqueName": "Golden Crimson Lager"
+  },
+  {
+    "address": "0xe6e6a9a078a2e1c16b1b6814850fde6115682358",
+    "uniqueName": "Stormy Ebony Helles"
+  },
+  {
+    "address": "0xc56201a1e5db893c087bc8ea2b5042919b390b15",
+    "uniqueName": "Luminous Emerald Porter"
+  },
+  {
+    "address": "0xcd8368615dc51b26431e45c47db28e656a96093c",
+    "uniqueName": "Bold Jade Bock"
+  },
+  {
+    "address": "0x2c55aaadf779c561eb0d387c1f5a79e812826f17",
+    "uniqueName": "Serene Silver Pilsner"
+  },
+  {
+    "address": "0x72df4531a03a33bae89ed962d716190d98015ef6",
+    "uniqueName": "Mystic Sapphire Red Ale"
+  },
+  {
+    "address": "0xaa86705e3915b426c090a5817a7b706354f09260",
+    "uniqueName": "Dusky Crimson Stout"
+  },
+  {
+    "address": "0xde2d51923c0b7fab0c0a275ae2d5536006d4fffb",
+    "uniqueName": "Dusky Ebony Lager"
+  },
+  {
+    "address": "0x4e1b7c9513ce19a6872a6187e56cbeb7c8864d88",
+    "uniqueName": "Luminous Emerald Bock"
+  },
+  {
+    "address": "0xc2f38da4e7f933868b5de48a9104a0cbf1bccf32",
+    "uniqueName": "Icy Jade Marzen"
+  },
+  {
+    "address": "0xe71e8f8d93bd99288369a6bfc1da4ec179e305b7",
+    "uniqueName": "Crisp Golden Pilsner"
+  },
+  {
+    "address": "0x5ed761c5249a957eafceea3358e5f9912cc2a07c",
+    "uniqueName": "Serene Crimson IPA"
+  },
+  {
+    "address": "0x4f9c40a5b51768bae33cf6d39a630505daf2fe64",
+    "uniqueName": "Twilight Crimson Hefeweizen"
+  },
+  {
+    "address": "0x2218a693ffb10b29c6683d10c93c176b94469807",
+    "uniqueName": "Enchanted Crimson Pilsner"
+  },
+  {
+    "address": "0xb9b48c488c5d661a88cd7c37edf9ce742725d30a",
+    "uniqueName": "Dusky Golden Barleywine"
+  },
+  {
+    "address": "0x2f426f50e9467af033814956776774753c013f60",
+    "uniqueName": "Crisp Silver Pale Ale"
+  },
+  {
+    "address": "0x8938b4c560ca397979b91dbab5f6d6e37740869a",
+    "uniqueName": "Mystic Ivory Saison"
+  },
+  {
+    "address": "0x99923a0d8ea4000bf609e4d1fe307a042eb5d6a3",
+    "uniqueName": "Icy Jade Dunkel"
+  },
+  {
+    "address": "0x152570fa22241ea40d2153134cb0490c489b144a",
+    "uniqueName": "Stormy Sapphire Dunkel"
+  },
+  {
+    "address": "0xdec3bb8e85ee3a2e26c3d20e542f2f4f7447434c",
+    "uniqueName": "Stormy Emerald Saison"
+  },
+  {
+    "address": "0xec40a077dc20cd61c9fdc9f36c5f0aabe2f56e67",
+    "uniqueName": "Rustic Jade Red Ale"
+  },
+  {
+    "address": "0x1c94a19f412b1d056032c3464c72ee296b9e6c5c",
+    "uniqueName": "Fiery Golden Stout"
+  },
+  {
+    "address": "0x01f3c6e073435e3eebd1e6320b246152d36c75bf",
+    "uniqueName": "Luminous Ivory Red Ale"
+  },
+  {
+    "address": "0x8bd8f0d9d63b1b9f67822230e4ca6c13e80b67e4",
+    "uniqueName": "Mystic Golden Marzen"
+  },
+  {
+    "address": "0xddfbb9ff1e49a15453e0677f1b1e72dcc556d7df",
+    "uniqueName": "Dusky Emerald Gose"
+  },
+  {
+    "address": "0xa6366886e652e9c1486c4416bbf11c8be99e009a",
+    "uniqueName": "Dawn Emerald Barleywine"
+  },
+  {
+    "address": "0xaf7c7d74968f281c9f3820357548b2e92a0268cc",
+    "uniqueName": "Bold Golden Lager"
+  },
+  {
+    "address": "0x51af4cc476ca67a7f2cdfea925321cbb42b986f0",
+    "uniqueName": "Roaring Ebony Dunkel"
+  },
+  {
+    "address": "0xa024e11ccaa2f68c58bec75a022df647a8df0c81",
+    "uniqueName": "Silver Crimson Kolsch"
+  },
+  {
+    "address": "0x6721b2575be9fc702200f535fafa2432ac0dc23e",
+    "uniqueName": "Enchanted Jade Weissbier"
+  },
+  {
+    "address": "0x683fdf86544a8ed3a4fc3786220f7592d833ed7d",
+    "uniqueName": "Mystic Ruby Amber Ale"
+  },
+  {
+    "address": "0xd519d888929fbce47176815f613a0dc9db1be867",
+    "uniqueName": "Silver Ebony Saison"
+  },
+  {
+    "address": "0xde671e2e3484219b22da95140f44b980636fc2a2",
+    "uniqueName": "Twilight Ruby Weissbier"
+  },
+  {
+    "address": "0xac252baa121835b6c222ba870b0a1a8230d11a84",
+    "uniqueName": "Enchanted Emerald Kolsch"
+  },
+  {
+    "address": "0x382aab55de5321a5e7b41a127f2c9e3a684d216d",
+    "uniqueName": "Enchanted Crimson Dunkel"
+  },
+  {
+    "address": "0xa06db9073b774f2f7f4cb35ace30ed1a2d1554d4",
+    "uniqueName": "Radiant Azure Marzen"
+  },
+  {
+    "address": "0xb344654caf45a86c5514e9e44cffb3c2df5bfeaa",
+    "uniqueName": "Bold Golden Stout"
+  },
+  {
+    "address": "0x68909e98c145d378efe44243a2344c2b7acdbf4a",
+    "uniqueName": "Radiant Sapphire IPA"
+  },
+  {
+    "address": "0xabcba59aec90247fbd2aeac038298f50d694bc57",
+    "uniqueName": "Dawn Sapphire Amber Ale"
+  },
+  {
+    "address": "0xe9513403597ecc0b31ff3e044bffb4299a720ec7",
+    "uniqueName": "Twilight Ruby Kolsch"
+  },
+  {
+    "address": "0x35e8aa334f0486c025a8b1e040f70d30c8c05400",
+    "uniqueName": "Silver Silver Kolsch"
+  },
+  {
+    "address": "0xc32ece573b6f4b611a19a8d726cd04a35aa34fb9",
+    "uniqueName": "Dawn Silver Helles"
+  },
+  {
+    "address": "0x6ae7cf721464e6a5475023538792f18412b40f96",
+    "uniqueName": "Serene Crimson Bock"
+  },
+  {
+    "address": "0x3e7712a25104c02ef9ffe0f702cba8afd95c8a23",
+    "uniqueName": "Dusky Sapphire Stout"
+  },
+  {
+    "address": "0x16adfe08c236573b3a54ddd3bbf52db98587415c",
+    "uniqueName": "Luminous Golden Brown Ale"
+  },
+  {
+    "address": "0xe4a9bd80310f1bfb253c69b0e1f631e70f1d8f5d",
+    "uniqueName": "Bold Golden Brown Ale"
+  },
+  {
+    "address": "0xbb25ebf5545ec025468232f4b7a28b40fb9815a0",
+    "uniqueName": "Mystic Ruby Stout"
+  },
+  {
+    "address": "0x350ab3dfbcf87f5cc9849afbc10d6546ae1a1ab7",
+    "uniqueName": "Rustic Jade Pale Ale"
+  },
+  {
+    "address": "0x852e46fadfff2976aec3baafe1cd899e783ec895",
+    "uniqueName": "Luminous Emerald Weissbier"
+  },
+  {
+    "address": "0x494f46fd40851505b2f3f5b765ba81d7215efc38",
+    "uniqueName": "Crisp Silver Porter"
+  },
+  {
+    "address": "0xffa8fb2f06a584d6cfa0cef289ffca3438fea479",
+    "uniqueName": "Enchanted Crimson Marzen"
+  },
+  {
+    "address": "0xf847543d4e2fc9a67be2ed39a4d52e6ecb8a862e",
+    "uniqueName": "Rustic Crimson Marzen"
+  },
+  {
+    "address": "0xfef4a44c7be6d56e76260dbe7e26c3707b4e31b4",
+    "uniqueName": "Roaring Crimson Stout"
+  },
+  {
+    "address": "0xffa214373aa8a3e56181284a82383c99556d680c",
+    "uniqueName": "Twilight Crimson Stout"
+  },
+  {
+    "address": "0x2495e0ad05c9f8b528899571f390be9ddf65369e",
+    "uniqueName": "Wicked Golden Red Ale"
+  },
+  {
+    "address": "0xdf5a775fac239cc1038e2879e9434ac59ebccc32",
+    "uniqueName": "Chilled Golden Porter"
+  },
+  {
+    "address": "0x6040f41e40b04bf9e14f41a48ab0fbeab404b2fc",
+    "uniqueName": "Fiery Crimson Helles"
+  },
+  {
+    "address": "0x02b22d283e81e32c7135ce90b838ca9055b13492",
+    "uniqueName": "Rustic Emerald Dunkel"
+  },
+  {
+    "address": "0x4fbc0ab8ab1a318f06306803f4923e6b362fc34b",
+    "uniqueName": "Fiery Jade Lager"
+  },
+  {
+    "address": "0xadb0053dd44616bc5da5c1529f20265ce1793a4a",
+    "uniqueName": "Rustic Sapphire Pale Ale"
+  },
+  {
+    "address": "0x02feb77e9092999821b955020df4983058538a78",
+    "uniqueName": "Mystic Jade Stout"
+  },
+  {
+    "address": "0x6c9cca5269ce6998f82274245b9001eab01a6983",
+    "uniqueName": "Serene Crimson Stout"
+  },
+  {
+    "address": "0x66e326618693071d7deda489204f513073555f17",
+    "uniqueName": "Roaring Ivory Bock"
+  },
+  {
+    "address": "0x47668ebb61d0038c808d90e4f4493e1644973510",
+    "uniqueName": "Luminous Ruby Gose"
+  },
+  {
+    "address": "0x67b9a48313ce241c026877b11cd97444b147eb2e",
+    "uniqueName": "Mystic Silver Hefeweizen"
+  },
+  {
+    "address": "0xe252126f67ddbc56c64ea7c10c0344465fec5c3c",
+    "uniqueName": "Wicked Jade Stout"
+  },
+  {
+    "address": "0x4109152bca08be2282487eccfc01fe0f524c90c8",
+    "uniqueName": "Stormy Jade Pale Ale"
+  },
+  {
+    "address": "0x309097adcea24155814987679053d5ca67ec907a",
+    "uniqueName": "Stormy Ivory Hefeweizen"
+  },
+  {
+    "address": "0x05fdae0d42db131848714e92c2152e98d576a2b3",
+    "uniqueName": "Icy Emerald Kolsch"
+  },
+  {
+    "address": "0x88bdf96b157a13a5d153fd46e11b7a9934e6a8d0",
+    "uniqueName": "Radiant Emerald Porter"
+  },
+  {
+    "address": "0xc1ab9b2e4d89dc700b26d23179bdda0dd77cb3af",
+    "uniqueName": "Icy Ebony Saison"
+  },
+  {
+    "address": "0x62b0ff7cac6625bb6a6b4760be6956913acc2a32",
+    "uniqueName": "Stormy Sapphire Saison"
+  },
+  {
+    "address": "0x632795089dfb2cc2043146eabd8deca879b97f49",
+    "uniqueName": "Serene Golden Red Ale"
+  },
+  {
+    "address": "0xa13295ce0c07e9823ebdc501e43361aacb348271",
+    "uniqueName": "Fiery Azure IPA"
+  },
+  {
+    "address": "0x068677cee30f331606ed737c56355c2a939f275e",
+    "uniqueName": "Dusky Crimson Pilsner"
+  },
+  {
+    "address": "0xa5716bef5d3131be2f71f13a62f2173e40409cd8",
+    "uniqueName": "Rustic Ivory Barleywine"
+  },
+  {
+    "address": "0x3b828f87aa041f9db49e29737e91bb88c52e7868",
+    "uniqueName": "Enchanted Crimson Blonde Ale"
+  },
+  {
+    "address": "0x41499e44aaa8111a1efc9b4b14aa540a6edd12c4",
+    "uniqueName": "Dawn Golden Barleywine"
+  },
+  {
+    "address": "0xdd536bd29711d4f3efb52f2a0a2e5b4e52cc3b2f",
+    "uniqueName": "Icy Azure Red Ale"
+  },
+  {
+    "address": "0x2b87f112073b1cc7f4d74c1f8378b9187bce8d40",
+    "uniqueName": "Mystic Sapphire Lager"
+  },
+  {
+    "address": "0x52988a30046bf522f17aea8f61324eb9aa25181e",
+    "uniqueName": "Crisp Emerald Bock"
+  },
+  {
+    "address": "0xfa16bc7a164b9bb03f83a317bc019bbb30e2a539",
+    "uniqueName": "Serene Ruby Pilsner"
+  },
+  {
+    "address": "0x43945aa014e1ce05dfe5b565397283e199dbd816",
+    "uniqueName": "Icy Crimson Porter"
+  },
+  {
+    "address": "0x5f682f907125bdd1002e551701aaa523fb2b875a",
+    "uniqueName": "Bold Sapphire Saison"
+  },
+  {
+    "address": "0x2718125b071b09311e71ca1ee35d8476533d74ef",
+    "uniqueName": "Crisp Jade Barleywine"
+  },
+  {
+    "address": "0xd63f8985f93c2befeaacfcf66ef525411881eda9",
+    "uniqueName": "Thunderous Ivory Barleywine"
+  },
+  {
+    "address": "0x52acb376c5ba4af55aae3b0cbc8a93f8b5774bee",
+    "uniqueName": "Roaring Ruby Pale Ale"
+  },
+  {
+    "address": "0xda0687b89a6d44053830fa8cd55e9708697eaec7",
+    "uniqueName": "Mystic Ebony Marzen"
+  },
+  {
+    "address": "0x555f54ae3a8d4957fe9f0a1cb255efd282bd555e",
+    "uniqueName": "Radiant Silver Blonde Ale"
+  },
+  {
+    "address": "0xff11ada077fcb1492da0cbea90be473266814af0",
+    "uniqueName": "Serene Ruby Gose"
+  },
+  {
+    "address": "0x99ccef311e8bb3d153e8d41e7aa27874071f2a9f",
+    "uniqueName": "Golden Golden Pale Ale"
+  },
+  {
+    "address": "0x4a70ea6400a34b51502720936243deea3e327f76",
+    "uniqueName": "Wicked Jade Saison"
+  },
+  {
+    "address": "0xe82421d9119035cc1b9367b9089b3c006098bf2c",
+    "uniqueName": "Fiery Golden Dunkel"
+  },
+  {
+    "address": "0xef05eaeddbb58de66463e561d445915cb0ef7a44",
+    "uniqueName": "Rustic Ruby Hefeweizen"
+  },
+  {
+    "address": "0x93298a6003286a35140c2185ad44dde5ab983cf2",
+    "uniqueName": "Crisp Jade Weissbier"
+  },
+  {
+    "address": "0x940e6ec54dd6a0649ce62b3cd3198a275e5e56cc",
+    "uniqueName": "Thunderous Azure Saison"
+  },
+  {
+    "address": "0xeff4fe9864faf5cde6d7848db2d3e81c9fb86353",
+    "uniqueName": "Icy Azure Lager"
+  },
+  {
+    "address": "0x0cb27e883e207905ad2a94f9b6ef0c7a99223c37",
+    "uniqueName": "Radiant Jade Lager"
+  },
+  {
+    "address": "0x15a63fd5237f9f62ceef7a6fcabd43b3d05e4967",
+    "uniqueName": "Crisp Silver Hefeweizen"
+  },
+  {
+    "address": "0xdaf3957e7a7160979b64fdaa298bdb3bd5d81f60",
+    "uniqueName": "Luminous Ruby Saison"
+  },
+  {
+    "address": "0x048a23c5d6c9176ee0ccf7711421bd55e247d07e",
+    "uniqueName": "Dawn Silver Stout"
+  },
+  {
+    "address": "0x924a45b213af040b4a4008313ffbf4de896bb29f",
+    "uniqueName": "Dawn Ruby Stout"
+  },
+  {
+    "address": "0x472030d6ebfdfc03810c6a196fcb00ced0bcb446",
+    "uniqueName": "Enchanted Sapphire Weissbier"
+  },
+  {
+    "address": "0x3df08f01a4121e67176147b279c95f304dec577a",
+    "uniqueName": "Golden Ruby Porter"
+  },
+  {
+    "address": "0x779707f1f3b01f8b53a96ef64637159da214e727",
+    "uniqueName": "Radiant Crimson Hefeweizen"
+  },
+  {
+    "address": "0xff24c44e2ee2d2f46424a9d1cdf4d3496a4aecfc",
+    "uniqueName": "Silver Emerald Saison"
+  },
+  {
+    "address": "0x79394d454f9bfa1bda923badaa9450cbed277f1f",
+    "uniqueName": "Dusky Azure Hefeweizen"
+  },
+  {
+    "address": "0x2df09ab64022389cf0c0f9af38c3c021e2dd1d63",
+    "uniqueName": "Golden Silver Pilsner"
+  },
+  {
+    "address": "0x2b43cf6f181d818781b1a7bdd2d3d51ecb4ac638",
+    "uniqueName": "Crisp Emerald Brown Ale"
+  },
+  {
+    "address": "0x35b41798b626f545f880b30b2e84d94bafcde3c1",
+    "uniqueName": "Chilled Ivory Kolsch"
+  },
+  {
+    "address": "0x02802c65fe3dbf44a074aeb75c49df0b1c7a6d91",
+    "uniqueName": "Thunderous Sapphire Pale Ale"
+  },
+  {
+    "address": "0x85f481c2f726424f7fde7c5f60896154f9ee6727",
+    "uniqueName": "Luminous Crimson Barleywine"
+  },
+  {
+    "address": "0x164c2aa7149926abdadba49c2c950fb4f412cca9",
+    "uniqueName": "Mystic Jade Bock"
+  },
+  {
+    "address": "0x41d35c0381990d4ab16c72f00ab6270fa50f3113",
+    "uniqueName": "Enchanted Ivory Pilsner"
+  },
+  {
+    "address": "0xa9b6b113490ace7503f98ebb8592c865e2bdfcb3",
+    "uniqueName": "Dawn Ruby Pilsner"
+  },
+  {
+    "address": "0x9b187f1cdf008462207fa22bb66b892ddb12650e",
+    "uniqueName": "Chilled Sapphire Barleywine"
+  },
+  {
+    "address": "0xec1151d394f601336019846cc810f7a46f8a8b21",
+    "uniqueName": "Serene Crimson Marzen"
+  },
+  {
+    "address": "0xd57e47b3a48c47793b0426da4f40d11670ef0d3c",
+    "uniqueName": "Dusky Azure Brown Ale"
+  },
+  {
+    "address": "0xfb650976aaf769b0e2a73b5e2cfdd4d505d1a982",
+    "uniqueName": "Mystic Golden Dunkel"
+  },
+  {
+    "address": "0x022c3a640cd205f0048970ce6da44282f3b04824",
+    "uniqueName": "Wicked Sapphire Hefeweizen"
+  },
+  {
+    "address": "0x5c0f16188d982c659d7cc0410a201690894754d1",
+    "uniqueName": "Chilled Ruby Pale Ale"
+  },
+  {
+    "address": "0xda95835d7f6b5314e860b062ef1e20c21228b091",
+    "uniqueName": "Roaring Azure Gose"
+  },
+  {
+    "address": "0x9617ac1ccf8fdb3c88bdb52ff869d573f3969f43",
+    "uniqueName": "Chilled Sapphire Helles"
+  },
+  {
+    "address": "0x41d19eb047c96db7ee6ee416c4516e7e9a98757e",
+    "uniqueName": "Roaring Sapphire Saison"
+  },
+  {
+    "address": "0x59a4a2ee91c7734ad4fe9b416c7be53b9fb7a9bf",
+    "uniqueName": "Serene Ebony Barleywine"
+  },
+  {
+    "address": "0xa5f5a4901bb6693ff72e8cf905e1cec86cda8b01",
+    "uniqueName": "Wicked Ivory Dunkel"
+  },
+  {
+    "address": "0x28b713171f92705155b50a13387fbf281df1e62a",
+    "uniqueName": "Roaring Ruby Helles"
+  },
+  {
+    "address": "0x995fda0aeaf4913f835f7649bb89a854762f2cde",
+    "uniqueName": "Chilled Emerald Pilsner"
+  },
+  {
+    "address": "0x6a33a2ca98db58a1b3dd24529f3eb4f5da8a8cd6",
+    "uniqueName": "Dusky Ivory Bock"
+  },
+  {
+    "address": "0xaf3c037a42d25adcb8c45da8407d5346ef47276e",
+    "uniqueName": "Chilled Ivory Porter"
+  },
+  {
+    "address": "0x6a1fdbf32b7b897c91eafaccaad216dffcb7a50f",
+    "uniqueName": "Radiant Ivory Weissbier"
+  },
+  {
+    "address": "0xb81357d0b944c1eefb8ed40dc3d418ac62ea2f92",
+    "uniqueName": "Golden Sapphire Pilsner"
+  },
+  {
+    "address": "0xc4576991860f446cae7383dad99924cf461a1ad9",
+    "uniqueName": "Silver Silver Porter"
+  },
+  {
+    "address": "0xfcaa76a9c1eb334c06bb4b65de96435cf610cc9c",
+    "uniqueName": "Wicked Azure Weissbier"
+  },
+  {
+    "address": "0xc464aec1fd53e3ddaff1f0d0c972c735e8d26331",
+    "uniqueName": "Dawn Ruby Red Ale"
+  },
+  {
+    "address": "0x3120762041d698f1d41d0c7861aa6c1a577e79aa",
+    "uniqueName": "Thunderous Silver Helles"
+  },
+  {
+    "address": "0xa481588fe60d0cd00e53769944fddcc7de113c18",
+    "uniqueName": "Mystic Silver Red Ale"
+  },
+  {
+    "address": "0x81d871dc387158e77db5fca388f9be7690fade41",
+    "uniqueName": "Rustic Silver Lager"
+  },
+  {
+    "address": "0x7c4b2905a7f4a47392bce760d436cd97c2fe95ae",
+    "uniqueName": "Radiant Silver Weissbier"
+  },
+  {
+    "address": "0xd098b8c985191ec82030cb5ee9bf7128f5e9facf",
+    "uniqueName": "Radiant Ivory Stout"
+  },
+  {
+    "address": "0x3a9ecaab1cbd8c646698b3de3234c967f6c60fad",
+    "uniqueName": "Silver Ruby Red Ale"
+  },
+  {
+    "address": "0x621ee2b1d1b1d53f6204cf8c5aed4bbd9fad39e2",
+    "uniqueName": "Icy Crimson Lager"
+  },
+  {
+    "address": "0x54fe532adcb810fbae516024b686e4ac19d0f791",
+    "uniqueName": "Stormy Golden Pale Ale"
+  },
+  {
+    "address": "0x150d7679fb7ae45fcb482c1ec8786482cf99721b",
+    "uniqueName": "Dusky Emerald Dunkel"
+  },
+  {
+    "address": "0x3210d62f04308566dabcd1801dfc09a8e842a7e2",
+    "uniqueName": "Twilight Silver IPA"
+  },
+  {
+    "address": "0x66fef429d5d8016e780320bb19adebeec430ca7f",
+    "uniqueName": "Icy Ruby Lager"
+  },
+  {
+    "address": "0x6227d7d1bc9417d4b480a5147bfbae6fcd7e4699",
+    "uniqueName": "Luminous Emerald Helles"
+  },
+  {
+    "address": "0xd8d45934ff47d79ecb6b801493e99c0e0e8ba945",
+    "uniqueName": "Luminous Jade Weissbier"
+  },
+  {
+    "address": "0x6ed01e20785dee8d5108467ef8ef240022a184b1",
+    "uniqueName": "Dusky Ruby Hefeweizen"
+  },
+  {
+    "address": "0xb8f7d95ee02590902127f14f3dbef95ea2d9338c",
+    "uniqueName": "Bold Ebony Gose"
+  },
+  {
+    "address": "0x0d9c4578cf424888bbefae4d2472663f83223063",
+    "uniqueName": "Mystic Jade Barleywine"
+  },
+  {
+    "address": "0x44f4098f7ae543e45c84145a98b61d077690ccde",
+    "uniqueName": "Thunderous Silver Weissbier"
+  },
+  {
+    "address": "0x6a5420def36977649a6ad5b821e1fd93e839ebed",
+    "uniqueName": "Golden Crimson Barleywine"
+  },
+  {
+    "address": "0xbfa9abb7ab0317d873f3b823aa2440130b8190a3",
+    "uniqueName": "Serene Golden Brown Ale"
+  },
+  {
+    "address": "0xa28126b98ef86f93feaac59247c081f5c152e95e",
+    "uniqueName": "Dusky Silver Kolsch"
+  },
+  {
+    "address": "0xe8e3084ea41726950fea9483f111548853bf5abf",
+    "uniqueName": "Dawn Azure Helles"
+  },
+  {
+    "address": "0x7fc6168a87a1ac3cfc8f3e8bd37c82627774b9b0",
+    "uniqueName": "Stormy Jade Dunkel"
+  },
+  {
+    "address": "0xc15fccc5345e2b82b793fba7715f9b933395625b",
+    "uniqueName": "Enchanted Jade Helles"
+  },
+  {
+    "address": "0xd6c7a5b94025cd09559684939666ecffc9f3f4bf",
+    "uniqueName": "Crisp Ivory Marzen"
+  },
+  {
+    "address": "0xd656babf90e72b9c83fda1aff931a834252a5234",
+    "uniqueName": "Luminous Azure Weissbier"
+  },
+  {
+    "address": "0x952d763f7ac9a99b8fc3686550b6bbdc7e0625d0",
+    "uniqueName": "Serene Golden Lager"
+  },
+  {
+    "address": "0x0f7f40da02cc841458dd05ecc8d28f8f252b74d6",
+    "uniqueName": "Stormy Golden IPA"
+  },
+  {
+    "address": "0x86dd5de7a8525ff223ae333515b06626d11c5660",
+    "uniqueName": "Roaring Ebony Barleywine"
+  },
+  {
+    "address": "0x7caf5e0a03550883d03618dd8684c2f5d527c0cf",
+    "uniqueName": "Wicked Emerald Weissbier"
+  },
+  {
+    "address": "0x55b7f7d3ee024daad8fa4eccc1afa54b00c4d834",
+    "uniqueName": "Stormy Crimson Pilsner"
+  },
+  {
+    "address": "0x773cdd5aef13c936eb088fb7ee8c4720485bdab7",
+    "uniqueName": "Dawn Ruby Bock"
+  },
+  {
+    "address": "0x4e26ba11c48703de9fe25da68e1ee84b71df2468",
+    "uniqueName": "Rustic Ruby Red Ale"
+  },
+  {
+    "address": "0x866cae66e771dec1ba244473284813570e6b66d4",
+    "uniqueName": "Serene Ruby Blonde Ale"
+  },
+  {
+    "address": "0x61734d52ba0276bd34478f9723ae49a39e35a0e4",
+    "uniqueName": "Enchanted Silver Dunkel"
+  },
+  {
+    "address": "0xacf8d3e1bfc7829efe70da61578c54bc6c95fa49",
+    "uniqueName": "Radiant Crimson IPA"
+  },
+  {
+    "address": "0x6ead7cd20bb5372a1b2b073710d17a678172dad3",
+    "uniqueName": "Dusky Emerald Stout"
+  },
+  {
+    "address": "0xcce805f2f96d3b1da32a105fedad8685ce35fa8f",
+    "uniqueName": "Roaring Azure Bock"
+  },
+  {
+    "address": "0x7f6233e9ab65e7115db9e4a22c883173cae84b63",
+    "uniqueName": "Stormy Sapphire Lager"
+  },
+  {
+    "address": "0x0c2b82ffbc28593df3186fb24998bada377f8ea2",
+    "uniqueName": "Golden Crimson Bock"
+  },
+  {
+    "address": "0x9da624020e331a9d813c9919e6620d6a8332bf4f",
+    "uniqueName": "Icy Emerald Blonde Ale"
+  },
+  {
+    "address": "0x2387828d324861dda5be802a7602b11f964996de",
+    "uniqueName": "Chilled Ebony Weissbier"
+  },
+  {
+    "address": "0x026df69e4047c1af843ffd9ae9054ded3f3f90bb",
+    "uniqueName": "Golden Crimson Pilsner"
+  },
+  {
+    "address": "0x59183144f6c1c4c581a2afc710f09b2361617e02",
+    "uniqueName": "Radiant Jade Bock"
+  },
+  {
+    "address": "0x4c7dc8af5330d4c544e15f086895a22532f6f4ea",
+    "uniqueName": "Silver Crimson Pale Ale"
+  },
+  {
+    "address": "0x5846055e77032091a91a88e09eb3f26d398b559d",
+    "uniqueName": "Crisp Silver Red Ale"
+  },
+  {
+    "address": "0xc376eb0dcd392712f88e252b6c96a0ea762b155d",
+    "uniqueName": "Rustic Golden Hefeweizen"
+  },
+  {
+    "address": "0x8c72a2a5ee49413da48928517044e9c267846baf",
+    "uniqueName": "Roaring Jade Dunkel"
+  },
+  {
+    "address": "0x75a2f211f93d02e0259ff9d020c3c2dd62357b78",
+    "uniqueName": "Chilled Azure Lager"
+  },
+  {
+    "address": "0x12986d13a8ae075962d2883f8cb05efa54bcba5a",
+    "uniqueName": "Silver Ivory Red Ale"
+  },
+  {
+    "address": "0x5d2a5c3876134e388f5749ba107f17834374c8ca",
+    "uniqueName": "Rustic Ruby IPA"
+  },
+  {
+    "address": "0xaefc62fc3ecaf59bb521d972ca3e8b92610ec92d",
+    "uniqueName": "Crisp Azure Pale Ale"
+  },
+  {
+    "address": "0x0e84c73b78a788edd739f5bc8ddaf5d7c6aa1ba7",
+    "uniqueName": "Bold Sapphire Weissbier"
+  },
+  {
+    "address": "0x09b144544001386895322074ce934397086b0746",
+    "uniqueName": "Rustic Jade Weissbier"
+  },
+  {
+    "address": "0x7caf5e0a03550883d03618dd8684c2f5d527c0cf",
+    "uniqueName": "Dawn Azure Saison"
+  },
+  {
+    "address": "0x55b7f7d3ee024daad8fa4eccc1afa54b00c4d834",
+    "uniqueName": "Roaring Golden Lager"
+  },
+  {
+    "address": "0x773cdd5aef13c936eb088fb7ee8c4720485bdab7",
+    "uniqueName": "Roaring Ebony Saison"
+  },
+  {
+    "address": "0x4e26ba11c48703de9fe25da68e1ee84b71df2468",
+    "uniqueName": "Bold Azure Barleywine"
+  },
+  {
+    "address": "0x866cae66e771dec1ba244473284813570e6b66d4",
+    "uniqueName": "Dawn Ruby Barleywine"
+  },
+  {
+    "address": "0x61734d52ba0276bd34478f9723ae49a39e35a0e4",
+    "uniqueName": "Luminous Jade Pale Ale"
+  },
+  {
+    "address": "0xacf8d3e1bfc7829efe70da61578c54bc6c95fa49",
+    "uniqueName": "Dawn Sapphire Brown Ale"
+  },
+  {
+    "address": "0x6ead7cd20bb5372a1b2b073710d17a678172dad3",
+    "uniqueName": "Crisp Golden Bock"
+  },
+  {
+    "address": "0xcce805f2f96d3b1da32a105fedad8685ce35fa8f",
+    "uniqueName": "Radiant Jade Porter"
+  },
+  {
+    "address": "0x7f6233e9ab65e7115db9e4a22c883173cae84b63",
+    "uniqueName": "Stormy Azure Pilsner"
+  },
+  {
+    "address": "0x0c2b82ffbc28593df3186fb24998bada377f8ea2",
+    "uniqueName": "Icy Sapphire Blonde Ale"
+  },
+  {
+    "address": "0x9da624020e331a9d813c9919e6620d6a8332bf4f",
+    "uniqueName": "Rustic Emerald Saison"
+  },
+  {
+    "address": "0x2387828d324861dda5be802a7602b11f964996de",
+    "uniqueName": "Rustic Emerald Blonde Ale"
+  },
+  {
+    "address": "0x026df69e4047c1af843ffd9ae9054ded3f3f90bb",
+    "uniqueName": "Wicked Ruby Amber Ale"
+  },
+  {
+    "address": "0x59183144f6c1c4c581a2afc710f09b2361617e02",
+    "uniqueName": "Serene Golden Pilsner"
+  },
+  {
+    "address": "0x4c7dc8af5330d4c544e15f086895a22532f6f4ea",
+    "uniqueName": "Enchanted Azure Blonde Ale"
+  },
+  {
+    "address": "0x5846055e77032091a91a88e09eb3f26d398b559d",
+    "uniqueName": "Thunderous Golden Bock"
+  },
+  {
+    "address": "0xc376eb0dcd392712f88e252b6c96a0ea762b155d",
+    "uniqueName": "Bold Azure Saison"
+  },
+  {
+    "address": "0x8c72a2a5ee49413da48928517044e9c267846baf",
+    "uniqueName": "Bold Emerald Amber Ale"
+  },
+  {
+    "address": "0x75a2f211f93d02e0259ff9d020c3c2dd62357b78",
+    "uniqueName": "Silver Crimson Brown Ale"
+  },
+  {
+    "address": "0x12986d13a8ae075962d2883f8cb05efa54bcba5a",
+    "uniqueName": "Enchanted Jade Porter"
+  },
+  {
+    "address": "0x5d2a5c3876134e388f5749ba107f17834374c8ca",
+    "uniqueName": "Roaring Silver Gose"
+  },
+  {
+    "address": "0xaefc62fc3ecaf59bb521d972ca3e8b92610ec92d",
+    "uniqueName": "Enchanted Jade Marzen"
+  },
+  {
+    "address": "0x0e84c73b78a788edd739f5bc8ddaf5d7c6aa1ba7",
+    "uniqueName": "Chilled Azure Kolsch"
+  },
+  {
+    "address": "0x09b144544001386895322074ce934397086b0746",
+    "uniqueName": "Rustic Jade IPA"
+  },
+  {
+    "address": "0x0180982f9dd3eccb7201d5a86bbeeebb4da5fedd",
+    "uniqueName": "Luminous Ruby Porter"
+  },
+  {
+    "address": "0x7c34e61599ce60880532e34c5676b209f725dac0",
+    "uniqueName": "Fiery Silver Weissbier"
+  },
+  {
+    "address": "0xc4417fc5a9b6a1a08f6b37b98dd4395349a2f344",
+    "uniqueName": "Crisp Azure Brown Ale"
+  },
+  {
+    "address": "0x509ea2584c39437212a0eb7bd50f883eb4b3f888",
+    "uniqueName": "Radiant Jade Brown Ale"
+  },
+  {
+    "address": "0xd5af542a0a783a3e6a6c0355b06c8e8dfdde31d7",
+    "uniqueName": "Twilight Sapphire Marzen"
+  },
+  {
+    "address": "0xb3270244ee0fb7cd6ab6afd4792f890542f8f5b4",
+    "uniqueName": "Mystic Ivory Porter"
+  },
+  {
+    "address": "0x01219b66b5e8c136e5ffb77bec057adb46999ff8",
+    "uniqueName": "Mystic Golden Saison"
+  },
+  {
+    "address": "0xf383a44b1f4f2c121f5aec81b96a47c488ca43f2",
+    "uniqueName": "Wicked Ivory Saison"
+  },
+  {
+    "address": "0x4dbe0c172083ecdfb601cd66ac1142ca074d886a",
+    "uniqueName": "Wicked Emerald Bock"
+  },
+  {
+    "address": "0x874b0868db8a0006b17384c0ab6c5e9026c9e762",
+    "uniqueName": "Golden Ruby IPA"
+  },
+  {
+    "address": "0x691907d3cb4788f5b92eb0cf00c9f137fbd4b03c",
+    "uniqueName": "Wicked Silver Weissbier"
+  },
+  {
+    "address": "0x2dcc97db67c9d2d20f8b243d762cc9e4b45d4e41",
+    "uniqueName": "Golden Azure Dunkel"
+  },
+  {
+    "address": "0x122d08dc1fec0dd9cd70b83f36f2279c933e7b82",
+    "uniqueName": "Crisp Ebony Kolsch"
+  },
+  {
+    "address": "0x98406e4bdc8e8de006c220c627d0a1e17c96b933",
+    "uniqueName": "Luminous Crimson Pale Ale"
+  },
+  {
+    "address": "0x360f191ea5cd50bf2239228031ddabc94d7fcffa",
+    "uniqueName": "Luminous Ebony Blonde Ale"
+  },
+  {
+    "address": "0xff168ba377b0e8441fb2efcb8ccb9fd7d34734bb",
+    "uniqueName": "Luminous Ivory Dunkel"
+  },
+  {
+    "address": "0x1d4709177fd85c1a3bfb74bc73b9ea6aa6ab3926",
+    "uniqueName": "Roaring Ivory Gose"
+  },
+  {
+    "address": "0xc812c5ccc6696e6311761a43ae0af0690bf6840d",
+    "uniqueName": "Dawn Emerald Hefeweizen"
+  },
+  {
+    "address": "0xb0e843dfb54eb288e664fb62d9630cc085b8700d",
+    "uniqueName": "Bold Ivory Red Ale"
+  },
+  {
+    "address": "0xfff8696621280ca68a7b6aba94a4626a17973e92",
+    "uniqueName": "Roaring Sapphire Lager"
+  },
+  {
+    "address": "0x26c3d835c12ce251cc820202be1cb0f84e535132",
+    "uniqueName": "Luminous Sapphire Brown Ale"
+  },
+  {
+    "address": "0xe1ab77940468428d13ebe90c427258acc67efc8a",
+    "uniqueName": "Thunderous Ivory Brown Ale"
+  },
+  {
+    "address": "0x16c212851ee9fb23b1f061252ed22ba46fa76cdb",
+    "uniqueName": "Bold Ebony Helles"
+  },
+  {
+    "address": "0xc7a235f4c1f2e184fec8812e587e6519fa93d2f7",
+    "uniqueName": "Chilled Silver Blonde Ale"
+  }
+]
