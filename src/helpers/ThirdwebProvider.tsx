@@ -9,6 +9,7 @@ import {
   // smartWallet,
 } from '@thirdweb-dev/react';
 import { Optimism } from '@thirdweb-dev/chains';
+import { ThirdwebProvider as ThirdwebProviderV5 } from 'thirdweb/react';
 import currentNetwork from '@/constants/currentNetwork';
 // import { FACTORY_ADDRESS } from '@/constants/addresses';
 
@@ -40,7 +41,7 @@ const ThirdWebProvider: React.FC<ThirdWebProviderProps> = ({ children }) => {
         coinbaseWallet(),
       ]}
     >
-      {children}
+      <ThirdwebProviderV5>{children}</ThirdwebProviderV5>
     </ThirdwebProvider>
   );
 };

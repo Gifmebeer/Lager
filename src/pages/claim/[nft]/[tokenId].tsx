@@ -1,12 +1,10 @@
 import { Flex, Loader, em } from '@mantine/core';
 
 import React, { useEffect, useState } from 'react';
-import { Button, Center, Text } from '@mantine/core';
+import { Image, Button, Center, Text } from '@mantine/core';
 import CustomText from '@/components/Text';
 import { CURRENT_COLLECTIONS, membership } from '@/constants/collections';
 import {
-  useAddress,
-  useConnectionStatus,
   useContract,
   useOwnedNFTs,
   useNFT,
@@ -22,6 +20,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ICollection } from '@/types';
 import { useMediaQuery } from '@mantine/hooks';
+import {
+  useActiveAccount,
+  useActiveWalletConnectionStatus,
+  useActiveWallet,
+} from 'thirdweb/react';
 
 async function sendRequest(
   url: string,
@@ -38,10 +41,11 @@ const Claim = (params: any) => {
   const nft = router.query.nft as Address;
   const tokenId = router.query.tokenId as string;
   const [claimDone, setClaimDone] = useState('');
-  const address = useAddress();
+  const account = useActiveAccount();
+  const address = account?.address;
   const isMobile = useMediaQuery(`(max-width: ${em(850)})`);
   const { walletClient } = createPublicWalletClient();
-  const connectionStatus = useConnectionStatus();
+  const connectionStatus = useActiveWalletConnectionStatus();
   const isConnected = connectionStatus === 'connected';
   const isConnecting = connectionStatus === 'connecting';
   const [isMinting, setIsMinting] = useState(false);
@@ -166,7 +170,7 @@ const Claim = (params: any) => {
 
   useEffect(() => {
     if (!ready || isConnecting) return;
-    if (!isConnected) return setIsWalletModalOpen(true);
+    // if (!isConnected) return setIsWalletModalOpen(true);
   }, [ready, isConnected]);
 
   const CurrentCard = () => {
@@ -180,8 +184,7 @@ const Claim = (params: any) => {
   };
 
   const isError = contractError || !isValidNFT || mutationError || error;
-  const connecting =
-    connectionStatus === 'connecting' || connectionStatus === 'unknown';
+  const connecting = connectionStatus === 'connecting';
   const isLoading = connecting || isMutating || isMinting || !ready;
 
   if (isLoading || !ready) {
@@ -236,7 +239,16 @@ const Claim = (params: any) => {
         }}
         bg="black"
       >
-        <ConnectWallet btntitle="Login" className={'connectButton3'} />
+        <Image
+          w={'120px'}
+          src="/images/gmb_logo.svg"
+          alt="Logo"
+          style={{ cursor: 'pointer' }}
+        />
+        <Text size="xl" style={{ color: 'white' }}>
+          Please login to claim your NFT
+        </Text>
+        <ConnectWallet btntitle="Login" className={'connectButtonDefault'} />
       </Center>
     );
   }
@@ -269,6 +281,7 @@ const Claim = (params: any) => {
                   margin: 'auto',
                   backgroundColor: 'black',
                   fontFamily: 'MetamorBit-Latin',
+                  border: '2px solid black',
                 }}
                 onClick={async () => await claim()}
                 fullWidth

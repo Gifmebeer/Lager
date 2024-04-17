@@ -11,7 +11,7 @@ import {
 } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import Link from 'next/link';
-import { useConnectionStatus } from '@thirdweb-dev/react';
+import { useActiveWalletConnectionStatus } from 'thirdweb/react';
 import { useRouter } from 'next/navigation';
 import ConnectWalletBtn from '../ConnectWallet';
 
@@ -34,7 +34,7 @@ const cards = [
 
 const Collections = () => {
   const router = useRouter();
-  const connectionStatus = useConnectionStatus();
+  const connectionStatus = useActiveWalletConnectionStatus();
   const isConnected = connectionStatus === 'connected';
   const isMobile = useMediaQuery(`(max-width: ${em(850)})`);
   return (

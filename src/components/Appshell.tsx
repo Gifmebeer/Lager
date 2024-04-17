@@ -2,7 +2,11 @@ import { ReactNode, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { AppShell, Flex, rem, em, Image, Button } from '@mantine/core';
-import { useDisconnect, useConnectionStatus } from '@thirdweb-dev/react';
+import {
+  useDisconnect,
+  useActiveWalletConnectionStatus,
+  useActiveWallet,
+} from 'thirdweb/react';
 import { IconMenu2, IconX } from '@tabler/icons-react';
 import { useHeadroom, useMediaQuery } from '@mantine/hooks';
 import Footer from './Footer';
@@ -16,6 +20,7 @@ interface IHeader {
   noLogin?: boolean;
   isClaim?: boolean;
   isRegular?: boolean;
+  noFooter?: boolean;
 }
 
 const IS_PRELAUNCH = false;
@@ -36,12 +41,14 @@ function Header({
   noLogin,
   isClaim,
   isRegular,
+  noFooter,
 }: IHeader) {
   const isMobile = useMediaQuery(`(max-width: ${em(850)})`);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
-  const disconnect = useDisconnect();
-  const connectionStatus = useConnectionStatus();
+  const wallet = useActiveWallet();
+  const { disconnect } = useDisconnect();
+  const connectionStatus = useActiveWalletConnectionStatus();
   const isConnected = connectionStatus === 'connected';
   const pinned = useHeadroom({ fixedAt: 50 });
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -134,7 +141,7 @@ function Header({
                   style={{ cursor: 'pointer' }}
                 />
               </Link>
-              {!IS_PRELAUNCH && (
+              {!IS_PRELAUNCH && !noLogin && (
                 <Flex mr={12}>
                   <Wallet isConnected={!!isConnected} />
                 </Flex>
@@ -197,7 +204,7 @@ function Header({
               {isConnected && (
                 <div
                   onClick={async () => {
-                    await disconnect();
+                    wallet && (await disconnect(wallet));
                     toggleMenu();
                   }}
                 >
@@ -213,7 +220,7 @@ function Header({
         pt={isLanding || noPadding ? 0 : '150px'}
       >
         {children}
-        <Footer />
+        {!noFooter && <Footer />}
       </AppShell.Main>
     </AppShell>
   );
