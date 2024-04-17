@@ -101,6 +101,7 @@ function Header({
               {isLanding && !isMobile && (
                 <Button
                   maw={'230px'}
+                  h="37px"
                   bg={'#C5C4C6'}
                   c={'black'}
                   style={{ borderRadius: 10 }}

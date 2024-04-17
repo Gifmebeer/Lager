@@ -72,7 +72,7 @@ const HeroPage = () => {
       </Flex>
       <Flex
         maw="1440px"
-        h={{ base: 'auto', md: '100vh' }}
+        h={{ base: 'auto', md: '695px' }}
         p={0}
         justify={'center'}
         align={'center'}
@@ -91,11 +91,11 @@ const HeroPage = () => {
             mt={{ base: '100px', md: 0 }}
           >
             <Image
-              w={{ base: '100%', md: '80%', xl: '228px' }}
+              w={{ base: '100%', md: '80%', xl: '308px' }}
               src="/images/gmb_logo.svg"
               alt="Logo"
             />
-            <Content />
+            {/* <Content /> */}
           </Flex>
         ) : (
           <Flex
@@ -132,7 +132,7 @@ const HeroPage = () => {
                 src="/images/landing_beers.svg"
                 alt="Beers"
               />
-              <Image
+              {/* <Image
                 pos={'absolute'}
                 bottom={{ md: 0, xl: '40%' }}
                 left={{ md: '25%', xl: '-70%' }}
@@ -140,7 +140,7 @@ const HeroPage = () => {
                 style={{ transform: 'rotate(9.684deg)' }}
                 src="/images/prelaunch_card_bbf.gif"
                 alt="bbf card"
-              />
+              /> */}
             </Flex>
           ) : (
             <Image
@@ -161,7 +161,7 @@ const HeroPage = () => {
               m={0}
               mt={'50px'}
             >
-              <Flex w="100vw" align={'center'} justify={'center'}>
+              {/* <Flex w="100vw" align={'center'} justify={'center'}>
                 <Image
                   pos={'absolute'}
                   top={-200}
@@ -170,8 +170,8 @@ const HeroPage = () => {
                   alt="bbf card"
                   style={{ zIndex: 3, transform: 'rotate(9.684deg)' }}
                 />
-              </Flex>
-              <Content />
+              </Flex> */}
+              {/* <Content /> */}
             </Flex>
           )}
         </Flex>
