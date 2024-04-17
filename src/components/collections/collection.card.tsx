@@ -66,14 +66,9 @@ export const CollectionCard: React.FC<{
         }}
       >
         {metadata ? (
-          <NFTCard w={w * 1.5} metadata={metadata} address={address} />
+          <NFTCard w={w * 2} metadata={metadata} address={address} />
         ) : item ? (
-          <Image
-            w={w * 1.5}
-            src={item.imageUrl}
-            alt={item.name}
-            fit="contain"
-          />
+          <Image w={w * 2} src={item.imageUrl} alt={item.name} fit="contain" />
         ) : null}
       </Modal>
       <Card
