@@ -1,7 +1,7 @@
 import { Flex, Loader, em } from '@mantine/core';
 
 import React, { useEffect, useState } from 'react';
-import { Button, Center, Text } from '@mantine/core';
+import { Image, Button, Center, Text } from '@mantine/core';
 import CustomText from '@/components/Text';
 import { CURRENT_COLLECTIONS, membership } from '@/constants/collections';
 import {
@@ -239,7 +239,16 @@ const Claim = (params: any) => {
         }}
         bg="black"
       >
-        <ConnectWallet btntitle="Login" className={'connectButton3'} />
+        <Image
+          w={'120px'}
+          src="/images/gmb_logo.svg"
+          alt="Logo"
+          style={{ cursor: 'pointer' }}
+        />
+        <Text size="xl" style={{ color: 'white' }}>
+          Please login to claim your NFT
+        </Text>
+        <ConnectWallet btntitle="Login" className={'connectButtonDefault'} />
       </Center>
     );
   }
