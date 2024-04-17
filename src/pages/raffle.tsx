@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Container } from '@mantine/core';
+import { Container, Flex } from '@mantine/core';
 import { useActiveAccount } from 'thirdweb/react';
 import AppShell from '@/components/Appshell';
 import Text from '@/components/Text';
-import ConnectWalletBtn from '@/components/ConnectWallet';
 
 const Raffle: React.FC = () => {
   const account = useActiveAccount();
   const address = account?.address;
-  console.log({ account });
   const [uniqueName, setUniqueName] = useState('');
 
   useEffect(() => {
@@ -34,15 +32,12 @@ const Raffle: React.FC = () => {
   }, [address]);
 
   return (
-    <AppShell isRegular noFooter>
-      <Container mt="xl">
+    <AppShell isRegular>
+      <Container my="xl">
         {account ? (
           uniqueName ? (
             <div
               style={{
-                width: '100vw',
-                height: '100%',
-                position: 'absolute',
                 left: 0,
                 margin: '20px 0 0 0',
               }}
@@ -70,6 +65,7 @@ const Raffle: React.FC = () => {
             </div>
           ) : (
             <Text
+              style={{ color: 'black' }}
               size="xl"
               mb="lg"
               fw={'400'}
@@ -77,15 +73,15 @@ const Raffle: React.FC = () => {
             />
           )
         ) : (
-          <div>
+          <Flex direction="column">
             <Text
               size="xl"
               mb="lg"
               fw={'400'}
-              content="Connect your wallet and check your raffle name."
+              style={{ color: 'black' }}
+              content="Login and check your raffle name."
             />
-            <ConnectWalletBtn />
-          </div>
+          </Flex>
         )}
       </Container>
     </AppShell>

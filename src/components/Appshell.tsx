@@ -140,7 +140,7 @@ function Header({
                   style={{ cursor: 'pointer' }}
                 />
               </Link>
-              {!IS_PRELAUNCH && (
+              {!IS_PRELAUNCH && !noLogin && (
                 <Flex mr={12}>
                   <Wallet isConnected={!!isConnected} />
                 </Flex>
