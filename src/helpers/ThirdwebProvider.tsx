@@ -2,9 +2,6 @@ import { ReactNode } from 'react';
 import { useRouter } from 'next/router';
 import {
   ThirdwebProvider,
-  metamaskWallet,
-  coinbaseWallet,
-  embeddedWallet,
   lightTheme,
   // smartWallet,
 } from '@thirdweb-dev/react';
@@ -31,15 +28,7 @@ const ThirdWebProvider: React.FC<ThirdWebProviderProps> = ({ children }) => {
       // TODO: CHANGE THIS WHEN MOVING TO MAINNET
       activeChain={isBBFLifetimePass ? Optimism : currentNetwork.thirdwebChain}
       // activeChain={currentNetwork.thirdwebChain}
-      theme={lightTheme({
-        colors: { accentButtonBg: '#c8c9cb' },
-      })}
       clientId={process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID}
-      supportedWallets={[
-        embeddedWallet(),
-        metamaskWallet({ recommended: true }),
-        coinbaseWallet(),
-      ]}
     >
       <ThirdwebProviderV5>{children}</ThirdwebProviderV5>
     </ThirdwebProvider>
