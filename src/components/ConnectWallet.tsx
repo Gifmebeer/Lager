@@ -1,6 +1,6 @@
 import { createThirdwebClient } from 'thirdweb';
 import { createWallet, inAppWallet } from 'thirdweb/wallets';
-import { ConnectButton, lightTheme } from 'thirdweb/react';
+import { ConnectButton } from 'thirdweb/react';
 import { currentThirdwebChain } from '@/utils/web3';
 
 const client = createThirdwebClient({
@@ -10,11 +10,7 @@ const client = createThirdwebClient({
 const wallets = [
   createWallet('io.metamask'),
   createWallet('com.coinbase.wallet'),
-  inAppWallet({
-    auth: {
-      options: ['email', 'google', 'apple', 'facebook'],
-    },
-  }),
+  inAppWallet(),
 ];
 
 const ConnectWalletBtn = ({ btntitle, className }: any) => {
@@ -36,9 +32,7 @@ const ConnectWalletBtn = ({ btntitle, className }: any) => {
           subtitle: 'Login to get started',
         },
       }}
-      theme={lightTheme({
-        colors: { accentButtonBg: '#c8c9cb' },
-      })}
+      theme={'light'}
     />
   );
 };
