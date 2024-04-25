@@ -3,7 +3,7 @@ import { createWallet, inAppWallet } from 'thirdweb/wallets';
 import { ConnectButton } from 'thirdweb/react';
 import { currentThirdwebChain } from '@/utils/web3';
 
-const client = createThirdwebClient({
+export const client = createThirdwebClient({
   clientId: process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID!,
 });
 

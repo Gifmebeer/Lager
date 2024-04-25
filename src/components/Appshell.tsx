@@ -146,21 +146,21 @@ function Header({
                   <Wallet isConnected={!!isConnected} />
                 </Flex>
               )}
-            </Flex>
 
-            <Flex
-              h={50}
-              p="md"
-              bg="black"
-              align={'center'}
-              justify={'flex-end'}
-            >
-              <IconMenu2
-                color="white"
-                style={{ width: rem(32), height: rem(32) }}
-                stroke={1.5}
-                onClick={toggleMenu}
-              />
+              <Flex
+                h={50}
+                p="md"
+                bg="black"
+                align={'center'}
+                justify={'flex-end'}
+              >
+                <IconMenu2
+                  color="white"
+                  style={{ width: rem(32), height: rem(32) }}
+                  stroke={1.5}
+                  onClick={toggleMenu}
+                />
+              </Flex>
             </Flex>
           </Flex>
         )}

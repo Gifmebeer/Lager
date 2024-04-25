@@ -4,18 +4,13 @@ import React, { useEffect, useState } from 'react';
 import { Image, Button, Center, Text } from '@mantine/core';
 import CustomText from '@/components/Text';
 import { CURRENT_COLLECTIONS, membership } from '@/constants/collections';
-import {
-  useContract,
-  useOwnedNFTs,
-  useNFT,
-  useSetIsWalletModalOpen,
-} from '@thirdweb-dev/react';
+import { useContract, useOwnedNFTs, useNFT } from '@thirdweb-dev/react';
 import useSWRMutation from 'swr/mutation';
 import { Address } from 'viem';
-import ConnectWallet from '@/components/ConnectWallet';
+import ConnectWallet, { client } from '@/components/ConnectWallet';
 import { NFTCard } from '@/components/NFTCard';
 import AppShell from '@/components/Appshell';
-import { createPublicWalletClient, shortenAddress } from '@/utils/web3';
+import { shortenAddress } from '@/utils/web3';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ICollection } from '@/types';
@@ -23,8 +18,9 @@ import { useMediaQuery } from '@mantine/hooks';
 import {
   useActiveAccount,
   useActiveWalletConnectionStatus,
-  useActiveWallet,
+  useWaitForReceipt,
 } from 'thirdweb/react';
+import currentNetwork from '@/constants/currentNetwork';
 
 async function sendRequest(
   url: string,
@@ -44,17 +40,13 @@ const Claim = (params: any) => {
   const account = useActiveAccount();
   const address = account?.address;
   const isMobile = useMediaQuery(`(max-width: ${em(850)})`);
-  const { walletClient } = createPublicWalletClient();
   const connectionStatus = useActiveWalletConnectionStatus();
   const isConnected = connectionStatus === 'connected';
   const isConnecting = connectionStatus === 'connecting';
   const [isMinting, setIsMinting] = useState(false);
   const [error, setError] = useState<any>(false);
-  const [receipt, setReceipt] = useState<any>(null);
-  const [redeemCode, setRedeemCode] = useState(null);
   const [isValidNFT, setIsValidNFT] = useState<boolean | null>(null);
   const [ready, setReady] = useState(false);
-  const setIsWalletModalOpen = useSetIsWalletModalOpen();
   const { data: nftContract, isError: contractError } = useContract(
     nft as Address,
   );
@@ -68,17 +60,43 @@ const Claim = (params: any) => {
     refetch: refetchOwnNFTS,
   } = useOwnedNFTs(nftContract, address);
 
+  // Check if the NFT exists in myNFTs
+  const allCards: any = React.useMemo(() => {
+    return CURRENT_COLLECTIONS.reduce((acc: any, collection: ICollection) => {
+      // Assuming each collection has a 'cards' array
+      return acc.concat(collection.cards);
+    }, []);
+  }, [CURRENT_COLLECTIONS]);
+
+  const currentCollectionCards = React.useMemo(() => {
+    return allCards.filter(() => {
+      return allCards.find((card: any) => card.address === nft);
+    });
+  }, [allCards, nft]);
+  const nftLocalMetadata = currentCollectionCards.find(
+    (card: any) => card.id === Number(tokenId),
+  );
+  const limit = nftLocalMetadata?.limit || 10 ** 10000; // No limits, then infinity
+  const availableForMinting = currentNFT
+    ? Number(currentNFT?.supply) < limit
+    : null;
+
   const ownsNFT = ownedNFT?.find(
     (i) => Number(i.metadata.id) === Number(tokenId),
   );
   const owned = ownedNFT?.length;
-  const giftReady = owned === 7;
+
   const {
     trigger,
     error: mutationError,
     isMutating,
   } = useSWRMutation('/api/claim', sendRequest);
 
+  const { data: receipt, isLoading: receiptLoading } = useWaitForReceipt({
+    client,
+    chain: currentNetwork.thirdwebChainv5,
+    transactionHash: claimDone as `0x${string}`,
+  });
   const claim = async () => {
     try {
       if (!isValidNFT) return alert('Invalid NFT');
@@ -95,13 +113,7 @@ const Claim = (params: any) => {
         setIsMinting(false);
       } else {
         const tx = await result?.transactionRequest;
-        setClaimDone(result?.transactionRequest);
-        const receipt = await walletClient.waitForTransactionReceipt({
-          hash: tx,
-        });
-        console.log({ receipt });
-        setReceipt(receipt);
-        await refetchOwnNFTS();
+        setClaimDone(tx);
         setIsMinting(false);
       }
     } catch (e) {
@@ -113,42 +125,10 @@ const Claim = (params: any) => {
   };
 
   useEffect(() => {
-    const getRedeemCode = async () => {
-      if (!address) return;
-      try {
-        const response = await fetch('/api/generateGiftCode', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ address }),
-        });
-        const data = await response.json();
-        if (data?.code) {
-          setRedeemCode(data?.code); // Save the received code to state
-        } else {
-          console.error('Error fetching code:', data.error);
-        }
-      } catch (error) {
-        console.error('Error fetching code:', error);
-      }
-    };
-
-    getRedeemCode();
-  }, [address]);
-
-  useEffect(() => {
     if (!nft) return;
     const contractAddress = nft;
     const id = tokenId;
-    // Check if the NFT exists in myNFTs
-    const allCards = CURRENT_COLLECTIONS.reduce(
-      (acc: any, collection: ICollection) => {
-        // Assuming each collection has a 'cards' array
-        return acc.concat(collection.cards);
-      },
-      [],
-    );
+
     const collectionExists = CURRENT_COLLECTIONS.find(
       (collection: ICollection) =>
         collection.address.toLowerCase() === contractAddress.toLowerCase(),
@@ -173,12 +153,18 @@ const Claim = (params: any) => {
     // if (!isConnected) return setIsWalletModalOpen(true);
   }, [ready, isConnected]);
 
+  useEffect(() => {
+    if (receipt) {
+      refetchOwnNFTS();
+    }
+  }, [receipt]);
+
   const CurrentCard = () => {
-    return currentNFTIsLoading ? (
-      <Loader color="white" />
-    ) : (
+    return (
       currentNFT && (
-        <NFTCard address={nft} metadata={currentNFT.metadata} key={tokenId} />
+        <div style={{ opacity: availableForMinting ? 1 : 0.5 }}>
+          <NFTCard address={nft} metadata={currentNFT.metadata} key={tokenId} />
+        </div>
       )
     );
   };
@@ -187,7 +173,7 @@ const Claim = (params: any) => {
   const connecting = connectionStatus === 'connecting';
   const isLoading = connecting || isMutating || isMinting || !ready;
 
-  if (isLoading || !ready) {
+  if (isLoading) {
     return (
       <Flex
         style={{ minHeight: '100vh' }}
@@ -255,7 +241,15 @@ const Claim = (params: any) => {
 
   return (
     <AppShell noPadding={true} noLogin={true} isClaim={true}>
-      <Center style={{ minHeight: '100vh', position: 'relative' }} bg="black">
+      <Center
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          minHeight: '90vh',
+          position: 'relative',
+        }}
+        bg="black"
+      >
         <Flex
           align="center"
           justify={'center'}
@@ -272,24 +266,32 @@ const Claim = (params: any) => {
                 margin: 'auto',
               }}
             >
-              <Button
-                w="250px"
-                bg="#FF0"
-                c="black"
-                size="xl"
-                style={{
-                  margin: 'auto',
-                  backgroundColor: 'black',
-                  fontFamily: 'MetamorBit-Latin',
-                  border: '2px solid black',
-                }}
-                onClick={async () => await claim()}
-                fullWidth
-              >
-                <Text fw="bold" size="xl" c="black">
-                  Download
-                </Text>
-              </Button>
+              {!receipt && !!availableForMinting && !isMinting && (
+                <Button
+                  w="250px"
+                  bg={'#FF0'}
+                  c="black"
+                  size="xl"
+                  disabled={isMinting}
+                  style={{
+                    zIndex: 1,
+                    margin: 'auto',
+                    backgroundColor: 'black',
+                    fontFamily: 'MetamorBit-Latin',
+                    border: '2px solid black',
+                  }}
+                  onClick={async () => await claim()}
+                  fullWidth
+                >
+                  <Text fw="bold" size="xl" c="black">
+                    {receiptLoading
+                      ? 'Processing'
+                      : availableForMinting
+                      ? 'Download'
+                      : 'Sold Out'}
+                  </Text>
+                </Button>
+              )}
             </Flex>
           ) : ownedNFTFetched && ownsNFT ? (
             <Flex
@@ -339,7 +341,7 @@ const Claim = (params: any) => {
               </Link>
             </Flex>
           ) : null}
-          <CurrentCard />
+          {currentNFT ? <CurrentCard /> : <Loader color="white" />}
         </Flex>
       </Center>
     </AppShell>
