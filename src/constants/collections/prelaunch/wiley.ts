@@ -37,7 +37,7 @@ export default [
   {
     name: 'Atlantis',
     address: NFT_COLLECTION_ADDRESS,
-    id: 222221,
+    id: 13,
     category: 'Beer',
     imageUrl: '/images/collections/op-mainnet/wylie/WYLIE-Atlantis.png',
     meta: {},
@@ -45,7 +45,7 @@ export default [
   {
     name: 'Enter the Dragon',
     address: NFT_COLLECTION_ADDRESS,
-    id: 222222,
+    id: 14,
     category: 'Beer',
     imageUrl: '/images/collections/op-mainnet/wylie/WYLIE-Enter_the_Dragon.png',
     meta: {},
@@ -53,7 +53,7 @@ export default [
   {
     name: 'Peace Yeast Love',
     address: NFT_COLLECTION_ADDRESS,
-    id: 222223,
+    id: 15,
     category: 'Beer',
     imageUrl:
       '/images/collections/op-mainnet/wylie/WYLIE-Peace_Yeast__Love.png',
@@ -62,7 +62,7 @@ export default [
   {
     name: 'Rain Dance',
     address: NFT_COLLECTION_ADDRESS,
-    id: 222224,
+    id: 16,
     category: 'Beer',
     imageUrl: '/images/collections/op-mainnet/wylie/WYLIE-Rain_Dance.png',
     meta: {},

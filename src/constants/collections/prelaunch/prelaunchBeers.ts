@@ -7,6 +7,7 @@ import naparbier from './naparbier';
 import lapirata from './lapirata';
 import mager from './mager';
 import maresme from './maresme';
+import engorile from './engorile';
 
 export default {
   id: 1111111111111, // deprecated
@@ -23,5 +24,6 @@ export default {
     ...lapirata,
     ...mager,
     ...maresme,
+    ...engorile,
   ],
 } as ICollection;
