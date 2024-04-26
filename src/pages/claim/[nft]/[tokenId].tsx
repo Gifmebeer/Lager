@@ -32,6 +32,18 @@ async function sendRequest(
   }).then((res) => res.json());
 }
 
+const BlinkingText = ({ loading, text }: any) => {
+  const blinkStyle = {
+    animation: 'blink-animation 2s linear infinite',
+    WebkitAnimation: 'blink-animation 2s linear infinite', // For Safari and Chrome
+    fontWeight: 'bold',
+    fontSize: 'xl',
+    color: 'black',
+  };
+
+  return <Text style={loading ? blinkStyle : {}}>{text}</Text>;
+};
+
 const Claim = (params: any) => {
   const router = useRouter();
   const nft = router.query.nft as Address;
@@ -283,13 +295,17 @@ const Claim = (params: any) => {
                   onClick={async () => await claim()}
                   fullWidth
                 >
-                  <Text fw="bold" size="xl" c="black">
-                    {receiptLoading
-                      ? 'Processing'
-                      : availableForMinting
-                      ? 'Download'
-                      : 'Sold Out'}
-                  </Text>
+                  {receiptLoading ? (
+                    <BlinkingText
+                      loading={true}
+                      text="Processing..."
+                      fallback={''}
+                    />
+                  ) : (
+                    <Text fw="bold" size="xl" c="black">
+                      {availableForMinting ? 'Download' : 'Sold Out'}
+                    </Text>
+                  )}
                 </Button>
               )}
             </Flex>

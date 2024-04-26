@@ -9,6 +9,6 @@ export default [
     imageUrl:
       '/images/collections/op-mainnet/engorile/Engorile_V-Aniversari-Edition.png',
     meta: {},
-    limit: 500,
+    limit: 600,
   },
 ];
