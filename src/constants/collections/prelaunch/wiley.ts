@@ -33,7 +33,7 @@ export default [
     imageUrl:
       '/images/collections/op-mainnet/wylie/WYLIE-La_Belle_de_Roquetes.png',
     meta: {},
-    limit: 200,
+    limit: 240,
   },
   {
     name: 'Atlantis',
@@ -42,7 +42,7 @@ export default [
     category: 'Beer',
     imageUrl: '/images/collections/op-mainnet/wylie/WYLIE-Atlantis.png',
     meta: {},
-    limit: 200,
+    limit: 240,
   },
   {
     name: 'Enter the Dragon',
@@ -51,7 +51,7 @@ export default [
     category: 'Beer',
     imageUrl: '/images/collections/op-mainnet/wylie/WYLIE-Enter_the_Dragon.png',
     meta: {},
-    limit: 200,
+    limit: 240,
   },
   {
     name: 'Peace Yeast Love',
@@ -61,7 +61,7 @@ export default [
     imageUrl:
       '/images/collections/op-mainnet/wylie/WYLIE-Peace_Yeast__Love.png',
     meta: {},
-    limit: 200,
+    limit: 240,
   },
   {
     name: 'Rain Dance',
@@ -70,6 +70,6 @@ export default [
     category: 'Beer',
     imageUrl: '/images/collections/op-mainnet/wylie/WYLIE-Rain_Dance.png',
     meta: {},
-    limit: 200,
+    limit: 240,
   },
 ];
