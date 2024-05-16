@@ -14,8 +14,8 @@ const data = [
       { label: 'TERMS & CONDITIONS', link: '/legal' },
       { label: 'LEGAL ADVISE', link: '/legaladvise' },
       {
-        label: 'HOLA@GIFME.BEER',
-        link: 'mailto:hola@gifme.beer',
+        label: 'GIFMEBEER@GMAIL.COM',
+        link: 'mailto:gifmebeer@gmail.com',
         color: '#ffff00',
       },
     ],
