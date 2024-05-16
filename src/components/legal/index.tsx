@@ -17,7 +17,7 @@ import { useMediaQuery } from '@mantine/hooks';
 
 const Legal: React.FC = () => {
   const isMobile = useMediaQuery(`(max-width: ${em(850)})`);
- 
+
   return (
     <Container
       bg="#EAEAEA"
@@ -79,7 +79,7 @@ const Legal: React.FC = () => {
         even the possibility of redeeming them to obtain the physical beer they
         represent, sent to the collector’s home.
       </Text>
-      <Text mb="lg">You can contact us email at hola@gifme.beer</Text>
+      <Text mb="lg">You can contact us email at gifmebeer@gmail.com</Text>
       <Text mb="lg">
         These Legal Terms constitute a legally binding agreement made between
         you, whether personally or on behalf of an entity (“you”), and Company
@@ -1232,8 +1232,13 @@ const Legal: React.FC = () => {
       <Text>B66312810</Text>
       <Text>c/ Carmancel, 7</Text>
       <Text>Agullana 17707 Girona</Text>
-      <Text mb="lg" variant="link" component="a" href="mailto:hola@gifme.beer">
-        hola@gifme.beer
+      <Text
+        mb="lg"
+        variant="link"
+        component="a"
+        href="mailto:gifmebeer@gmail.com"
+      >
+        gifmebeer@gmail.com
       </Text>
     </Container>
   );
