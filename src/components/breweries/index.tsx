@@ -103,7 +103,7 @@ const Breweries: React.FC = () => {
   };
 
   return (
-    <Container bg="#EAEAEA" mih="30vh" p="lg" mb={'xl'}>
+    <Container bg="#EAEAEA" mih="30vh" p="lg" mb={'xl'} c={'black'}>
       <Dialog
         opened={opened}
         withCloseButton

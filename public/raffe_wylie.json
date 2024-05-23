@@ -1,0 +1,18 @@
+[
+  {
+    "address": "0xdd48960f655304ae3d3b0631ac93e7a305114be8",
+    "uniqueName": "Rustic Sapphire Pilsner"
+  },
+  {
+    "address": "0x6cc5af65e1c2a5c5bd024f95c34a5407eb2595ad",
+    "uniqueName": "Mystic Silver Kolsch"
+  },
+  {
+    "address": "0x2e672adbc0bdd0a56b4e610cd7ad7287e37d94b9",
+    "uniqueName": "Golden Amber Ale"
+  },
+  {
+    "address": "0x683a2ffa2564c1f1be1d3bf344662558605c41e1",
+    "uniqueName": "Crimson Red Lager"
+  }
+]
