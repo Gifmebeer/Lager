@@ -13,6 +13,7 @@ const Team: React.FC = () => {
     <Container
       bg="#EAEAEA"
       mih="30vh"
+      c="black"
       pt="lg"
       pb="lg"
       mt={{ base: 'lg', md: '100px' }}
@@ -26,15 +27,11 @@ const Team: React.FC = () => {
         }}
         c="black"
         maw={isMobile ? '100%' : '500px'}
-        content="Gifme.beer Team"
+        content="GifmeBeer Team"
       />
 
       <Center>
-        <Image
-          src="/images/team/santi.png"
-          /*           height={280} */
-          alt=""
-        />
+        <Image src="/images/team/santi.png" height={330} alt="" />
       </Center>
 
       <Center>
@@ -75,11 +72,7 @@ const Team: React.FC = () => {
       />
 
       <Center>
-        <Image
-          src="/images/team/mateo.png"
-          /*           height={160}
-           */ alt=""
-        />
+        <Image src="/images/team/mateo.png" height={330} alt="" />
       </Center>
 
       <Center>
@@ -120,11 +113,7 @@ const Team: React.FC = () => {
       />
 
       <Center>
-        <Image
-          src="/images/team/Carol.png"
-          /*           height={160}
-           */ alt=""
-        />
+        <Image src="/images/team/Anna.png" height={330} alt="" />
       </Center>
 
       <Center>
@@ -137,7 +126,7 @@ const Team: React.FC = () => {
             fontWeight: 'bold',
           }}
           maw={isMobile ? '100%' : '500px'}
-          content="Carol “The Artist”"
+          content="Anna “The Artist”"
         />
       </Center>
 
@@ -165,11 +154,7 @@ const Team: React.FC = () => {
       />
 
       <Center>
-        <Image
-          src="/images/team/xavi.png"
-          /*           height={160}
-           */ alt=""
-        />
+        <Image src="/images/team/Jordi.png" height={330} alt="" />
       </Center>
 
       <Center>
@@ -182,7 +167,7 @@ const Team: React.FC = () => {
             fontWeight: 'bold',
           }}
           maw={isMobile ? '100%' : '500px'}
-          content="Xavier “The Brewer”"
+          content="Jordi “The Brewer”"
         />
       </Center>
 

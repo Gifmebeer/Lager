@@ -22,9 +22,10 @@ const Legaladvise: React.FC = () => {
     <Container
       bg="#EAEAEA"
       mih="30vh"
+      c="black"
       pt="lg"
       pb="lg"
-      mt={{ base: 'lg', md: 'lg' }}
+      mt={{ base: 'lg', md: '100px' }}
       pr="lg"
       pl="lg"
     >

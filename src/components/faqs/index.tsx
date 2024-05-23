@@ -76,7 +76,7 @@ const Faqs: React.FC = () => {
       mih="30vh"
       pt="lg"
       pb="lg"
-      mt={{ base: 'lg', md: 'lg' }}
+      mt={{ base: 'lg', md: '100px' }}
       pr="lg"
       pl="lg"
     >
