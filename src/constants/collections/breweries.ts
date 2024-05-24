@@ -74,5 +74,14 @@ export default {
       imageUrl: '/images/collections/op-mainnet/synera.gif',
       meta: {},
     },
+    {
+      name: 'Gat Brewing',
+      address: NFT_COLLECTION_ADDRESS,
+      id: 17,
+      category: 'Brewery',
+      imageUrl: '/images/collections/op-mainnet/gat.gif',
+      meta: {},
+      limit: 440,
+    },
   ],
 } as ICollection;
