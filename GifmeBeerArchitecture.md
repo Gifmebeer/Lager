@@ -1,4 +1,6 @@
-# GifmeBeer NFT dApp Architecture Description
+# GifmeBeer NFT dApp Architecture 
+
+![image](https://github.com/user-attachments/assets/2e28780c-2811-404d-a2c9-343a8032669b)
 
 ## 1. User Interaction
 * Users scan a QR code at a physical location (e.g., a bar).
@@ -21,12 +23,10 @@
 * Receives the HTTPS request from the frontend after wallet creation/connection
 * Performs the following actions:
     1. Loads the Contract Owner information
-    2. Utilizes the ThirdWeb SDK
-    3. Interacts with the smart contract to claim the NFT for the user's address
+    2. Interacts directly with the smart contract to claim the NFT for the user's address
 
 ## 5. ThirdWeb SDK
-* Facilitates wallet creation/connection
-* Interacts with the Smart Contract
+* Used only for wallet creation/connection
 
 ## 6. Smart Contract
 * Deployed on Optimism Mainnet
@@ -47,11 +47,12 @@
 
 ## Data Flow
 1. User scans QR → Redirected to web application
-2. Web app creates/connects wallet for user
+2. Web app creates/connects wallet for user using ThirdWeb SDK
 3. Web app triggers claim process, sending request to /api/claim
 4. /api/claim loads Contract Owner info
-5. /api/claim interacts with smart contract via ThirdWeb SDK
+5. /api/claim interacts directly with smart contract
 6. Smart contract mints NFT on Optimism Mainnet
 7. NFT claimed for user's address
 8. Gas fees subsidized by Contract Owner
 9. Web app updates to display newly claimed NFT along with all user's NFTs
+
