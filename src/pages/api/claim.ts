@@ -5,7 +5,9 @@ import { privateKeyToWalletClient } from '@/utils/web3';
 
 export default async function POST(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const query = JSON.parse(req.body);
+    const query =
+      typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
+
     const { address, nftAddress, tokenId } = query;
     const NFT_ADDRESS = nftAddress as Address;
     if (!address) {
@@ -16,7 +18,7 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
 
     const TOKEN_ID = tokenId;
     const minterPvtKey = process.env.MINTER_PV_KEY as Address;
-    console.log('MIN', minterPvtKey);
+
     if (!minterPvtKey) {
       return res.status(400).json({ error: 'No attester set' });
     }
@@ -84,6 +86,7 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
       });
     }
   } catch (error) {
+    console.log({ error });
     return res.status(500).json({ error });
   }
 }
