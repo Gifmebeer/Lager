@@ -16,7 +16,7 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
 
     const TOKEN_ID = tokenId;
     const minterPvtKey = process.env.MINTER_PV_KEY as Address;
-
+    console.log('MIN', minterPvtKey);
     if (!minterPvtKey) {
       return res.status(400).json({ error: 'No attester set' });
     }
