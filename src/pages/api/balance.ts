@@ -9,6 +9,11 @@ const DEFAULT_START = 0;
 const DEFAULT_COUNT = 100;
 const MAX_COUNT = 500;
 
+// Define a type that includes the supply property
+type NFTWithSupply = Awaited<ReturnType<typeof getOwnedNFTs>>[number] & {
+  supply: bigint;
+};
+
 export default async function POST(req: NextApiRequest, res: NextApiResponse) {
   try {
     const query =
@@ -64,12 +69,12 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
     });
 
     try {
-      const nfts = await getOwnedNFTs({
+      const nfts = (await getOwnedNFTs({
         contract,
         start: startIndex,
         count: itemCount,
         address: checksummedAddress,
-      });
+      })) as NFTWithSupply[];
 
       // If looking for a specific token
       if (tokenId !== undefined) {
@@ -80,6 +85,7 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
           address: checksummedAddress,
           nftAddress: checksummedNFTAddress,
           tokenId,
+          supply: specificToken?.supply.toString(),
           owned: specificToken
             ? Number(specificToken.quantityOwned) > 0
             : false,
@@ -104,6 +110,7 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
           tokenURI: nft.tokenURI,
           owner: nft.owner,
           metadata: nft.metadata,
+          supply: nft.supply.toString(),
           quantityOwned: nft.quantityOwned.toString(),
         })),
         pagination: {
