@@ -85,11 +85,15 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
           address: checksummedAddress,
           nftAddress: checksummedNFTAddress,
           tokenId,
-          supply: specificToken?.supply.toString(),
+          supply: Number(specificToken?.supply),
           owned: specificToken
             ? Number(specificToken.quantityOwned) > 0
             : false,
-          balance: specificToken ? specificToken.quantityOwned.toString() : '0',
+          balance: specificToken
+            ? Number(specificToken.quantityOwned) > 0
+              ? Number(specificToken.quantityOwned)
+              : 0
+            : 0,
         });
       }
 
@@ -110,8 +114,8 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
           tokenURI: nft.tokenURI,
           owner: nft.owner,
           metadata: nft.metadata,
-          supply: nft.supply.toString(),
-          quantityOwned: nft.quantityOwned.toString(),
+          supply: Number(nft.supply),
+          quantityOwned: Number(nft.quantityOwned),
         })),
         pagination: {
           start: startIndex,
