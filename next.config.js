@@ -25,6 +25,10 @@ const nextConfig = {
     return {
       beforeFiles: [
         {
+          source: '/',
+          destination: 'https://server.gifmebeer.com/',
+        },
+        {
           source: '/tos',
           destination: '/GifmeBeer_Terms_and_Conditions.pdf',
         },
@@ -33,12 +37,6 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      {
-        source: '/',
-        destination: 'https://server.gifmebeer.com/',
-        permanent: false,
-        basePath: false,
-      },
       {
         source: '/raffle2',
         destination:
