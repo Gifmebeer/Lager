@@ -34,6 +34,12 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/',
+        destination: 'https://server.gifmebeer.com/',
+        permanent: false,
+        basePath: false,
+      },
+      {
         source: '/raffle2',
         destination:
           'https://docs.google.com/spreadsheets/d/1HBpoXaZIAuOJUSgWvn39tB1VnO35tr1rLyaeQT-f_4c/edit?usp=sharing',
